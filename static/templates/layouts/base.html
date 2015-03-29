@@ -5,42 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Fav and touch icons -->
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'assets/ico/apple-touch-icon-144-precomposed.png' %}">
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'assets/ico/apple-touch-icon-114-precomposed.png' %}">
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'assets/ico/apple-touch-icon-72-precomposed.png' %}">
-<link rel="apple-touch-icon-precomposed" href="{% static 'ico/apple-touch-icon-57-precomposed.png' %}">
-<link rel="shortcut icon" href="{% static 'assets/ico/favicon.png' %}">
-<title>Borroh</title>
-<!-- Bootstrap core CSS -->
-<link href="{% static 'assets/bootstrap/css/bootstrap.css' %}" rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
-
-<!-- css3 animation effect for this template -->
-<link href="{% static 'assets/css/animate.min.css' %}" rel="stylesheet">
-
-<!-- styles needed by carousel slider -->
-<link href="{% static 'assets/css/owl.carousel.css' %}" rel="stylesheet">
-<link href="{% static 'assets/css/owl.theme.css' %}" rel="stylesheet">
-
-<!-- styles needed by checkRadio -->
-<link href="{% static 'assets/css/ion.checkRadio.css' %}" rel="stylesheet">
-<link href="{% static 'assets/css/ion.checkRadio.cloudy.css' %}" rel="stylesheet">
-
-<!-- styles needed by mCustomScrollbar -->
-<link href="{% static 'assets/css/jquery.mCustomScrollbar.css' %}" rel="stylesheet">
-
-<!-- Just for debugging purposes. -->
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-<![endif]-->
-
-<!-- include pace script for automatic web page progress bar  -->
-
+{% include 'layouts/_css.html' %}
 <script>
     paceOptions = {
       elements: true
