@@ -47,7 +47,6 @@ class Migration(migrations.Migration):
                 ('brand', models.CharField(max_length=40, null=True, blank=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True)),
-                ('category', models.ManyToManyField(to='product.Category', null=True, blank=True)),
                 ('image_set', models.ManyToManyField(to='product.Image', null=True, blank=True)),
             ],
             options={

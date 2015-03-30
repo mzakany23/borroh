@@ -4,55 +4,61 @@ from django.utils.text import slugify
 
 class Product(models.Model):
 	product_code = models.CharField(max_length=100,blank=True,null=True)
-	title = models.CharField(max_length=40)
-	description = models.TextField(max_length=1000)
-	price = models.CharField(max_length=40)
-	# category = models.ManyToManyField('Category',blank=True,null=True)
 	slug = models.SlugField(blank=True,null=True)
-	image_set = models.ManyToManyField('Image',blank=True,null=True)
-	discount = models.CharField(max_length=40,choices=(('15%','15%'),('20%','20%'),('25%','25%')),blank=True,null=True)
-	points_price = models.CharField(max_length=40,blank=True,null=True)
 	borrohed = models.BooleanField(default=False)
 	sold = models.BooleanField(default=False)
+	title = models.CharField(max_length=40)
+	description = models.TextField(max_length=1000)
+	price = models.DecimalField(max_digits=10,decimal_places=2,default=0.00)
+	points_price = models.IntegerField(max_length=40,default=0)
+	category = models.ManyToManyField('Category',blank=True,null=True)
+	image = models.ImageField(upload_to='product_images',blank=True,null=True)
+	discount = models.CharField(max_length=40,choices=(('15%','15%'),('20%','20%'),('25%','25%'),(None,None)),blank=True,null=True)
 	status = models.CharField(max_length=40,choices=(('New','New'),('Featured','Featured'),('Regular','Regular')),blank=True,null=True)
-	variants = models.ManyToManyField('Variant',blank=True,null=True)
-	brand = models.CharField(max_length=40, blank=True,null=True)
-
+	size = models.CharField(max_length=40,choices=(('XS','XS'),('S','M'),('L','L'),('XS','XL'),('XXL','XXL')),blank=True,null=True)
+	# brand = models.CharField(max_length=40, blank=True,null=True)
 	created = models.DateTimeField(auto_now_add=True,auto_now=False)
 	updated = models.DateTimeField(auto_now_add=False,auto_now=True)
 
 	def __unicode__(self):
-		return self.title
+		return "%s %s %s" %(self.title,':',str(self.id))
 
 
 # -----------------------------------------------------------------------------------
 # post_save generate product code and slug
 # -----------------------------------------------------------------------------------
 
-# def generate_product_code_receiver(sender,instance,created,*args,**kwargs):
-# 	generated_code = "%s %s %s" %('BUR',instance.title.replace(' ','')[5],instance.id)
-# 	instance.product_code = generated_code
-# 	instance.save()
+def generate_product_code_receiver(sender,instance,created,*args,**kwargs):
+	if created:
+		generated_code = "%s %s" %('BORRPRO-',instance.id)
+		try:
+			obj_exists = Product.objects.get(product_code=generated_code)
+			instance.save()
+		except Product.DoesNotExist:
+			instance.product_code = generated_code
+			instance.save()
+		except:
+			pass
+		
+def generate_slug_receiver(sender,instance,created,*args,**kwargs):
+	if created:
+		new_slug = "%s %s" %(instance.title,instance.id)
+		slug_title = slugify(new_slug)
+		try:
+			obj_exists = Product.objects.get(slug=slug_title)
+			slugify(new_slug)
+			instance.save()
+		except Product.DoesNotExist:
+			instance.slug = slug_title
+			instance.save()
+		except Product.MultipleObjectsReturned:
+			slugify(new_slug)
+			instance.save()
+		except:
+			pass
 
-# def generate_slug_receiver(sender,instance,created,*args,**kwargs):
-# 	if created:
-# 		slug_title = slugify(instance.title)
-# 		new_slug = "%s %s" %(instance.title,instance.id)
-# 		try:
-# 			obj_exists = Product.objects.get(slug=slug_title)
-# 			slugify(new_slug)
-# 			instance.save()
-# 		except Product.DoesNotExist:
-# 			instance.title = slug_title
-# 			instance.save()
-# 		except Product.MultipleObjectsReturned:
-# 			slugify(new_slug)
-# 			instance.save()
-# 		except:
-# 			pass
-
-# post_save.connect(generate_product_code_receiver,sender=Product)
-# post_save.connect(generate_slug_receiver,sender=Product)
+post_save.connect(generate_product_code_receiver,sender=Product)
+post_save.connect(generate_slug_receiver,sender=Product)
 
 
 # -----------------------------------------------------------------------------------
@@ -63,19 +69,9 @@ class Image(models.Model):
 	def __unicode__(self):
 		return str(self.image)
 
-class Variant(models.Model):
-	title = models.CharField(max_length=40)
-	options = models.ManyToManyField('VariantSelection')
-	def __unicode__(self):
-		return self.title	
-
-class VariantSelection(models.Model):
-	name = models.CharField(max_length=40)
-	def __unicode__(self):
-		return self.name
-
 class Category(models.Model):
 	title = models.CharField(max_length=40)
+	gender = models.CharField(max_length=40,choices=(('Male','Male'),('Female','Female'),('Unisex','Unisex')),blank=True,null=True)
 
 	def __unicode__(self):
-		return self.title
+		return self.gender + ":" + self.title
