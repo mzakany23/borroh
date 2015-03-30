@@ -10,7 +10,7 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('product.views',
-	url(r'^products/list$','product_list',name='product_list'),
+	# url(r'^products/list$','product_list',name='product_list'),
 )
 
 # media
