@@ -9,7 +9,7 @@ TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Application definition
+AUTH_LOGIN = 'auth_login'
 
 INSTALLED_APPS = (
     'django.contrib.admin',
