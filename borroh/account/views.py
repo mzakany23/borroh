@@ -40,17 +40,43 @@ def auth_create_account(request):
 def user_profile(request,id):
 	try:
 		user = User.objects.get(id=id)
-	except User.DoesNotExsist:
-		user = None
 	except:
-		pass
+		user = None
 
 	template = 'account/user_profile.html'
 	context = {}
 	return render(request,template,context)
 
 
+def add_address(request,id):
+	try:
+		user = User.objects.get(id=id)
+	except: 
+		user = None
 
+	template = 'account/address/add-address.html'
+	context = {}
+	return render(request,template,context)
+
+def show_address(request):
+	template = 'account/address/my-address.html'
+	context = {}
+	return render(request,template,context)
+
+def edit_auth(request):
+	template = 'account/auth/authentication.html'
+	context = {}
+	return render(request,template,context)
+
+def profile_info(request):
+	template = 'account/profile/user-information.html'
+	context = {}
+	return render(request,template,context)
+
+def user_wishlist(request):
+	template = 'account/wishlist/wishlist.html'
+	context = {}
+	return render(request,template,context)
 
 
 

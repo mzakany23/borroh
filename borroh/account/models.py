@@ -2,9 +2,11 @@ from django.db import models
 from django.contrib.auth.models import User
 from product.models import Product
 from django.db.models.signals import post_save
+from django.utils.text import slugify
 
 class Profile(models.Model):
-	user = models.OneToOneField(User,blank=True,null=True)
+	user = models.OneToOneField(User,blank=True,null=True,unique=True)
+	slug = models.SlugField(blank=True,null=True)
 	profile_pic = models.ImageField(upload_to='profile_pics',blank=True,null=True)
 	strip_id = models.CharField(max_length=100,blank=True,null=True)
 	favorites = models.ManyToManyField(Product,blank=True,null=True)
@@ -25,6 +27,7 @@ def create_profile_receiver(sender,instance,created,*args,**kwargs):
 	if created:
 		try:
 			profile = Profile()
+			profile.slug = instance	
 			profile.user = instance
 			profile.save()
 		except:

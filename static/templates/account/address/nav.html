@@ -1,0 +1,10 @@
+{% load staticfiles %}
+<div class="row">
+    <div class="breadcrumbDiv col-lg-12">
+      <ul class="breadcrumb">
+        <li> <a href="{% url 'home' %}">Home</a> </li>
+        <li> <a href="{% url 'edit_auth' %}">Authentication</a> </li>
+        <li> <a href="{% url 'user_profile' user.id %}">My account</a> </li>
+      </ul>
+    </div>
+  </div>

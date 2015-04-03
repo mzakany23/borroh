@@ -16,6 +16,11 @@ urlpatterns += patterns('account.views',
 	url(r'^account/logout$','auth_logout',name='auth_logout'),
 	url(r'^account/create$','auth_create_account',name='auth_create_account'),
 	url(r'^account/profile/(?P<id>\d+)/$','user_profile',name='user_profile'),
+	url(r'^account/profile/address/add/(?P<id>\d+)/$','add_address',name='add_address'),
+	url(r'^account/profile/address/show/$','show_address',name='show_address'),
+	url(r'^account/profile/auth/edit/$','edit_auth',name='edit_auth'),
+	url(r'^account/profile/info/$','profile_info',name='profile_info'),
+	url(r'^account/profile/wishlist/$','user_wishlist',name='user_wishlist'),
 )
 
 # products
