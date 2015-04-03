@@ -21,6 +21,7 @@ INSTALLED_APPS = (
     'home',
     'image_slider',
     'product',
+    'account'
 )
 
 MIDDLEWARE_CLASSES = (

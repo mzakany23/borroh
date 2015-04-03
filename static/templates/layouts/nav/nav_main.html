@@ -16,7 +16,7 @@
           <div class="pull-right">
             <ul class="userMenu">
               {% if user.is_authenticated %}
-              <li> <a href="account-1.html"><span class="hidden-xs"> {{ user }}:profile</span> <i class="glyphicon glyphicon-user hide visible-xs "></i></a> </li>
+              <li> <a href="{% url 'user_profile' user.id %} "><span class="hidden-xs"> {{ user }}:profile</span> <i class="glyphicon glyphicon-user hide visible-xs "></i></a> </li>
               <li> <a href="{% url 'auth_logout' %}"><span class="hidden-xs"> Logout</span> <i class="glyphicon glyphicon-user hide visible-xs "></i></a> </li>
               {% else %}
               <li> <a href="#"  data-toggle="modal" data-target="#ModalLogin"> <span class="hidden-xs">Sign In</span> <i class="glyphicon glyphicon-log-in hide visible-xs "></i> </a> </li>

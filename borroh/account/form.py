@@ -1,5 +1,10 @@
 from django import forms
 
+
+# -----------------------------------------------------------------------------------
+# login
+# -----------------------------------------------------------------------------------
+
 class LoginForm(forms.Form):
 	username = forms.CharField(widget=forms.TextInput(attrs={
 		"name" : "log",
@@ -20,6 +25,12 @@ class LoginForm(forms.Form):
 	}))
 
 
+
+
+# -----------------------------------------------------------------------------------
+# registration
+# -----------------------------------------------------------------------------------
+
 class RegisterUserForm(forms.Form):
 	username = forms.CharField(widget=forms.TextInput(attrs={
 		"name" : "login",
@@ -33,14 +44,14 @@ class RegisterUserForm(forms.Form):
 		"class" : "form-control input",
 		"size" : "20",
 		"placeholder" : "Enter Email",
-		"type" : "text",
+		"type" : "email",
 	}))
 	password = forms.CharField(widget=forms.TextInput(attrs={
 		"name" : "password",
 		"class" : "form-control input",
 		"size" : "20",
 		"placeholder" : "Enter Password",
-		"type" : "text",
+		"type" : "password",
 	}))
 
 	

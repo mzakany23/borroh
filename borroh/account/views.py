@@ -37,3 +37,32 @@ def auth_create_account(request):
 		login(request,authenticated_user)
 	return HttpResponseRedirect('/')
 
+def user_profile(request,id):
+	try:
+		user = User.objects.get(id=id)
+	except User.DoesNotExsist:
+		user = None
+	except:
+		pass
+
+	template = 'account/user_profile.html'
+	context = {}
+	return render(request,template,context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

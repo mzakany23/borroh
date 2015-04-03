@@ -15,6 +15,7 @@ urlpatterns += patterns('account.views',
 	url(r'^account/login$','auth_login',name='auth_login'),
 	url(r'^account/logout$','auth_logout',name='auth_logout'),
 	url(r'^account/create$','auth_create_account',name='auth_create_account'),
+	url(r'^account/profile/(?P<id>\d+)/$','user_profile',name='user_profile'),
 )
 
 # products
