@@ -7,6 +7,7 @@ from django.utils.text import slugify
 class Profile(models.Model):
 	user = models.OneToOneField(User,blank=True,null=True,unique=True)
 	slug = models.SlugField(blank=True,null=True)
+	points = models.IntegerField(default=0)
 	profile_pic = models.ImageField(upload_to='profile_pics',blank=True,null=True)
 	strip_id = models.CharField(max_length=100,blank=True,null=True)
 	favorites = models.ManyToManyField(Product,blank=True,null=True)
