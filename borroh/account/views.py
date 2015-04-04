@@ -9,7 +9,8 @@ from django.contrib.auth.decorators import login_required
 
 def auth_login(request):
 	form = LoginForm(request.POST or None)
-	
+	form2 = RegisterUserForm(request.POST or None)
+
 	if form.is_valid():
 		username = form.cleaned_data['username']
 		password = form.cleaned_data['password']
@@ -20,11 +21,20 @@ def auth_login(request):
 			login(request,user)
 		else:
 			print 'does not exist try again'
-
 		return HttpResponseRedirect('/')
 
+	if form2.is_valid():
+		username = form.cleaned_data['username']
+		email = form.cleaned_data['email']
+		password = form.cleaned_data['password']
+		user = User.objects.create_user(username,email,password)
+		user.save()
+		authenticated_user = authenticate(username=username,password=password)
+		login(request,authenticated_user)
+		return HttpResponseRedirect('/')
+
+	context = {'login' : LoginForm, 'register' : RegisterUserForm}
 	template = 'account/auth/authentication.html'
-	context = {}
 	return render(request,template,context)
 
 def auth_logout(request):
@@ -33,6 +43,7 @@ def auth_logout(request):
 
 def auth_create_account(request):
 	form = RegisterUserForm(request.POST or None)
+	form2 = LoginForm(request.POST or None)
 	if form.is_valid():
 		username = form.cleaned_data['username']
 		email = form.cleaned_data['email']
@@ -41,7 +52,23 @@ def auth_create_account(request):
 		user.save()
 		authenticated_user = authenticate(username=username,password=password)
 		login(request,authenticated_user)
-	return HttpResponseRedirect('/')
+		return HttpResponseRedirect('/')
+
+	if form2.is_valid():
+		username = form2.cleaned_data['username']
+		password = form2.cleaned_data['password']
+		
+		user = authenticate(username=username,password=password)
+		
+		if user:
+			login(request,user)
+		else:
+			print 'does not exist try again'
+		return HttpResponseRedirect('/')
+
+	template = 'account/auth/authentication.html'
+	context = {'register' : RegisterUserForm, 'login' : LoginForm}
+	return render(request,template,context)
 
 @login_required(login_url='/account/login')
 def user_profile(request,id):

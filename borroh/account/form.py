@@ -1,5 +1,5 @@
 from django import forms
-
+from django.contrib.auth.models import User
 
 # -----------------------------------------------------------------------------------
 # login
@@ -23,6 +23,16 @@ class LoginForm(forms.Form):
 		"placeholder" : "Password",
 		"type" : "password",
 	}))
+
+	# def clean(self):
+	#   cleaned_data = super(LoginForm, self).clean()
+	#   username = cleaned_data.get("username")
+	#   password = cleaned_data.get("password")
+
+	#   if username and password:
+	#     if 'greg' not in username:
+	#         raise forms.ValidationError("we love greg")
+
 
 
 
