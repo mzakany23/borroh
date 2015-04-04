@@ -13,6 +13,8 @@ class LoginForm(forms.Form):
 		"size" : "20",
 		"placeholder" : "Enter Username",
 		"type" : "text",
+		'data-parsley-trigger' : 'change',
+		'required' : '',
 	}))
 
 	password = forms.CharField(widget=forms.TextInput(attrs={
@@ -22,18 +24,11 @@ class LoginForm(forms.Form):
 		"size" : "20",
 		"placeholder" : "Password",
 		"type" : "password",
+		'data-parsley-trigger' : 'change',
+		'required' : '',
 	}))
 
-	# def clean(self):
-	#   cleaned_data = super(LoginForm, self).clean()
-	#   username = cleaned_data.get("username")
-	#   password = cleaned_data.get("password")
-
-	#   if username and password:
-	#     if 'greg' not in username:
-	#         raise forms.ValidationError("we love greg")
-
-
+	
 
 
 
@@ -48,6 +43,8 @@ class RegisterUserForm(forms.Form):
 		"size" : "20",
 		"placeholder" : "Enter Username",
 		"type" : "text",
+		'data-parsley-trigger' : 'change',
+		'required' : '',
 	}))
 	email = forms.CharField(widget=forms.TextInput(attrs={
 		"name" : "reg",
@@ -55,6 +52,8 @@ class RegisterUserForm(forms.Form):
 		"size" : "20",
 		"placeholder" : "Enter Email",
 		"type" : "email",
+		'data-parsley-trigger' : 'change',
+		'required' : '',
 	}))
 	password = forms.CharField(widget=forms.TextInput(attrs={
 		"name" : "password",
@@ -62,6 +61,8 @@ class RegisterUserForm(forms.Form):
 		"size" : "20",
 		"placeholder" : "Enter Password",
 		"type" : "password",
+		'data-parsley-trigger' : 'change',
+		'required' : '',
 	}))
 
 	
