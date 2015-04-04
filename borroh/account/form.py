@@ -13,8 +13,6 @@ class LoginForm(forms.Form):
 		"size" : "20",
 		"placeholder" : "Enter Username",
 		"type" : "text",
-		'data-parsley-trigger' : 'change',
-		'required' : '',
 	}))
 
 	password = forms.CharField(widget=forms.TextInput(attrs={
@@ -24,8 +22,6 @@ class LoginForm(forms.Form):
 		"size" : "20",
 		"placeholder" : "Password",
 		"type" : "password",
-		'data-parsley-trigger' : 'change',
-		'required' : '',
 	}))
 
 	
@@ -43,8 +39,6 @@ class RegisterUserForm(forms.Form):
 		"size" : "20",
 		"placeholder" : "Enter Username",
 		"type" : "text",
-		'data-parsley-trigger' : 'change',
-		'required' : '',
 	}))
 	email = forms.CharField(widget=forms.TextInput(attrs={
 		"name" : "reg",
@@ -52,8 +46,6 @@ class RegisterUserForm(forms.Form):
 		"size" : "20",
 		"placeholder" : "Enter Email",
 		"type" : "email",
-		'data-parsley-trigger' : 'change',
-		'required' : '',
 	}))
 	password = forms.CharField(widget=forms.TextInput(attrs={
 		"name" : "password",
@@ -61,8 +53,6 @@ class RegisterUserForm(forms.Form):
 		"size" : "20",
 		"placeholder" : "Enter Password",
 		"type" : "password",
-		'data-parsley-trigger' : 'change',
-		'required' : '',
 	}))
 
 	
