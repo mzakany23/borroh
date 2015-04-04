@@ -21,6 +21,7 @@ def auth_login(request):
 			login(request,user)
 		else:
 			print 'does not exist try again'
+			return HttpResponseRedirect('login')
 		return HttpResponseRedirect('/')
 
 	if form2.is_valid():

@@ -12,7 +12,9 @@ class Product(models.Model):
 	price = models.DecimalField(max_digits=10,decimal_places=2,default=0.00)
 	points_price = models.IntegerField(max_length=40,default=0)
 	category = models.ManyToManyField('Category',blank=True,null=True)
-	image = models.ImageField(upload_to='product_images',blank=True,null=True)
+	gender = models.CharField(max_length=40,choices=(('Male','Male'),('Female','Female'),('Unisex','Unisex'),),blank=True,null=True)
+	# image = models.ImageField(upload_to='product_images',blank=True,null=True)
+	# image = models.ManyToManyField('Image',blank=True,null=True)
 	discount = models.CharField(max_length=40,choices=(('15%','15%'),('20%','20%'),('25%','25%'),(None,None)),blank=True,null=True)
 	status = models.CharField(max_length=40,choices=(('New','New'),('Featured','Featured'),('Regular','Regular')),blank=True,null=True)
 	size = models.CharField(max_length=40,choices=(('XS','XS'),('S','M'),('L','L'),('XS','XL'),('XXL','XXL')),blank=True,null=True)
@@ -66,6 +68,8 @@ post_save.connect(generate_slug_receiver,sender=Product)
 
 class Image(models.Model):
 	image = models.ImageField(upload_to='product_images')
+	default = models.BooleanField(default=False,blank=False,null=False)
+	product = models.ForeignKey(Product,blank=True,null=True)
 	def __unicode__(self):
 		return str(self.image)
 
