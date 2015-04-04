@@ -11,11 +11,12 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='ImageSlider',
+            name='Subscription',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=40)),
-                ('image', models.ImageField(upload_to=b'image_slider')),
+                ('points', models.IntegerField(default=0)),
+                ('price', models.DecimalField(default=0.0, max_digits=10, decimal_places=2)),
             ],
             options={
             },
