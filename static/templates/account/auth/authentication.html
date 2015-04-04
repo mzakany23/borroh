@@ -35,12 +35,12 @@
         </div>
         <div class="col-xs-12 col-sm-6">
           <h2 class="block-title-2"><span>Already registered?</span></h2>
-          <form id='loginForm' method="POST" role="form" class="logForm" action="{% url 'auth_login' %}" data-parsley-validate>
+          <form id='loginForm' method="POST" role="form" class="logForm" action="{% url 'auth_login' %}" >
             {% csrf_token %}
 
             <div class="form-group">
               <label>Username</label>
-              {{ login.errors }}
+              
               {{ login.username }}
 
             </div>

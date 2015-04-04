@@ -1,9 +1,13 @@
 from django.contrib import admin
 from models import Product,Image,Category
 
+class ProductImageInline(admin.TabularInline):
+	model = Image
+
 class ProductAdmin(admin.ModelAdmin):
-	fields = ['title','slug','description','price', 'image','points_price','borrohed','sold','discount','status','created','updated']
+	fields = ['title','slug','description','category','gender','price','points_price','borrohed','sold','discount','status','size','created','updated']
 	readonly_fields = ('product_code','slug','created','updated')
+	inlines = [ProductImageInline]
 	class Meta:
 		model = Product
 
