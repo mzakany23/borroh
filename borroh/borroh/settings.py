@@ -8,7 +8,7 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+LOGIN_URL = '/auth_login/'
 AUTH_LOGIN = 'auth_login'
 
 INSTALLED_APPS = (

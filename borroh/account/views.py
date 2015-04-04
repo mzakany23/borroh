@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,HttpResponseRedirect
 from django.contrib.auth.models import User
 from form import LoginForm,RegisterUserForm
+from django.contrib.auth.decorators import login_required
+
 
 def auth_login(request):
 	form = LoginForm(request.POST or None)
@@ -19,7 +21,11 @@ def auth_login(request):
 		else:
 			print 'does not exist try again'
 
-	return HttpResponseRedirect('/')
+		return HttpResponseRedirect('/')
+
+	template = 'account/auth/authentication.html'
+	context = {}
+	return render(request,template,context)
 
 def auth_logout(request):
 	logout(request)
@@ -37,6 +43,7 @@ def auth_create_account(request):
 		login(request,authenticated_user)
 	return HttpResponseRedirect('/')
 
+@login_required(login_url='/account/login')
 def user_profile(request,id):
 	try:
 		user = User.objects.get(id=id)
@@ -47,7 +54,7 @@ def user_profile(request,id):
 	context = {}
 	return render(request,template,context)
 
-
+@login_required(login_url='/account/login')
 def add_address(request,id):
 	try:
 		user = User.objects.get(id=id)
@@ -58,21 +65,25 @@ def add_address(request,id):
 	context = {}
 	return render(request,template,context)
 
+@login_required(login_url='/account/login')
 def show_address(request):
 	template = 'account/address/my-address.html'
 	context = {}
 	return render(request,template,context)
 
+@login_required(login_url='/account/login')
 def edit_auth(request):
 	template = 'account/auth/authentication.html'
 	context = {}
 	return render(request,template,context)
 
+@login_required(login_url='/account/login')
 def profile_info(request):
 	template = 'account/profile/user-information.html'
 	context = {}
 	return render(request,template,context)
 
+@login_required(login_url='/account/login')
 def user_wishlist(request):
 	template = 'account/wishlist/wishlist.html'
 	context = {}

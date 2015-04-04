@@ -4,7 +4,10 @@
       <ul class="breadcrumb">
         <li> <a href="{% url 'home' %}">Home</a> </li>
         <li> <a href="{% url 'edit_auth' %}">Authentication</a> </li>
+        {% if user.is_authenticated %}
         <li> <a href="{% url 'user_profile' user.id %}">My account</a> </li>
+        {% endif %}
+
       </ul>
     </div>
   </div>
