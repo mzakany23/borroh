@@ -6,6 +6,7 @@ class Product(models.Model):
 	product_code = models.CharField(max_length=100,blank=True,null=True)
 	slug = models.SlugField(blank=True,null=True)
 	borrohed = models.BooleanField(default=False)
+	# featured = models.BooleanField(default=False)
 	sold = models.BooleanField(default=False)
 	title = models.CharField(max_length=40)
 	description = models.TextField(max_length=1000)
