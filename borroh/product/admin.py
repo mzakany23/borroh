@@ -6,7 +6,7 @@ class ProductImageInline(admin.TabularInline):
 
 class ProductAdmin(admin.ModelAdmin):
 	fields = ['title','slug','description','category','brand','featured','gender','price','points_price','borrohed','sold','discount','status','size','created','updated']
-	list_display = ['title','description','brand_relation','featured','price','points_price','borrohed','sold','discount','status']
+	list_display = ['title','description','brand_relation','featured','size','price','points_price','borrohed','sold','discount','status']
 	readonly_fields = ('product_code','slug','created','updated')
 	ordering = ['-price']
 	inlines = [ProductImageInline]

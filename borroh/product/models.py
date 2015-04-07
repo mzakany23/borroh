@@ -28,6 +28,7 @@ class Product(models.Model):
 		for brand in self.brand.values():
 			brands.append(str(brand['name']))
 		return brands[0]
+	
 
 # -----------------------------------------------------------------------------------
 # post_save generate product code and slug
@@ -99,6 +100,8 @@ class Collection(models.Model):
 		return categories
 
 
+
+
 class Brand(models.Model):
 	name = models.CharField(max_length=40)
 	def __unicode__(self):
@@ -114,6 +117,12 @@ class SizeCollection(models.Model):
 		for content in self.size.values():
 			contents.append(str(content['name']))
 		return contents
+
+	def contents_to_string(self):
+		categories = ''
+		for content in self.size.values():
+			categories += str(content['name']) + '/'
+		return categories
 
 class Size(models.Model):
 	name = models.CharField(max_length=40)
