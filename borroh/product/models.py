@@ -6,20 +6,18 @@ class Product(models.Model):
 	product_code = models.CharField(max_length=100,blank=True,null=True)
 	slug = models.SlugField(blank=True,null=True)
 	borrohed = models.BooleanField(default=False)
-	# featured = models.BooleanField(default=False)
+	featured = models.BooleanField(default=False)
 	sold = models.BooleanField(default=False)
 	title = models.CharField(max_length=40)
 	description = models.TextField(max_length=1000)
 	price = models.DecimalField(max_digits=10,decimal_places=2,default=0.00)
 	points_price = models.IntegerField(max_length=40,default=0)
 	category = models.ManyToManyField('Category',blank=True,null=True)
+	brand = models.ManyToManyField('Brand',null=True,blank=True)
 	gender = models.CharField(max_length=40,choices=(('Male','Male'),('Female','Female'),('Unisex','Unisex'),),blank=True,null=True)
-	# image = models.ImageField(upload_to='product_images',blank=True,null=True)
-	# image = models.ManyToManyField('Image',blank=True,null=True)
 	discount = models.CharField(max_length=40,choices=(('15%','15%'),('20%','20%'),('25%','25%'),(None,None)),blank=True,null=True)
-	status = models.CharField(max_length=40,choices=(('New','New'),('Featured','Featured'),('Regular','Regular')),blank=True,null=True)
+	status = models.CharField(max_length=40,choices=(('New','New'),('Regular','Regular')),blank=True,null=True)
 	size = models.CharField(max_length=40,choices=(('XS','XS'),('S','M'),('L','L'),('XS','XL'),('XXL','XXL')),blank=True,null=True)
-	# brand = models.CharField(max_length=40, blank=True,null=True)
 	created = models.DateTimeField(auto_now_add=True,auto_now=False)
 	updated = models.DateTimeField(auto_now_add=False,auto_now=True)
 
@@ -80,3 +78,14 @@ class Category(models.Model):
 
 	def __unicode__(self):
 		return self.gender + ":" + self.title
+
+class Collection(models.Model):
+	name = models.CharField(max_length=40)
+	category = models.ManyToManyField(Category)
+	def __unicode__(self):
+		return self.name
+
+class Brand(models.Model):
+	name = models.CharField(max_length=40)
+	def __unicode__(self):
+		return self.name
