@@ -5,6 +5,7 @@ from django.shortcuts import render,HttpResponseRedirect
 from django.contrib.auth.models import User
 from form import LoginForm,RegisterUserForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 def auth_login(request):
@@ -19,9 +20,11 @@ def auth_login(request):
 		
 		if user:
 			login(request,user)
+			messages.success(request,'You successfully logged in!')
 			request.session['errors'] = None
 		else:
 			request.session['errors'] = 'Please try logging in again'
+			template = 'account/auth/authentication.html'
 			return HttpResponseRedirect('login')
 		return HttpResponseRedirect('/')
 
@@ -33,6 +36,7 @@ def auth_login(request):
 		user.save()
 		authenticated_user = authenticate(username=username,password=password)
 		login(request,authenticated_user)
+		messages.success(request, str(user.username) + ', You have successfully signed up!')
 		return HttpResponseRedirect('/')
 
 	try: 
@@ -59,6 +63,7 @@ def auth_create_account(request):
 		user.save()
 		authenticated_user = authenticate(username=username,password=password)
 		login(request,authenticated_user)
+		messages.success(request, str(user.username) + ', You have successfully signed up!')
 		return HttpResponseRedirect('/')
 
 	if form2.is_valid():
@@ -68,6 +73,7 @@ def auth_create_account(request):
 		user = authenticate(username=username,password=password)
 		
 		if user:
+			messages.success(request, 'You have successfully logged in!')
 			login(request,user)
 		else:
 			print 'does not exist try again'
