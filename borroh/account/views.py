@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 def auth_login(request):
 	form = LoginForm(request.POST or None)
 	form2 = RegisterUserForm(request.POST or None)
-
+	
 	if form.is_valid():
 		username = form.cleaned_data['username']
 		password = form.cleaned_data['password']
@@ -19,8 +19,9 @@ def auth_login(request):
 		
 		if user:
 			login(request,user)
+			request.session['errors'] = None
 		else:
-			print 'does not exist try again'
+			request.session['errors'] = 'Please try logging in again'
 			return HttpResponseRedirect('login')
 		return HttpResponseRedirect('/')
 
@@ -34,7 +35,12 @@ def auth_login(request):
 		login(request,authenticated_user)
 		return HttpResponseRedirect('/')
 
-	context = {'login' : LoginForm, 'register' : RegisterUserForm}
+	try: 
+		request.session['errors']
+	except: 
+		request.session['errors'] = None
+
+	context = {'login' : LoginForm, 'register' : RegisterUserForm, 'errors' : request.session['errors']}
 	template = 'account/auth/authentication.html'
 	return render(request,template,context)
 

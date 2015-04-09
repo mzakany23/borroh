@@ -52,3 +52,43 @@ $(window).load(function(){
 
 </script>
 
+<!-- custom js -->
+
+<script type="text/javascript">
+	$('.quickview').click(function(){
+
+		var id = $(this).attr('id')
+		
+    $.ajax({
+    	url: "http://localhost:8000/products/details/" + id,
+    	type: 'GET',
+    	success: function(data){
+    		dynamicallyGenerateConent(data);
+    	},
+    	error: function(data){
+    		console.log(data);
+    	}
+    });
+
+    function dynamicallyGenerateConent(data){
+    	var d = JSON.parse(data)
+    	var images = d[1].fields
+    	var product = d[0].fields
+    	console.log(product)
+    	var largePic = 'media/' + String(images.image)
+    	$('#custom-large-pic').attr('src', largePic)
+    	$('.product-title').html(product.title)
+    	$('.price-sales').html("$" + String(product.price))
+    	$('.details-description').html(product.description)
+    	$('.product-title').html('<div>' + String(product.title) + '</div>')
+    	
+    }
+
+    function getId(data){
+
+    }
+  });
+</script>
+
+
+

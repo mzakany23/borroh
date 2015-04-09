@@ -1,0 +1,26 @@
+
+
+#custom-cart-add{
+	background-color: #39c381;
+	margin-bottom: 1%;
+	width: 95px;
+	max-height: 2000px !important; 
+}
+
+#custom-cart-row{
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+
+
+#custom-cart-add:hover{
+	background-color: #39c350;
+}
+
+#custom-featured{
+	margin-top: 15px;
+}
+
+#custom-product-featured-show{
+	margin-top: 25px;
+}

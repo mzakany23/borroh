@@ -11,6 +11,11 @@ ALLOWED_HOSTS = []
 LOGIN_URL = '/auth_login/'
 AUTH_LOGIN = 'auth_login'
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.request',
+    'django.contrib.auth.context_processors.auth',
+)
+
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',

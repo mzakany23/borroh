@@ -1,6 +1,8 @@
 from django.db import models
 from django.db.models.signals import post_save
 from django.utils.text import slugify
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 class Product(models.Model):
 	product_code = models.CharField(max_length=100,blank=True,null=True)
@@ -70,14 +72,16 @@ post_save.connect(generate_slug_receiver,sender=Product)
 
 # -----------------------------------------------------------------------------------
 
-
 class Image(models.Model):
-	image = models.ImageField(upload_to='product_images')
 	default = models.BooleanField(default=False,blank=False,null=False)
+	image = models.ImageField(upload_to='product_images')
+	zoom_image = models.BooleanField(default=False)
 	product = models.ForeignKey(Product,blank=True,null=True)
+	
 	def __unicode__(self):
 		return str(self.image)
 
+ 			
 class Category(models.Model):
 	title = models.CharField(max_length=40)
 	gender = models.CharField(max_length=40,choices=(('Male','Male'),('Female','Female'),('Unisex','Unisex')),blank=True,null=True)

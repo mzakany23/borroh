@@ -25,7 +25,7 @@ urlpatterns += patterns('account.views',
 
 # products
 urlpatterns += patterns('product.views',
-	# url(r'^products/list$','product_list',name='product_list'),
+	url(r'^products/details/(?P<id>\d+)$','product_detail',name='product_detail'),
 )
 
 # media
