@@ -78,6 +78,7 @@ $(window).load(function(){
     	var largePic = 'media/' + String(images.image)
     	$('#custom-large-pic').attr('src', largePic)
     	$('.product-title').html(product.title)
+        $('.product-code').html("Product Code: " + String(product.product_code))
     	$('.price-sales').html("$" + String(product.price))
     	$('.details-description').html(product.description)
     	$('.product-title').html('<div>' + String(product.title) + '</div>')
