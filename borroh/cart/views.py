@@ -11,7 +11,19 @@ def cart_show(request):
 	except:
 		pass
 
-	context = {'cart' : cart, 'items' : cart.lineitem_set.all()}
+	try:
+		buy_items_set = cart.lineitem_set.filter(borroh=False)
+		borroh_items_set = cart.lineitem_set.filter(borroh=True)
+	except:
+		buy_items_set = None
+		borroh_items_set = None
+
+	list_set = {
+		'buy' : buy_items_set,
+		'borroh' : borroh_items_set
+	}
+	
+	context = {'cart' : cart, 'items' : cart.lineitem_set.all(), 'list' : list_set}
 
 	template = 'cart/show_cart.html'
 	return render(request,template,context)
@@ -66,6 +78,7 @@ def add_item(request,id):
 	return HttpResponseRedirect(reverse('home'))
 
 def delete_item(request,id):
+	print request	
 	cart = Cart.objects.get(id=request.session['cart_id'])
 	line_item = LineItem.objects.get(id=id)
 	if line_item.borroh == False:

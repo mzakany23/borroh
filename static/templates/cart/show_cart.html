@@ -5,6 +5,7 @@
 
  
 
+
 <div class="container main-container headerOffset">
   <div class="row">
     <div class="breadcrumbDiv col-lg-12">
@@ -25,66 +26,74 @@
     </div>
   </div><!--/.row-->
   
+  
   <div class="row">
     <div class="col-lg-9 col-md-9 col-sm-7">
       <div class="row userInfo">
         <div class="col-xs-12 col-sm-12">
           <div class="cartContent w100">
+            
             <table class="cartTable table-responsive" style="width:100%">
               <tbody>
               
                 <tr class="CartProduct cartTableHeader">
-                  <td style="width:15%"  > Product </td>
+                  <td style="width:15%"  > Buy Product </td>
                   <td style="width:40%"  >Details</td>
                   <td style="width:10%"  class="delete">&nbsp;</td>
-                  <td style="width:10%" >QNT</td>
+                  <td style="width:10%" ></td>
                   <td style="width:10%" >Discount</td>
                   <td style="width:15%" >Total</td>
                 </tr>
                 
+                {% for item in list.buy %}
                 <tr class="CartProduct">
-                  <td  class="CartProductThumb"><div> <a href="product-details.html"><img src="images/product/a1.jpg" alt="img"></a> </div></td>
+
+                  <td  class="CartProductThumb"><div> <a href="product-details.html"><img src="http://localhost:8000/media/{{ item.product.image_set.all.0 }}" alt="img"></a> </div></td>
                   <td ><div class="CartDescription">
-                      <h4> <a href="product-details.html">Denim T shirt Black </a> </h4>
-                      <span class="size">12 x 1.5 L</span>
-                      <div class="price"> <span>$8.80</span></div>
+                      <h4> <a href="product-details.html">{{ item.product.title }}</a> </h4>
+                      <!-- <span class="size">12 x 1.5 L</span> -->
+                      <!-- <div class="price"> <span>$8.80</span></div> -->
                     </div></td>
-                  <td class="delete"><a title="Delete"> <i class="glyphicon glyphicon-trash fa-2x"></i></a></td>
-                  <td ><input class="quanitySniper" type="text" value="2" name="quanitySniper"></td>
+                  <td class="delete"><a title="Delete"> <a href="{% url 'delete_item' item.id %}"><i class="glyphicon glyphicon-trash fa-2x"></i></a></a></td>
+                  <td ><!-- <input class="quanitySniper" type="text" value="2" name="quanitySniper"> --></td>
                   <td >0</td>
-                  <td class="price">$300</td>
+                  <td class="price">${{ item.product.price }}</td>
+                </tr>
+                {% endfor %}
+            
+              </tbody>
+            </table>
+
+            
+            <table class="cartTable table-responsive" style="width:100%">
+              <tbody>
+              
+                <tr class="CartProduct cartTableHeader">
+                  <td style="width:15%"  > Points Product </td>
+                  <td style="width:40%"  >Details</td>
+                  <td style="width:10%"  class="delete">&nbsp;</td>
+                  <td style="width:10%" ></td>
+                  <td style="width:10%" >Discount</td>
+                  <td style="width:15%" >Total</td>
                 </tr>
                 
+                {% for item in list.borroh %}
                 <tr class="CartProduct">
-                  <td  class="CartProductThumb"><div> <a href="product-details.html"><img src="images/product/a2.jpg" alt="img"></a> </div></td>
+
+                  <td  class="CartProductThumb"><div> <a href="product-details.html"><img src="http://localhost:8000/media/{{ item.product.image_set.all.0 }}" alt="img"></a> </div></td>
                   <td ><div class="CartDescription">
-                      <h4> <a href="product-details.html">Denim T shirt Red </a> </h4>
-                      <span class="size">12 x 1.5 L</span>
-                      <div class="price"> <span>$30</span> </div>
+                      <h4> <a href="product-details.html">{{ item.product.title }}</a> </h4>
+                      <!-- <span class="size">12 x 1.5 L</span> -->
+                      <!-- <div class="price"> <span>$8.80</span></div> -->
                     </div></td>
-                  <td class="delete"><a title="Delete"> <i class="glyphicon glyphicon-trash fa-2x"></i></a></td>
-                  <td ><input class="quanitySniper" type="text" value="2" name="quanitySniper"></td>
+                  <td class="delete"><a title="Delete"> <a href="{% url 'delete_item' item.id %}"><i class="glyphicon glyphicon-trash fa-2x"></i></a></a></td>
+                  <td ><!-- <input class="quanitySniper" type="text" value="2" name="quanitySniper"> --></td>
                   <td >0</td>
-                  <td class="price" >$60</td>
+                  <td class="price">{{ item.product.points_price }}</td>
                 </tr>
-                
-                <tr class="CartProduct">
-                  <td  class="CartProductThumb">
-                  <div> 
-                  <a href="product-details.html"><img src="images/product/a5.jpg" alt="img"></a> 
-                  </div>
-                  </td>
-                  
-                  <td ><div class="CartDescription">
-                      <h4> <a href="product-details.html">Denim T shirt Blue </a> </h4>
-                      <span class="size">12 x 1.5 L</span>
-                      <div class="price"> <span>$8.80</span></div>
-                    </div></td>
-                  <td class="delete"><a title="Delete"> <i class="glyphicon glyphicon-trash fa-2x"></i></a></td>
-                  <td ><input class="quanitySniper" type="text" value="2" name="quanitySniper"></td>
-                  <td >0</td>
-                  <td class="price">$60</td>
-                </tr>
+                {% endfor %}
+              
+          
               </tbody>
             </table>
           </div>
@@ -92,9 +101,9 @@
           
           <div class="cartFooter w100">
             <div class="box-footer">
-              <div class="pull-left"> <a href="index.html" class="btn btn-default"> <i class="fa fa-arrow-left"></i> &nbsp; Continue shopping </a> </div>
+              <div class="pull-left"> <a href="{% url 'home' %}" class="btn btn-default"> <i class="fa fa-arrow-left"></i> &nbsp; Continue shopping </a> </div>
               <div class="pull-right">
-                <button type="submit" class="btn btn-default"> <i class="fa fa-undo"></i> &nbsp; Update cart </button>
+                <!-- <button type="submit" class="btn btn-default"> <i class="fa fa-undo"></i> &nbsp; Update cart </button> -->
               </div>
             </div>
           </div> <!--/ cartFooter --> 
@@ -113,7 +122,7 @@
                 <tbody>
                   <tr >
                     <td>Total products</td>
-                    <td class="price" >$216.51</td>
+                    <td class="price" >${{ cart.total_price }}</td>
                   </tr>
                   <tr  style="">
                     <td>Shipping</td>
@@ -121,7 +130,7 @@
                   </tr>
                   <tr class="cart-total-price ">
                     <td>Total (tax excl.)</td>
-                    <td class="price" >$216.51</td>
+                    <td class="price" >${{ cart.total_price }}</td>
                   </tr>
                   <tr >
                     <td>Total tax</td>
@@ -129,7 +138,7 @@
                   </tr>
                   <tr >
                     <td > Total </td>
-                    <td class=" site-color" id="total-price">$216.51</td>
+                    <td class=" site-color" id="total-price">${{ cart.total_price }}</td>
                   </tr>
                   <tr >
                     <td colspan="2"  ><div class="input-append couponForm">

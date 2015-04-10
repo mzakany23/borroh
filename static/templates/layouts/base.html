@@ -196,6 +196,7 @@
             <div class="w100 miniCartTable scroll-pane" style='overflow: scroll;'>
               <table>
                 <tbody>
+                  {% if list.buy.count >= 1 %}
                   <h3>Buy Items</h3>
                   {% for item in list.buy %}
                   <tr class="miniCartProduct">
@@ -210,13 +211,14 @@
                     <td  style="width:5%" class="delete"><a > <a href="{% url 'delete_item' item.id %}">x</a> </a></td>
                   </tr>
                   {% endfor %}
+                  {% endif %}
                 </tbody>
               </table>
               <table>
+                {% if list.borroh.count >= 1 %}
                 <h3>Borroh Items</h3>
                 <tbody>
                 {% for item in list.borroh %}
-
                   <tr class="miniCartProduct">
                     <td style="width:20%" class="miniCartProductThumb"><div> <a href="product-details.html"> <img src="{% static 'images/product/3.jpg' %}" alt="img"> </a> </div></td>
                     <td style="width:40%"><div class="miniCartDescription">
@@ -229,6 +231,7 @@
                     <td  style="width:5%" class="delete"><a ><a href="{% url 'delete_item' item.id %}">x</a> </a></a></td>
                   </tr>
                   {% endfor %}
+                  {% endif %}
                 </tbody>
               </table>
             </div>
@@ -236,9 +239,11 @@
             
             <div class="miniCartFooter text-right">
               <h3 class="text-right subtotal"> Buy Subtotal: ${{ cart.total_price }} </h3>
-              <h3 class="text-right subtotal"> Borroh Subtotal: {{ cart.total_points }} </h3>
-              <a href="{% url 'cart_show' %}" class="btn btn-sm btn-danger"> <i class="fa fa-shopping-cart"> </i> VIEW CART </a> <a class="btn btn-sm btn-primary"> CHECKOUT </a> </div>
+                <h3 class="text-right subtotal"> Borroh Subtotal: {{ cart.total_points }} </h3>
+                <a href="{% url 'cart_show' %}" class="btn btn-sm btn-danger"> <i class="fa fa-shopping-cart"> </i> VIEW CART </a> <a class="btn btn-sm btn-primary"> CHECKOUT </a> 
+            </div>
             <!--/.miniCartFooter--> 
+            
             
           </div>
           <!--/.dropdown-menu--> 
