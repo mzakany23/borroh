@@ -8,11 +8,22 @@ def home(request):
 	try:
 		cart = Cart.objects.get(id=request.session['cart_id'])
 	except:
-		cart = None
+		cart = None	
 
+	try:
+		buy_items_set = cart.lineitem_set.filter(borroh=False)
+		borroh_items_set = cart.lineitem_set.filter(borroh=True)
+	except:
+		buy_items_set = None
+		borroh_items_set = None
+
+	list_set = {
+		'buy' : buy_items_set,
+		'borroh' : borroh_items_set
+	}
 
 	featured_products = Product.objects.filter(featured=True)
-	context = {'login_form' : LoginForm, 'register' : RegisterUserForm, 'featured_products' : featured_products, 'cart' : cart}
+	context = {'login_form' : LoginForm, 'register' : RegisterUserForm, 'featured_products' : featured_products, 'cart' : cart, 'list' : list_set}
 	template = 'home/index.html'
 	return render(request,template,context)
 

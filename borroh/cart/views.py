@@ -66,7 +66,19 @@ def add_item(request,id):
 	return HttpResponseRedirect(reverse('home'))
 
 def delete_item(request,id):
-	return HttpResponseRedirect(reverse('cart_show'))
+	cart = Cart.objects.get(id=request.session['cart_id'])
+	line_item = LineItem.objects.get(id=id)
+	if line_item.borroh == False:
+		price = line_item.product.price
+		cart.total_price -= price
+	elif line_item.borroh == True:
+		points = line_item.product.points_price
+		cart.total_points -= points
+
+	cart.save()
+	line_item.delete()
+
+	return HttpResponseRedirect(reverse('home'))
 
 
 
