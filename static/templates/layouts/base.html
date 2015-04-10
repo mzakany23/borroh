@@ -65,7 +65,7 @@
     
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only"> Toggle navigation </span> <span class="icon-bar"> </span> <span class="icon-bar"> </span> <span class="icon-bar"> </span> </button>
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-cart"> <i class="fa fa-shopping-cart colorWhite"> </i> <span class="cartRespons colorWhite"> Cart ($210.00) </span> </button>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-cart"> <i class="fa fa-shopping-cart colorWhite"> </i> <span class="cartRespons colorWhite"> Cart (${{ cart.total_price }} / {{ cart.total_points }} Points) </span> </button>
       <a class="navbar-brand " href="{% url 'home' %}"> <img src="{% static 'images/logo.png' %}" alt="TSHOP"> </a> 
       
       <!-- this part for mobile -->
@@ -85,75 +85,27 @@
         <div class="w100 miniCartTable scroll-pane">
           <table  >
             <tbody>
+              {% for item in mobile_items %}
               <tr class="miniCartProduct">
-                <td style="20%" class="miniCartProductThumb"><div> <a href="product-details.html"> <img src="{% static 'images/product/3.jpg' %}" alt="img"> </a> </div></td>
+                <td style="20%" class="miniCartProductThumb"><div> <a href="product-details.html"> <img src="http://localhost:8000/media/{{ item.product.image_set.all.0 }}" alt="img"> </a> </div></td>
                 <td style="40%"><div class="miniCartDescription">
                     <h4> <a href="product-details.html"> TSHOP T shirt Black </a> </h4>
-                    <span class="size"> 12 x 1.5 L </span>
+                    {% if item.borroh == True %}
+                    <span class="size"> Borroh </span>
+                    {% else %}
+                    <span class="size"> Buy </span>
+                    {% endif %}
                     <div class="price"> <span> $8.80 </span> </div>
                   </div></td>
                 <td  style="10%" class="miniCartQuantity"><a > X 1 </a></td>
                 <td  style="15%" class="miniCartSubtotal"><span> $8.80 </span></td>
                 <td  style="5%" class="delete"><a > x </a></td>
               </tr>
-              <tr class="miniCartProduct">
-                <td style="20%" class="miniCartProductThumb"><div> <a href="product-details.html"> <img src="{% static 'images/product/2.jpg' %}" alt="img"> </a> </div></td>
-                <td  style="40%"><div class="miniCartDescription">
-                    <h4> <a href="product-details.html"> TSHOP T shirt Black </a> </h4>
-                    <span class="size"> 12 x 1.5 L </span>
-                    <div class="price"> <span> $8.80 </span> </div>
-                  </div></td>
-                <td   style="10%" class="miniCartQuantity"><a > X 1 </a></td>
-                <td  style="15%" class="miniCartSubtotal"><span> $8.80 </span></td>
-                <td  style="5%" class="delete"><a > x </a></td>
-              </tr>
-              <tr class="miniCartProduct">
-                <td style="20%" class="miniCartProductThumb"><div> <a href="product-details.html"> <img src="{% static 'images/product/5.jpg' %}" alt="img"> </a> </div></td>
-                <td  style="40%"><div class="miniCartDescription">
-                    <h4> <a href="product-details.html"> TSHOP T shirt Black </a> </h4>
-                    <span class="size"> 12 x 1.5 L </span>
-                    <div class="price"> <span> $8.80 </span> </div>
-                  </div></td>
-                <td   style="10%" class="miniCartQuantity"><a > X 1 </a></td>
-                <td  style="15%" class="miniCartSubtotal"><span> $8.80 </span></td>
-                <td  style="5%" class="delete"><a > x </a></td>
-              </tr>
-              <tr class="miniCartProduct">
-                <td style="20%" class="miniCartProductThumb"><div> <a href="product-details.html"> <img src="{% static 'images/product/3.jpg' %}" alt="img"> </a> </div></td>
-                <td  style="40%"><div class="miniCartDescription">
-                    <h4> <a href="product-details.html"> TSHOP T shirt Black </a> </h4>
-                    <span class="size"> 12 x 1.5 L </span>
-                    <div class="price"> <span> $8.80 </span> </div>
-                  </div></td>
-                <td   style="10%" class="miniCartQuantity"><a > X 1 </a></td>
-                <td  style="15%" class="miniCartSubtotal"><span> $8.80 </span></td>
-                <td  style="5%" class="delete"><a > x </a></td>
-              </tr>
-              <tr class="miniCartProduct">
-                <td style="20%" class="miniCartProductThumb"><div> <a href="product-details.html"> <img src="{% static 'images/product/3.jpg' %}" alt="img"> </a> </div></td>
-                <td  style="40%"><div class="miniCartDescription">
-                    <h4> <a href="product-details.html"> TSHOP T shirt Black </a> </h4>
-                    <span class="size"> 12 x 1.5 L </span>
-                    <div class="price"> <span> $8.80 </span> </div>
-                  </div></td>
-                <td   style="10%" class="miniCartQuantity"><a > X 1 </a></td>
-                <td  style="15%" class="miniCartSubtotal"><span> $8.80 </span></td>
-                <td  style="5%" class="delete"><a > x </a></td>
-              </tr>
-              <tr class="miniCartProduct">
-                <td style="20%" class="miniCartProductThumb"><div> <a href="product-details.html"> <img src="{% static 'images/product/4.jpg' %}" alt="img"> </a> </div></td>
-                <td  style="40%"><div class="miniCartDescription">
-                    <h4> <a href="product-details.html"> TSHOP T shirt Black </a> </h4>
-                    <span class="size"> 12 x 1.5 L </span>
-                    <div class="price"> <span> $8.80 </span> </div>
-                  </div></td>
-                <td   style="10%" class="miniCartQuantity"><a > X 1 </a></td>
-                <td  style="15%" class="miniCartSubtotal"><span> $8.80 </span></td>
-                <td  style="5%" class="delete"><a > x </a></td>
-              </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>
+
         <!--/.miniCartTable-->
         
         <div class="miniCartFooter  miniCartFooterInMobile text-right">

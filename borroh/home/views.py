@@ -22,8 +22,16 @@ def home(request):
 		'borroh' : borroh_items_set
 	}
 
+	mobile = cart.lineitem_set.order_by('borroh')
+
 	featured_products = Product.objects.filter(featured=True)
-	context = {'login_form' : LoginForm, 'register' : RegisterUserForm, 'featured_products' : featured_products, 'cart' : cart, 'list' : list_set}
+	context = {
+			'login_form' : LoginForm, 
+			'register' : RegisterUserForm, 
+			'featured_products' : featured_products, 
+			'cart' : cart, 'list' : list_set, 
+			'mobile_items' : mobile
+	}
 	template = 'home/index.html'
 	return render(request,template,context)
 
