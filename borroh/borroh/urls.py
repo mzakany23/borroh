@@ -32,3 +32,9 @@ urlpatterns += patterns('product.views',
 urlpatterns += patterns('',
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}))
 
+# cart
+urlpatterns += patterns('cart.views',
+	url(r'^cart/show', 'cart_show',name='cart_show'),
+	url(r'^cart/add/(?P<id>\d+)', 'add_item',name='add_item'),
+	url(r'^cart/delete/(?P<id>\d+)', 'delete_item',name='delete_item'),	
+)

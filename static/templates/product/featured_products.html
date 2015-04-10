@@ -32,7 +32,7 @@
                   <span class="discount">{{ product.discount }}</span> 
                 {% endif %}
               </div>
-    f        </div>
+            </div>
 
             <div class="description">
               <h4><a href="product-details.html">{{ product.title }}</a></h4>
@@ -47,11 +47,30 @@
 
             <div id="custom-cart-row" class="row">
               <div class="col-md-5 col-md-offset-1">
-                <button id='custom-cart-add' class="btn btn-default" type='submit'>Add to Cart</button>
+
+                <form method='POST' action="{% url 'add_item' product.id %}" >
+                  {% csrf_token %}
+                  <input name='cart_to_add' type='text' style="display: none;" value='buy'>
+
+                  <button  id='custom-cart-add' class="btn btn-default" type='submit'>
+                    <a style='text-decoration: none; color: #FFFFFF;'>
+                      Add Cart
+                    </a>
+                  </button>
+                </form>
               </div>
+                
 
               <div class="col-md-5">
-                <button id='custom-cart-add' class="btn btn-default" type='submit'>Borroh</button>
+                <form method='POST' action="{% url 'add_item' product.id %}" >
+                  {% csrf_token %}
+                  <input name='cart_to_add' type='text' style="display: none;" value='borroh'>
+
+                  <button id='custom-cart-add' class="btn btn-default" type='submit'>Add Borroh</button>
+                    
+                  </button>
+                </form>
+                
               </div>
             </div>
 
