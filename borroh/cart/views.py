@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.shortcuts import render,HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from models import Cart,LineItem
@@ -25,7 +26,7 @@ def cart_show(request):
 		'borroh' : borroh_items_set
 	}
 
-	context = {'cart' : cart, 'items' : cart_items, 'list' : list_set}
+	context = {'cart' : cart, 'items' : cart_items, 'list' : list_set, 'settings' : settings}
 
 	template = 'cart/show_cart.html'
 	return render(request,template,context)
@@ -80,7 +81,7 @@ def add_item(request,id):
 	return HttpResponseRedirect(reverse('home'))
 
 def delete_item(request,id):
-	print request	
+	
 	cart = Cart.objects.get(id=request.session['cart_id'])
 	line_item = LineItem.objects.get(id=id)
 	if line_item.borroh == False:
@@ -94,6 +95,7 @@ def delete_item(request,id):
 	line_item.delete()
 
 	return HttpResponseRedirect(reverse('home'))
+
 
 
 

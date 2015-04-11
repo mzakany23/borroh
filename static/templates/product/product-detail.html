@@ -19,9 +19,9 @@
    <!-- left column -->
     <div class="col-lg-6 col-md-6 col-sm-6">
     	<!-- product Image and Zoom -->
-<img src="http://localhost:8000/media/{{ product.image_set.all.0 }}" alt="img">
+<img src="{{ settings.server }}/media/{{ product.image_set.all.0 }}" alt="img">
     <div class="main-image sp-wrap col-lg-12 no-padding style2 style2look2"> 
-        <a href="#"><img src="http://localhost:8000/media/{{ product.image_set.all.0 }}" class="img-responsive" alt="img"></a> 
+        <a href="#"><img src="{{ settings.SERVER }}/media/{{ product.image_set.all.0 }}" class="img-responsive" alt="img"></a> 
         <a href="images/zoom/zoom2hi.jpg"><img src="images/zoom/zoom2.jpg" class="img-responsive" alt="img"></a>
         <a href="images/zoom/zoom3hi.jpg"><img src="images/zoom/zoom3.jpg" class="img-responsive" alt="img"></a> 
       </div>

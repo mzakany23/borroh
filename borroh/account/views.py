@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate,login,logout
@@ -136,7 +137,7 @@ def user_wishlist(request):
 		favorite_products = 0
 
 
-	context = {'favorite_products' : favorite_products}
+	context = {'favorite_products' : favorite_products, 'settings' : settings}
 	template = 'account/wishlist/wishlist.html'
 	return render(request,template,context)
 

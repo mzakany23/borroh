@@ -20,7 +20,7 @@
               
               <tr class="CartProduct">
                 <td style="width:10%" class="CartProductThumb"><div> <a href="{% url 'product_detail_non_json' product.id %}">
-                <img src="http://localhost:8000/media/{{ product.image_set.all.0 }}" alt="img"></a> </div></td>
+                <img src="{{ settings.server }}/media/{{ product.image_set.all.0 }}" alt="img"></a> </div></td>
                 <td style="width:40%"><div class="CartDescription">
                     <h4> <a href="product-details.html">{{ product.title }}</a> </h4>
                     <span class="size">12 x 1.5 L</span>

@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core import serializers
@@ -26,5 +27,5 @@ def product_detail_non_json(request,id):
 	except:
 		product = None
 	template = 'product/product-detail.html'
-	context={'product' : product}
+	context={'product' : product, 'settings' : settings}
 	return render(request,template,context)

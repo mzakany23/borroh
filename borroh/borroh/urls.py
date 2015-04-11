@@ -27,7 +27,7 @@ urlpatterns += patterns('account.views',
 # products
 urlpatterns += patterns('product.views',
 	url(r'^products/details/(?P<id>\d+)$','product_detail',name='product_detail'),
-	url(r'^products/details/nojson/(?P<id>\d+)$','product_detail_non_json',name='product_detail_non_json'),
+	url(r'^products/detail/(?P<id>\d+)$','product_detail_non_json',name='product_detail_non_json'),
 )
 
 # media
