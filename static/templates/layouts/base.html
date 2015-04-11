@@ -20,7 +20,7 @@
 {% include 'account/auth/partials/_login.html' %}
 {% endif %}
 <!-- Modal Signup start -->
-{% if request.path == '/' %}
+
 <div class="modal signUpContent fade" id="ModalSignup" tabindex="-1" role="dialog" >
   <div class="modal-dialog">
     <div class="modal-content">
@@ -32,7 +32,7 @@
         <div class="control-group"> <a class="fb_button btn  btn-block btn-lg " href="#"> SIGNUP WITH FACEBOOK </a> </div>
         <h5 style="padding:10px 0 10px 0;" class="text-center"> OR </h5>
         {% include 'account/auth/partials/_register.html' %}
-{% endif %}
+
         <!--userForm--> 
         
       </div>
@@ -93,12 +93,12 @@
                     {% if item.borroh == True %}
                     <span class="size"> Borroh </span>
                     {% else %}
-                    <span class="size"> Buy </span>
+                    <span class="size"> for purchase </span>
                     {% endif %}
-                    <div class="price"> <span> $8.80 </span> </div>
+                    <!-- <div class="price"> <span> ${{ item.product.price }} </span> </div> -->
                   </div></td>
-                <td  style="10%" class="miniCartQuantity"><a > X 1 </a></td>
-                <td  style="15%" class="miniCartSubtotal"><span> $8.80 </span></td>
+                <!-- <td  style="10%" class="miniCartQuantity"><a > X 1 </a></td> -->
+                <td  style="15%" class="miniCartSubtotal"><span> ${{ cart.total_price }} </span></td>
                 <td  style="5%" class="delete"><a > x </a></td>
               </tr>
               {% endfor %}
@@ -109,8 +109,8 @@
         <!--/.miniCartTable-->
         
         <div class="miniCartFooter  miniCartFooterInMobile text-right">
-          <h3 class="text-right subtotal"> Subtotal: $210 </h3>
-          <a class="btn btn-sm btn-danger"> <i class="fa fa-shopping-cart"> </i> VIEW CART </a> <a class="btn btn-sm btn-primary"> CHECKOUT </a> </div>
+          <h3 class="text-right subtotal"> Subtotal: ${{ cart.total_price }} </h3>
+          <a href="{% url 'cart_show' %}" class="btn btn-sm btn-danger"> <i class="fa fa-shopping-cart"> </i> VIEW CART </a> <a class="btn btn-sm btn-primary"> CHECKOUT </a> </div>
         <!--/.miniCartFooter--> 
         
       </div>

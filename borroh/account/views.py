@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,HttpResponseRedirect
@@ -6,6 +7,8 @@ from django.contrib.auth.models import User
 from form import LoginForm,RegisterUserForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from product.models import Product
+from account.models import Profile
 
 
 def auth_login(request):
@@ -125,12 +128,30 @@ def profile_info(request):
 
 @login_required(login_url='/account/login')
 def user_wishlist(request):
+	try:
+		profile = Profile.objects.get(user=request.user)
+		favorite_products = profile.favorites
+	except:
+		profile = None
+		favorite_products = 0
+
+
+	context = {'favorite_products' : favorite_products}
 	template = 'account/wishlist/wishlist.html'
-	context = {}
 	return render(request,template,context)
 
 
-
+@login_required(login_url='/account/login')
+def add_to_wishlist(request,id):
+	try:
+		product = Product.objects.get(id=id)
+		profile = Profile.objects.get(user=request.user)
+		profile.favorites.add(product)
+		profile.save()
+	except:
+		print 'nope'
+	
+	return HttpResponseRedirect(reverse('home'))
 
 
 

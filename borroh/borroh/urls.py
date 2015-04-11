@@ -21,11 +21,13 @@ urlpatterns += patterns('account.views',
 	url(r'^account/profile/auth/edit/$','edit_auth',name='edit_auth'),
 	url(r'^account/profile/info/$','profile_info',name='profile_info'),
 	url(r'^account/profile/wishlist/$','user_wishlist',name='user_wishlist'),
+	url(r'^account/profile/wishlist/add/(?P<id>\d+)$','add_to_wishlist',name='add_to_wishlist'),
 )
 
 # products
 urlpatterns += patterns('product.views',
 	url(r'^products/details/(?P<id>\d+)$','product_detail',name='product_detail'),
+	url(r'^products/details/nojson/(?P<id>\d+)$','product_detail_non_json',name='product_detail_non_json'),
 )
 
 # media
@@ -37,4 +39,9 @@ urlpatterns += patterns('cart.views',
 	url(r'^cart/show', 'cart_show',name='cart_show'),
 	url(r'^cart/add/(?P<id>\d+)', 'add_item',name='add_item'),
 	url(r'^cart/delete/(?P<id>\d+)', 'delete_item',name='delete_item'),	
+)
+
+# order 
+urlpatterns += patterns('order.views',
+
 )

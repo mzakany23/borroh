@@ -22,7 +22,10 @@ def home(request):
 		'borroh' : borroh_items_set
 	}
 
-	mobile = cart.lineitem_set.order_by('borroh')
+	try:
+		mobile = cart.lineitem_set.order_by('borroh')
+	except:
+		mobile = None
 
 	featured_products = Product.objects.filter(featured=True)
 	context = {

@@ -8,8 +8,10 @@ def cart_show(request):
 	try:
 		cart_id = request.session['cart_id']
 		cart = Cart.objects.get(id=cart_id)
+		cart_items = cart.lineitem_set.all()
 	except:
-		pass
+		cart = None
+		cart_items = None
 
 	try:
 		buy_items_set = cart.lineitem_set.filter(borroh=False)
@@ -22,8 +24,8 @@ def cart_show(request):
 		'buy' : buy_items_set,
 		'borroh' : borroh_items_set
 	}
-	
-	context = {'cart' : cart, 'items' : cart.lineitem_set.all(), 'list' : list_set}
+
+	context = {'cart' : cart, 'items' : cart_items, 'list' : list_set}
 
 	template = 'cart/show_cart.html'
 	return render(request,template,context)
