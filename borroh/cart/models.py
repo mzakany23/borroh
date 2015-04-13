@@ -24,6 +24,7 @@ class Cart(models.Model):
 				total += int(item.product.points_price)
 		return total				
 
+	
 class LineItem(models.Model):
 	cart = models.ForeignKey(Cart)
 	product = models.ForeignKey(Product,null=True,blank=True)

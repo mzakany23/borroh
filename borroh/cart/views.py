@@ -5,6 +5,7 @@ from models import Cart,LineItem
 from product.models import Product
 from django.contrib.auth.models import User,AnonymousUser
 
+
 def cart_show(request):
 	try:
 		cart_id = request.session['cart_id']
@@ -15,16 +16,9 @@ def cart_show(request):
 		cart_items = None
 
 	try:
-		buy_items_set = cart.lineitem_set.filter(borroh=False)
-		borroh_items_set = cart.lineitem_set.filter(borroh=True)
+		list_set = cart.lineitem_set.all().order_by('borroh')
 	except:
-		buy_items_set = None
-		borroh_items_set = None
-
-	list_set = {
-		'buy' : buy_items_set,
-		'borroh' : borroh_items_set
-	}
+		list_set = None
 
 	context = {'cart' : cart, 'items' : cart_items, 'list' : list_set, 'settings' : settings}
 

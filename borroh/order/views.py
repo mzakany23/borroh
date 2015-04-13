@@ -1,6 +1,7 @@
 from django.shortcuts import render,HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
+from cart.models import Cart
 
 def start_order_process(request):
 	if request.user.is_authenticated():
@@ -9,9 +10,17 @@ def start_order_process(request):
 		return HttpResponseRedirect(reverse('order_auth'))
 
 # auth
-
 def order_auth(request):
-	context = {}
+	
+	try:
+		cart_id = request.session['cart_id']
+		cart = Cart.objects.get(id=cart_id)
+		cart_items = cart.lineitem_set.all()
+	except:
+		cart = None
+		cart_items = None
+
+	context = {'list' : cart_items}
 	template = 'order/checkout-auth.html'
 	return render(request,template,context)
 

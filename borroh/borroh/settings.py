@@ -13,6 +13,8 @@ AUTH_LOGIN = 'auth_login'
 
 SERVER = 'http://localhost:8000'
 
+SESSION_COOKIE_AGE = 14000
+
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.contrib.auth.context_processors.auth',
