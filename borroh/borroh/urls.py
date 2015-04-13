@@ -43,5 +43,22 @@ urlpatterns += patterns('cart.views',
 
 # order 
 urlpatterns += patterns('order.views',
-
+	url(r'^order/start_order/', 'start_order_process',name='start_order_process'),	
+	url(r'^order/auth/', 'order_auth',name='order_auth'),	
+	url(r'^order/address/', 'order_address',name='order_address'),	
+	url(r'^order/billing/', 'order_billing',name='order_billing'),	
+	url(r'^order/shipping/', 'order_shipping',name='order_shipping'),	
+	url(r'^order/payment/', 'order_payment',name='order_payment'),	
+	url(r'^order/show/', 'order_show',name='order_show'),	
+	
 )
+
+
+
+
+
+
+
+
+
+
