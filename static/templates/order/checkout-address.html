@@ -215,7 +215,7 @@
           <div class="cartFooter w100">
             <div class="box-footer">
               <div class="pull-left"> <a class="btn btn-default" href="index.html"> <i class="fa fa-arrow-left"></i> &nbsp; Back to Shop </a> </div>
-              <div class="pull-right"> <a class="btn btn-primary btn-small "  href="checkout-2.html"> Shipping address &nbsp; <i class="fa fa-arrow-circle-right"></i> </a> </div>
+              <div class="pull-right"> <a class="btn btn-primary btn-small "  href="{% url 'order_billing' %}"> Shipping address &nbsp; <i class="fa fa-arrow-circle-right"></i> </a> </div>
             </div>
           </div>
           <!--/ cartFooter --> 
@@ -225,35 +225,7 @@
       <!--/row end--> 
       
     </div>
-    <div class="col-lg-3 col-md-3 col-sm-12 rightSidebar">
-      <div class="w100 cartMiniTable">
-        <table id="cart-summary" class="std table">
-          <tbody>
-            <tr >
-              <td>Total products</td>
-              <td class="price" >$216.51</td>
-            </tr>
-            <tr  style="">
-              <td>Shipping</td>
-              <td class="price" ><span class="success">Free shipping!</span></td>
-            </tr>
-            <tr class="cart-total-price ">
-              <td>Total (tax excl.)</td>
-              <td class="price" >$216.51</td>
-            </tr>
-            <tr >
-              <td>Total tax</td>
-              <td class="price" id="total-tax">$0.00</td>
-            </tr>
-            <tr >
-              <td > Total </td>
-              <td class=" site-color" id="total-price">$216.51</td>
-            </tr>
-          </tbody>
-          <tbody>
-          </tbody>
-        </table>
-      </div>
+    {% include 'order/partials/_right_column_total.html' %}
       <!--  /cartMiniTable--> 
       
     </div>
