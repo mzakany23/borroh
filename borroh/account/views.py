@@ -12,6 +12,7 @@ from product.models import Product
 from account.models import Profile
 from home.views import get_home_variables
 from django.template import RequestContext
+from django.contrib.auth.models import AnonymousUser
 
 
 def auth_login(request):
@@ -53,6 +54,11 @@ def auth_login(request):
 	context = {'login' : LoginForm, 'register' : RegisterUserForm, 'errors' : request.session['errors']}
 	template = 'account/auth/authentication.html'
 	return render(request,template,context)
+
+def login_as_guest(request):
+	request.user = AnonymousUser()
+	return HttpResponseRedirect(reverse('start_order_process'))
+
 
 def auth_logout(request):
 	logout(request)

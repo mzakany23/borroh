@@ -23,6 +23,7 @@ urlpatterns += patterns('account.views',
 	url(r'^account/profile/wishlist/$','user_wishlist',name='user_wishlist'),
 	url(r'^account/profile/wishlist/add/(?P<id>\d+)$','add_to_wishlist',name='add_to_wishlist'),
 	url(r'^account/profile/wishlist/delete/(?P<id>\d+)$','delete_from_wishlist',name='delete_from_wishlist'),
+	url(r'^account/login_as_guest/', 'login_as_guest',name='login_as_guest'),
 )
 
 # products
@@ -50,8 +51,7 @@ urlpatterns += patterns('order.views',
 	url(r'^order/billing/', 'order_billing',name='order_billing'),	
 	url(r'^order/shipping/', 'order_shipping',name='order_shipping'),	
 	url(r'^order/payment/', 'order_payment',name='order_payment'),	
-	url(r'^order/show/', 'order_show',name='order_show'),	
-	
+	url(r'^order/show/', 'order_show',name='order_show'),		
 )
 
 

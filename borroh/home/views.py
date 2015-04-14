@@ -51,7 +51,8 @@ def get_home_variables(request):
 			'cart' : cart, 
 			'list' : list_set, 
 			'mobile_items' : mobile,
-			'sorted_by_borroh' : borrohed
+			'sorted_by_borroh' : borrohed,
+			'settings' : settings
 	}
 
 	

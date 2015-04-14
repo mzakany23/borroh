@@ -6,7 +6,7 @@ from home.views import get_home_variables
 from django.template import RequestContext
 
 def start_order_process(request):
-	if request.user.is_authenticated():
+	if request.user.is_authenticated() or request.user.is_anonymous():
 		return HttpResponseRedirect(reverse('order_address'))
 	else:
 		return HttpResponseRedirect(reverse('order_auth'))
@@ -17,39 +17,34 @@ def order_auth(request):
 	return render(request,template,context_instance=RequestContext(request, processors=[get_home_variables]))
 
 # address
-@login_required
 def order_address(request):
 	context = {}
 	template = 'order/checkout-address.html'
 	return render(request,template,context)
 
 # billing
-@login_required
 def order_billing(request):
 	context = {}
 	template = 'order/checkout-billing.html'
 	return render(request,template,context)
 
 # shipping
-@login_required
 def order_shipping(request):
 	context = {}
 	template = 'order/checkout-shipping.html'
 	return render(request,template,context)
 
 # payment
-@login_required
 def order_payment(request):
 	context = {}
 	template = 'order/checkout-payment.html'
 	return render(request,template,context)
 
 # order
-@login_required
 def order_show(request):
 	context = {}
 	template = 'order/checkout-order.html'
-	return render(request,template,context)
+	return render(request,template,context,context_instance=RequestContext(request, processors=[get_home_variables]))
 
 
 
