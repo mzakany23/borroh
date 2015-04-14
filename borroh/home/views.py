@@ -3,10 +3,21 @@ from account.form import LoginForm,RegisterUserForm
 from product.models import Product
 from django.template import *
 from cart.models import Cart
+from django.conf import settings
 
 def home(request):
+	featured_products = Product.objects.filter(featured=True)
+	context = {
+			'featured_products' : featured_products
+	}
+	template = 'home/index.html'
+	return render(request,template,context,context_instance=RequestContext(request, processors=[get_home_variables]))
+
+
+def get_home_variables(request):
 	try:
 		cart = Cart.objects.get(id=request.session['cart_id'])
+		cart_items = cart.lineitem_set.all()
 	except:
 		cart = None	
 
@@ -22,19 +33,28 @@ def home(request):
 		'borroh' : borroh_items_set
 	}
 
+	try: 
+		borrohed = cart.lineitem_set.order_by('borroh')
+	except:
+		borrohed = None
+
 	try:
 		mobile = cart.lineitem_set.order_by('borroh')
 	except:
 		mobile = None
 
-	featured_products = Product.objects.filter(featured=True)
-	context = {
+	return {
 			'login_form' : LoginForm, 
 			'register' : RegisterUserForm, 
-			'featured_products' : featured_products, 
-			'cart' : cart, 'list' : list_set, 
-			'mobile_items' : mobile
+			'items' : cart_items,
+			'cart' : cart, 
+			'list' : list_set, 
+			'mobile_items' : mobile,
+			'sorted_by_borroh' : borrohed
 	}
-	template = 'home/index.html'
-	return render(request,template,context)
+
+	
+
+
+
 

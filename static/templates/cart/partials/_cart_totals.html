@@ -1,0 +1,51 @@
+<div class="col-lg-3 col-md-3 col-sm-5 rightSidebar">
+      <div class="contentBox" >
+        <div class="w100 costDetails">
+          <div class="table-block" id="order-detail-content"> <a class="btn btn-primary btn-lg btn-block " title="checkout" href="{% url 'start_order_process' %}" style="margin-bottom:20px"> Proceed to checkout &nbsp; <i class="fa fa-arrow-right"></i> </a>
+            <div class="w100 cartMiniTable">
+              <table id="cart-summary" class="std table">
+                <tbody>
+                  <tr >
+                    <td>Total products</td>
+                    <td class="price" >${{ cart.total_price }}</td>
+                  </tr>
+                  <tr >
+                    <td>Total borroh</td>
+                    <td class="price" >{{ cart.total_points }} points</td>
+                  </tr>
+                  <tr  style="">
+                    <td>Shipping</td>
+                    <td class="price" ><span class="success">Free shipping!</span></td>
+                  </tr>
+                  <tr class="cart-total-price ">
+                    <td>Total (tax excl.)</td>
+                    <td class="price" >${{ cart.total_price }}</td>
+                  </tr>
+                  <tr >
+                    <td>Total tax</td>
+                    <td class="price" id="total-tax">$0.00</td>
+                  </tr>
+                  <tr >
+                    <td > Total </td>
+                    <td class=" site-color" id="total-price">${{ cart.total_price }}</td>
+                  </tr>
+                  <tr >
+                    <td colspan="2"  ><div class="input-append couponForm">
+                        <input class="col-lg-8" id="appendedInputButton" type="text"  placeholder="Coupon code" >
+                        <button class="col-lg-4 btn btn-success" type="button">Apply!</button>
+                      </div></td>
+                  </tr>
+                </tbody>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End popular --> 
+      
+    </div>
+    <!--/rightSidebar--> 
+    
+  </div><!--/row-->

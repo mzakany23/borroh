@@ -1,0 +1,37 @@
+<div class="navbar-cart  collapse">
+      <div class="cartMenu  col-lg-4 col-xs-12 col-md-4 ">
+        <div class="w100 miniCartTable scroll-pane">
+          <table  >
+            <tbody>
+              
+              {% for item in mobile_items %}
+              <tr class="miniCartProduct">
+                <td style="20%" class="miniCartProductThumb"><div> <a href="{% url 'product_detail_non_json' item.product.id %}"> <img src="{{ settings.SERVER }}/media/{{ item.product.image_set.all.0 }}" alt="img"> </a> </div></td>
+                <td style="40%"><div class="miniCartDescription">
+                    <h4> <a href="{% url 'product_detail_non_json' item.product.id %}"> TSHOP T shirt Black </a> </h4>
+                    {% if item.borroh == True %}
+                    <span class="size"> Borroh </span>
+                    {% else %}
+                    <span class="size"> for purchase </span>
+                    {% endif %}
+                    <!-- <div class="price"> <span> ${{ item.product.price }} </span> </div> -->
+                  </div></td>
+                <!-- <td  style="10%" class="miniCartQuantity"><a > X 1 </a></td> -->
+                <td  style="15%" class="miniCartSubtotal"><span> ${{ cart.total_price }} </span></td>
+                <td  style="5%" class="delete"><a > x </a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <!--/.miniCartTable-->
+        
+        <div class="miniCartFooter  miniCartFooterInMobile text-right">
+          <h3 class="text-right subtotal"> Subtotal: ${{ cart.total_price }} </h3>
+          <a href="{% url 'cart_show' %}" class="btn btn-sm btn-danger"> <i class="fa fa-shopping-cart"> </i> VIEW CART </a> <a href="{% url 'cart_show' %}" class="btn btn-sm btn-primary"> CHECKOUT </a> </div>
+        <!--/.miniCartFooter--> 
+        
+      </div>
+      <!--/.cartMenu--> 
+    </div>

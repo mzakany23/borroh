@@ -16,9 +16,9 @@
 
 <body>
 
-{% if request.path == '/' %}
+
 {% include 'account/auth/partials/_login.html' %}
-{% endif %}
+
 <!-- Modal Signup start -->
 
 <div class="modal signUpContent fade" id="ModalSignup" tabindex="-1" role="dialog" >
@@ -80,42 +80,7 @@
     
 
     <!-- this part is duplicate from cartMenu  keep it for mobile -->
-    <div class="navbar-cart  collapse">
-      <div class="cartMenu  col-lg-4 col-xs-12 col-md-4 ">
-        <div class="w100 miniCartTable scroll-pane">
-          <table  >
-            <tbody>
-              {% for item in mobile_items %}
-              <tr class="miniCartProduct">
-                <td style="20%" class="miniCartProductThumb"><div> <a href="product-details.html"> <img src="http://localhost:8000/media/{{ item.product.image_set.all.0 }}" alt="img"> </a> </div></td>
-                <td style="40%"><div class="miniCartDescription">
-                    <h4> <a href="product-details.html"> TSHOP T shirt Black </a> </h4>
-                    {% if item.borroh == True %}
-                    <span class="size"> Borroh </span>
-                    {% else %}
-                    <span class="size"> for purchase </span>
-                    {% endif %}
-                    <!-- <div class="price"> <span> ${{ item.product.price }} </span> </div> -->
-                  </div></td>
-                <!-- <td  style="10%" class="miniCartQuantity"><a > X 1 </a></td> -->
-                <td  style="15%" class="miniCartSubtotal"><span> ${{ cart.total_price }} </span></td>
-                <td  style="5%" class="delete"><a > x </a></td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-
-        <!--/.miniCartTable-->
-        
-        <div class="miniCartFooter  miniCartFooterInMobile text-right">
-          <h3 class="text-right subtotal"> Subtotal: ${{ cart.total_price }} </h3>
-          <a href="{% url 'cart_show' %}" class="btn btn-sm btn-danger"> <i class="fa fa-shopping-cart"> </i> VIEW CART </a> <a class="btn btn-sm btn-primary"> CHECKOUT </a> </div>
-        <!--/.miniCartFooter--> 
-        
-      </div>
-      <!--/.cartMenu--> 
-    </div>
+    {% include 'layouts/nav/mobile_cart_dropdown.html' %}
     <!--/.navbar-cart-->
     
     <div class="navbar-collapse collapse">
@@ -131,7 +96,6 @@
         </li>
         <li class="dropdown megamenu-fullwidth"> <a data-toggle="dropdown" class="dropdown-toggle" href="#"> PAGES <b class="caret"> </b> </a>
           {% include 'layouts/nav/pages_dropdown.html' %}
-              
       
       <!--- this part will be hidden for mobile version -->
       <div class="nav navbar-nav navbar-right hidden-xs">
@@ -144,60 +108,7 @@
           <b class="caret"> </b> </a>
           {% endif %}
 
-          <div class="dropdown-menu col-lg-4 col-xs-12 col-md-4 " >
-            <div class="w100 miniCartTable scroll-pane" style='overflow: scroll;'>
-              <table>
-                <tbody>
-                  {% if list.buy.count >= 1 %}
-                  <h3>Buy Items</h3>
-                  {% for item in list.buy %}
-                  <tr class="miniCartProduct">
-                    <td style="width:20%" class="miniCartProductThumb"><div> <a href="product-details.html"> <img src="{% static 'images/product/3.jpg' %}" alt="img"> </a> </div></td>
-                    <td style="width:40%"><div class="miniCartDescription">
-                        <h4> <a href="product-details.html">{{ item.product.title }}</a> </h4>
-                        <span class="size"> 12 x 1.5 L </span>
-                        <div class="price"> <span> ${{ item.product.price }} </span> </div>
-                      </div></td>
-                    <!-- <td  style="width:10%" class="miniCartQuantity"><a > X 1 </a></td> -->
-                    <!-- <td  style="width:15%" class="miniCartSubtotal"><span></span></td> -->
-                    <td  style="width:5%" class="delete"><a > <a href="{% url 'delete_item' item.id %}">x</a> </a></td>
-                  </tr>
-                  {% endfor %}
-                  {% endif %}
-                </tbody>
-              </table>
-              <table>
-                {% if list.borroh.count >= 1 %}
-                <h3>Borroh Items</h3>
-                <tbody>
-                {% for item in list.borroh %}
-                  <tr class="miniCartProduct">
-                    <td style="width:20%" class="miniCartProductThumb"><div> <a href="product-details.html"> <img src="{% static 'images/product/3.jpg' %}" alt="img"> </a> </div></td>
-                    <td style="width:40%"><div class="miniCartDescription">
-                        <h4> <a href="product-details.html">{{ item.product.title }}</a> </h4>
-                        <span class="size"> 12 x 1.5 L </span>
-                        <div class="price"> <span> ${{ item.product.price }} </span> </div>
-                      </div></td>
-                    <!-- <td  style="width:10%" class="miniCartQuantity"><a > X 1 </a></td> -->
-                    <!-- <td  style="width:15%" class="miniCartSubtotal"><span></span></td> -->
-                    <td  style="width:5%" class="delete"><a ><a href="{% url 'delete_item' item.id %}">x</a> </a></a></td>
-                  </tr>
-                  {% endfor %}
-                  {% endif %}
-                </tbody>
-              </table>
-            </div>
-            <!--/.miniCartTable-->
-            
-            <div class="miniCartFooter text-right">
-              <h3 class="text-right subtotal"> Buy Subtotal: ${{ cart.total_price }} </h3>
-                <h3 class="text-right subtotal"> Borroh Subtotal: {{ cart.total_points }} </h3>
-                <a href="{% url 'cart_show' %}" class="btn btn-sm btn-danger"> <i class="fa fa-shopping-cart"> </i> VIEW CART </a> <a class="btn btn-sm btn-primary"> CHECKOUT </a> 
-            </div>
-            <!--/.miniCartFooter--> 
-            
-            
-          </div>
+          {% include 'layouts/nav/cart_dropdown.html' %}
           <!--/.dropdown-menu--> 
         </div>
         <!--/.cartMenu-->

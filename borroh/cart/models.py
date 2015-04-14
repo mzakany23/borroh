@@ -22,15 +22,18 @@ class Cart(models.Model):
 		for item in self.lineitem_set.all():
 			if item.borroh == True:
 				total += int(item.product.points_price)
-		return total				
-
+		return total	
 	
+
+
 class LineItem(models.Model):
 	cart = models.ForeignKey(Cart)
 	product = models.ForeignKey(Product,null=True,blank=True)
 	borroh = models.BooleanField(default=False)
 	def __unicode__(self):
 		return self.product.title
+	def has_items(self):
+		return self.count > 0			
 
 
 

@@ -4,26 +4,12 @@ from django.core.urlresolvers import reverse
 from models import Cart,LineItem
 from product.models import Product
 from django.contrib.auth.models import User,AnonymousUser
-
+from home.views import get_home_variables
+from django.template import RequestContext
 
 def cart_show(request):
-	try:
-		cart_id = request.session['cart_id']
-		cart = Cart.objects.get(id=cart_id)
-		cart_items = cart.lineitem_set.all()
-	except:
-		cart = None
-		cart_items = None
-
-	try:
-		list_set = cart.lineitem_set.all().order_by('borroh')
-	except:
-		list_set = None
-
-	context = {'cart' : cart, 'items' : cart_items, 'list' : list_set, 'settings' : settings}
-
 	template = 'cart/show_cart.html'
-	return render(request,template,context)
+	return render(request,template,context_instance=RequestContext(request, processors=[get_home_variables]))
 
 def add_item(request,id):
 	try:
