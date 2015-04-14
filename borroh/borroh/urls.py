@@ -22,6 +22,7 @@ urlpatterns += patterns('account.views',
 	url(r'^account/profile/info/$','profile_info',name='profile_info'),
 	url(r'^account/profile/wishlist/$','user_wishlist',name='user_wishlist'),
 	url(r'^account/profile/wishlist/add/(?P<id>\d+)$','add_to_wishlist',name='add_to_wishlist'),
+	url(r'^account/profile/wishlist/delete/(?P<id>\d+)$','delete_from_wishlist',name='delete_from_wishlist'),
 )
 
 # products

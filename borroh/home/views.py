@@ -20,6 +20,7 @@ def get_home_variables(request):
 		cart_items = cart.lineitem_set.all()
 	except:
 		cart = None	
+		cart_items = None
 
 	try:
 		buy_items_set = cart.lineitem_set.filter(borroh=False)

@@ -101,14 +101,15 @@
       <div class="nav navbar-nav navbar-right hidden-xs">
         <div class="dropdown  cartMenu "> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-shopping-cart"> </i>
           {% if cart == None %}
-          <span class="cartRespons"> Cart ($0 and 0 points)</span> <b class="caret"> </b> </a>
+          <span class="cartRespons"> Cart (Empty!)</span>  </a>
           {% else %}
           <span class="cartRespons"> Cart (${{ cart.total_price }} / {{ cart.total_points }} points)</span> 
           
           <b class="caret"> </b> </a>
+          {% include 'layouts/nav/cart_dropdown.html' %}
           {% endif %}
 
-          {% include 'layouts/nav/cart_dropdown.html' %}
+          
           <!--/.dropdown-menu--> 
         </div>
         <!--/.cartMenu-->

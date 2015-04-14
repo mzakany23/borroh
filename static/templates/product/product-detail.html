@@ -8,9 +8,9 @@
     <div class="breadcrumbDiv col-lg-12">
       <ul class="breadcrumb">
         <li> <a href="index.html">Home</a> </li>
-        <li> <a href="category.html">MEN COLLECTION</a> </li>
+        <!-- <li> <a href="category.html">MEN COLLECTION</a> </li>
         <li> <a href="sub-category.html">TSHIRT</a> </li>
-        <li class="active">Lorem ipsum dolor sit amet </li>
+        <li class="active">Lorem ipsum dolor sit amet </li> -->
       </ul>
     </div>
   </div>
@@ -81,12 +81,24 @@
       
       <div class="cart-actions">
         <div class="addto">
-          <button onclick="productAddToCartForm.submit(this);" class="button btn-cart cart first" title="Add to Cart" type="button">Add to Cart</button>
-          <a class="link-wishlist wishlist"  >Add to Wishlist</a> </div>
+
+          <button class="button btn-cart cart first" title="Add to Cart" type="button">Add to Cart</button>
+          {% if request.user != None %}
+          <a href="{% url 'add_to_wishlist' product.id %}" class="link-wishlist wishlist"  >Add to Wishlist</a> </div>
+          {% else %}
+          <a href="{% url 'auth_create_account' %}" class="link-wishlist wishlist"  >Add to Wishlist</a> </div>
+          {% endif %}
           
         <div style="clear:both"></div>
         
+        {% if product.borroh == True %}
+        <h3 style="display:none" class="incaps"><i class="fa fa-minus-circle color-out"></i> Out of stock</h3>
+        {% elif product.borroh == True %}
+        <h3 style="display:none" class="incaps"><i class="fa fa-minus-circle color-out"></i> Out of stock</h3>
+        {% else %}
         <h3 class="incaps"><i class="fa fa fa-check-circle-o color-in"></i> In stock</h3>
+        {% endif %}
+        
         <h3 style="display:none" class="incaps"><i class="fa fa-minus-circle color-out"></i> Out of stock</h3>
         <h3 class="incaps"> <i class="glyphicon glyphicon-lock"></i> Secure online ordering</h3>
       </div>
@@ -104,8 +116,7 @@
         
         <!-- Tab panes -->
         <div class="tab-content">
-          <div class="tab-pane active" id="details">Sed ut eros felis. Vestibulum rutrum imperdiet nunc a interdum. In scelerisque libero ut elit porttitor commodo. Suspendisse laoreet magna nec urna fringilla viverra.<br>
-            100% Cotton<br></div>
+          <div class="tab-pane active" id="details">{{ product.description }}</div>
           <div class="tab-pane" id="size"> 16" waist<br>
             34" inseam<br>
             10.5" front rise<br>
@@ -170,87 +181,9 @@
   </div>
   <!--/.row-->
   
-  <div class="row recommended">
+  <!-- recommended partial can go here -->
   
-    <h1> YOU MAY ALOS LIKE </h1>
-    
-    <div id="SimilarProductSlider">
-      <div class="item">
-        <div class="product"> <a class="product-image" > <img src="images/product/a1.jpg"  alt="img"> </a>
-          <div class="description">
-            <h4><a href="san-remo-spaghetti">YOUR LIFE</a></h4>
-            <div class="price"> <span>$57</span> </div>
-          </div>
-        </div>
-      </div><!--/.item-->
-      
-      <div class="item">
-        <div class="product"> <a class="product-image" > <img src="images/product/a2.jpg"  alt="img"> </a>
-          <div class="description">
-            <h4><a href="san-remo-spaghetti">RED CROWN</a></h4>
-            <div class="price"> <span>$44</span> </div>
-          </div>
-        </div>
-      </div><!--/.item-->
-      
-      <div class="item">
-        <div class="product"> <a class="product-image" > <img src="images/product/a3.jpg" alt="img"> </a>
-          <div class="description">
-            <h4><a href="san-remo-spaghetti">WHITE GOLD</a></h4>
-            <div class="price"> <span>$35</span></div>
-          </div>
-        </div>
-      </div><!--/.item-->
-      
-      <div class="item">
-        <div class="product"> <a class="product-image" > <img src="images/product/a4.jpg"  alt="img"> </a>
-          <div class="description">
-            <h4><a href="san-remo-spaghetti">DENIM 4240</a></h4>
-            <div class="price"> $<span>55</span></div>
-          </div>
-        </div>
-      </div><!--/.item-->
-      
-      <div class="item">
-        <div class="product"> <a class="product-image" > <img src="images/product/30.jpg"  alt="img"> </a>
-          <div class="description">
-            <h4><a href="san-remo-spaghetti">CROWN ROCK</a></h4>
-            <div class="price"> <span>$500</span> </div>
-          </div>
-        </div>
-      </div><!--/.item-->
-      
-      <div class="item">
-        <div class="product"> <a class="product-image" > <img src="images/product/a5.jpg"  alt="img"> </a>
-          <div class="description">
-            <h4><a href="san-remo-spaghetti">SLIM ROCK</a></h4>
-            <div class="price"> <span>$50 </span> </div>
-          </div>
-        </div>
-      </div><!--/.item-->
-      
-      <div class="item">
-        <div class="product"> <a class="product-image" > <img src="images/product/36.jpg"  alt="img"> </a>
-          <div class="description">
-            <h4><a href="san-remo-spaghetti">ROCK T-Shirts </a></h4>
-            <div class="price"> <span>$130</span> </div>
-          </div>
-        </div>
-      </div><!--/.item-->
-      
-      <div class="item">
-        <div class="product"> <a class="product-image" > <img src="images/product/13.jpg"  alt="img"> </a>
-          <div class="description">
-            <h4><a href="san-remo-spaghetti">Denim T-Shirts </a></h4>
-            <div class="price"> <span>$43</span> </div>
-          </div>
-        </div>
-      </div><!--/.item-->
-    </div><!--/.SimilarProductSlider-->
-  </div>  <!--/.recommended--> 
-  
-  
-  <div style="clear:both"></div>
+  <div style="clear:both; margin-bottom: 50px;"></div>
   
   
 </div> <!-- /main-container -->

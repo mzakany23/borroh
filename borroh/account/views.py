@@ -10,6 +10,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from product.models import Product
 from account.models import Profile
+from home.views import get_home_variables
+from django.template import RequestContext
 
 
 def auth_login(request):
@@ -139,7 +141,7 @@ def user_wishlist(request):
 
 	context = {'favorite_products' : favorite_products, 'settings' : settings}
 	template = 'account/wishlist/wishlist.html'
-	return render(request,template,context)
+	return render(request,template,context,context_instance=RequestContext(request, processors=[get_home_variables]))
 
 
 @login_required(login_url='/account/login')
@@ -150,10 +152,22 @@ def add_to_wishlist(request,id):
 		profile.favorites.add(product)
 		profile.save()
 	except:
-		print 'nope'
+		pass
 	
-	return HttpResponseRedirect(reverse('home'))
+	return HttpResponseRedirect(reverse('user_wishlist'))
 
+@login_required(login_url='/account/login')
+def delete_from_wishlist(request,id):
+	try:
+		product = Product.objects.get(id=id)
+		profile = Profile.objects.get(user=request.user)
+		favorite = profile.favorites.filter(pk=product.id)
+		favorite.delete()
+		profile.save()
+	except:
+		pass
+	
+	return HttpResponseRedirect(reverse('user_wishlist'))
 
 
 
