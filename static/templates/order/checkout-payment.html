@@ -79,7 +79,7 @@
                           <br>
                           <label class="radio-inline" for="radios-3">
                             <input name="radios" id="radios-3" value="4" type="radio">
-                            <img src="images/site/payment/paypal-small.png" height="18" alt="paypal"> Checkout with Paypal </label>
+                            <img src="{% static 'images/site/payment/paypal-small.png' %}" height="18" alt="paypal"> Checkout with Paypal </label>
                           <div class="form-group">
                             <label for="CommentsOrder2">Add Comments About Your Order</label>
                             <textarea id="CommentsOrder2" class="form-control" name="CommentsOrder2" cols="26" rows="3"></textarea>
@@ -95,12 +95,16 @@
                     </div>
                     <div class="panel panel-default">
                       <div class="panel-heading panel-heading-custom">
-                        <h4 class="panel-title"> <a class="masterCard" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"> <span class="numberCircuil">Option 3</span> <strong> MasterCard</strong> </a> </h4>
+                        <h4 class="panel-title"> <a class="masterCard" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"> <span class="numberCircuil">Option 3</span> <strong> MasterCard/Visa/Amex</strong> </a> </h4>
                       </div>
                       <div id="collapseThree" class="panel-collapse collapse">
                         <div class="panel-body">
                           <p>All transactions are secure and encrypted, and we neverstor To learn more, please view our privacy policy.</p>
                           <br>
+
+                          <h1>Processing through stipe</h1>
+                          <h1><button class='btn btn-success'>Stripe</button></h1>
+
                           <div class="panel open">
                             <div class="creditCard">
                               <div class="cartBottomInnerRight paymentCard"> 

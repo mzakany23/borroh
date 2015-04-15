@@ -6,7 +6,7 @@ from home.views import get_home_variables
 from django.template import RequestContext
 
 def start_order_process(request):
-	if request.user.is_authenticated() or request.user.is_anonymous():
+	if request.user.is_authenticated():
 		return HttpResponseRedirect(reverse('order_address'))
 	else:
 		return HttpResponseRedirect(reverse('order_auth'))

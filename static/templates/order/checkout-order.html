@@ -64,42 +64,21 @@
                               <th class="hidden-xs" style="width:10%" >Discount</th>
                               <th style="width:15%">Total</th>
                             </tr>
+
+                            {% for item in items %}
                             <tr class="CartProduct">
-                              <td  class="CartProductThumb"><div> <a href="product-details.html"><img src="images/product/3.jpg"></a> </div></td>
+                              <td  class="CartProductThumb"><div> <a href="{% url 'product_detail_non_json' item.product.id%}"><img src="{{ settings.SERVER }}/media/{{ item.product.image_set.all.0 }}"></a> </div></td>
                               <td ><div class="CartDescription">
-                                  <h4> <a href="product-details.html">Denim T shirt Black </a> </h4>
-                                  <span class="size">12 x 1.5 L</span>
+                                  <h4> <a href="{% url 'product_detail_non_json' item.product.id%}">{{ item.product.title }}</a> </h4>
+                                  <!-- <span class="size">12 x 1.5 L</span> -->
                                  
                                 </div></td>
-                              <td class="delete"><div class="price ">$116.51 </div></td>
+                              <td class="delete"><div class="price ">${{ item.product.price }}</div></td>
                               <td class="hidden-xs">1</td>
                               <td class="hidden-xs">0</td>
-                              <td class="price">$116.51</td>
-                            </tr>
-                            <tr class="CartProduct">
-                              <td  class="CartProductThumb"><div> <a href="product-details.html"><img src="images/product/2.jpg"></a> </div></td>
-                              <td ><div class="CartDescription">
-                                  <h4> <a href="product-details.html">Denim T shirt </a> </h4>
-                                  <span class="size">12 x 1.5 L</span>
-                                
-                                </div></td>
-                              <td class="delete"><div class="price ">$50 </div></td>
-                              <td class="hidden-xs">1</td>
-                              <td class="hidden-xs">0</td>
-                              <td class="price" >$50</td>
-                            </tr>
-                            <tr class="CartProduct">
-                              <td  class="CartProductThumb"><div> <a href="product-details.html"><img src="images/product/5.jpg"></a> </div></td>
-                              <td ><div class="CartDescription">
-                                  <h4> <a href="product-details.html">Denim T shirt Red </a> </h4>
-                                  <span class="size">12 x 1.5 L</span>
-                                 
-                                </div></td>
-                              <td class="delete"><div class="price ">$50  </div></td>
-                              <td class="hidden-xs">1</td>
-                              <td class="hidden-xs">0</td>
-                              <td class="price">$50</td>
-                            </tr>
+                              <td class="price">${{ item.product.price }}</td>
+                            </tr>          
+                            {% endfor %}
                           </tbody>
                         </table>
                       </div>
@@ -118,7 +97,7 @@
                             </tr>
                             <tr class="cart-total-price ">
                               <td>Total (tax excl.)</td>
-                              <td  class="price">$216.51 </td>
+                              <td  class="price">${{ cart.total_price }} </td>
                             </tr>
                             <tr >
                               <td>Total tax</td>
@@ -126,7 +105,7 @@
                             </tr>
                             <tr >
                               <td > Total </td>
-                              <td id="total-price" class="price">$216.51 </td>
+                              <td id="total-price" class="price">${{ cart.total_price }} </td>
                             </tr>
                             <tbody>
                             </tbody>
@@ -171,57 +150,16 @@
             </div>
           </div>
           <!--/ cartFooter --> 
-    
-          
-       
-     
-        
-        
-        
-        
-        
+            
         </div>
-          
-          
           
                 
         </div>
       </div>
       <!--/row end--> 
       
-  
-    <div class="col-lg-3 col-md-3 col-sm-12 rightSidebar"> 
-      
-  <div class="w100 cartMiniTable">
-                            <table id="cart-summary" class="std table">
-                                    <tbody><tr >
-                                      <td>Total products</td>
-                                      <td class="price" >$216.51</td>
-                                    </tr>
-                                    <tr  style="">
-                                      <td>Shipping</td>
-                                      <td class="price" ><span class="success">Free shipping!</span></td>
-                                    </tr>
-                                    <tr class="cart-total-price ">
-                                      <td>Total (tax excl.)</td>
-                                      <td class="price" >$216.51</td>
-                                    </tr>
-                                    <tr >
-                                      <td>Total tax</td>
-                                      <td class="price" id="total-tax">$0.00</td>
-                                    </tr>
-                                    <tr >
-                                      <td > Total </td>
-                                      <td class=" site-color" id="total-price">$216.51</td>
-                                    </tr>
-                                    
-                                                                         
-                                    </tbody><tbody>
-                                    </tbody>
-                                  </table> 
-                                  </div>
-      
-    </div>
+      {% include 'order/partials/_right_column_total.html' %}  
+
     <!--/rightSidebar--> 
     
   </div>
