@@ -29,8 +29,7 @@
         <h3 class="modal-title-site text-center" > REGISTER </h3>
       </div>
       <div class="modal-body">
-        <div class="control-group"> <a class="fb_button btn  btn-block btn-lg " href="#"> SIGNUP WITH FACEBOOK </a> </div>
-        <h5 style="padding:10px 0 10px 0;" class="text-center"> OR </h5>
+        
         {% include 'account/auth/partials/_register.html' %}
 
         <!--userForm--> 
@@ -61,6 +60,9 @@
     {% endfor %}
   {% endif %}
 
+  <!-- ############################ -->
+  <!-- nav start -->
+  <!-- ############################ -->
   <div class="container">
     
     <div class="navbar-header">
@@ -83,48 +85,7 @@
     {% include 'layouts/nav/mobile_cart_dropdown.html' %}
     <!--/.navbar-cart-->
     
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li class="active"> <a href="{% url 'home' %}"> Home </a> </li>
-        <li class="dropdown megamenu-fullwidth"> <a data-toggle="dropdown" class="dropdown-toggle" href="#"> New Products <b class="caret"> </b> </a>
-          {% include 'layouts/nav/new_products_dropdown.html' %}
-        </li>
-        
-        <!-- change width of megamenu = use class > megamenu-fullwidth, megamenu-60width, megamenu-40width -->
-        <li class="dropdown megamenu-80width "> <a data-toggle="dropdown" class="dropdown-toggle" href="#"> SHOP <b class="caret"> </b> </a>
-         {% include 'layouts/nav/shop_dropdown.html' %}
-        </li>
-        <li class="dropdown megamenu-fullwidth"> <a data-toggle="dropdown" class="dropdown-toggle" href="#"> PAGES <b class="caret"> </b> </a>
-          {% include 'layouts/nav/pages_dropdown.html' %}
-      
-      <!--- this part will be hidden for mobile version -->
-      <div class="nav navbar-nav navbar-right hidden-xs">
-        <div class="dropdown  cartMenu "> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-shopping-cart"> </i>
-          {% if items.count == 0 %}
-          <span class="cartRespons"> Cart (Empty!)</span>  </a>
-          {% else %}
-          <span class="cartRespons"> Cart (${{ cart.total_price }} / {{ cart.total_points }} points)</span> 
-          
-          <b class="caret"> </b> </a>
-          {% include 'layouts/nav/cart_dropdown.html' %}
-          {% endif %}
-
-          
-          <!--/.dropdown-menu--> 
-        </div>
-        <!--/.cartMenu-->
-        
-        <div class="search-box">
-          <div class="input-group">
-            <button class="btn btn-nobg getFullSearch" type="button"> <i class="fa fa-search"> </i> </button>
-          </div>
-          <!-- /input-group --> 
-          
-        </div>
-        <!--/.search-box --> 
-      </div>
-      <!--/.navbar-nav hidden-xs--> 
-    </div>
+    {% include 'layouts/nav/nav_contents.html' %}
     <!--/.nav-collapse --> 
     
   </div>
@@ -145,6 +106,7 @@
 <!-- <div class="banner"> -->
   
   <div class="full-container">
+
     {% block content %}{% endblock %}
     {% block account %}{% endblock %}
     <!--/.slider-content--> 
@@ -176,7 +138,6 @@
 <!--main-container-->
 
 
-
 <div class="parallax-section parallax-image-2">
   <div class="w100 parallax-section-overley">
     <div class="container">
@@ -192,7 +153,7 @@
   </div>
 </div>
 <!--/.parallax-section-->
-
+  
   <!-- Product Details Modal  -->
     {% include 'product/featured-products-modal.html' %}  
   <!-- End Modal -->

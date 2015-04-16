@@ -1,22 +1,34 @@
-
+{% load staticfiles %}
 <!-- Fixed navbar start -->
 <div class="navbar navbar-tshop navbar-fixed-top megamenu" role="navigation">
   <div class="navbar-top">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6">
+      <div class="row" id='custom-nav-font'>
+        <div class="col-lg-2 col-sm-2 col-xs-2 col-md-2">
           <div class="pull-left ">
             <ul class="userMenu ">
-              <li> <a href="#"> <span class="hidden-xs">HELP</span><i class="glyphicon glyphicon-info-sign hide visible-xs "></i> </a> </li>
-              <li class="phone-number"> <a  href="callto:+8801680531352"> <span> <i class="glyphicon glyphicon-phone-alt "></i></span> <span class="hidden-xs" style="margin-left:5px"> 88 01680 53 1352 </span> </a> </li>
+              <!-- <li> <a href="#"> <span class="hidden-xs">HELP</span><i class="glyphicon glyphicon-info-sign hide visible-xs "></i> </a> </li>
+              <li class="phone-number"> <a  href="callto:+8801680531352"> <span> <i class="glyphicon glyphicon-phone-alt "></i></span> <span class="hidden-xs" style="margin-left:5px"> 88 01680 53 1352 </span> </a> </li> -->
             </ul>
           </div>
         </div>
-        <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 no-margin no-padding">
+
+        <div class="col-lg-10 col-sm-10 col-xs-10 col-md-10 no-margin no-padding">
           <div class="pull-right">
             <ul class="userMenu">
+              
               {% if user.is_authenticated %}
-              <li> <a href="{% url 'user_profile' user.id %} "><span class="hidden-xs"> {{ user }}:profile</span> <i class="glyphicon glyphicon-user hide visible-xs "></i></a> </li>
+            <li><a href="#">Borrowed <span class="badge">0</span></a>
+              </a> </li>
+
+              <li><a href="#">Basket <span class="badge">42</span></a>
+              </a> </li>
+
+              <li><a href="#">Buy <span class="badge">42</span></a>
+              </a> </li>
+
+              <li><a href="{% url 'user_profile' user.id %} "><span class="hidden-xs"> <i class="glyphicon glyphicon-user" style='margin-right: 5px;'></i>{{ user }}:profile</span> <i class="glyphicon glyphicon-user hide visible-xs "></i></a> </li>
+
               <li> <a href="{% url 'auth_logout' %}"><span class="hidden-xs"> Logout</span> <i class="glyphicon glyphicon-user hide visible-xs "></i></a> </li>
               {% else %}
               <li> <a href="#"  data-toggle="modal" data-target="#ModalLogin"> <span class="hidden-xs">Sign In</span> <i class="glyphicon glyphicon-log-in hide visible-xs "></i> </a> </li>
