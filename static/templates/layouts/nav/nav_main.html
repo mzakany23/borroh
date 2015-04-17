@@ -21,10 +21,10 @@
             <li><a href="#">Borrowed <span class="badge">0</span></a>
               </a> </li>
 
-              <li><a href="#">Basket <span class="badge">42</span></a>
+              <li><a href="#">Basket <span class="badge">{{ list.borroh.count }}</span></a>
               </a> </li>
 
-              <li><a href="#">Buy <span class="badge">42</span></a>
+              <li><a href="#">Buy <span class="badge">{{ list.buy.count }}</span></a>
               </a> </li>
 
               <li><a href="{% url 'user_profile' user.id %} "><span class="hidden-xs"> <i class="glyphicon glyphicon-user" style='margin-right: 5px;'></i>{{ user }}:profile</span> <i class="glyphicon glyphicon-user hide visible-xs "></i></a> </li>

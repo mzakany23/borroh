@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from product.models import Product
 from django.db.models.signals import post_save
 from django.utils.text import slugify
+from subscription.models import Subscription
 
 class Profile(models.Model):
 	user = models.OneToOneField(User,blank=True,null=True,unique=True)
@@ -11,13 +12,21 @@ class Profile(models.Model):
 	profile_pic = models.ImageField(upload_to='profile_pics',blank=True,null=True)
 	strip_id = models.CharField(max_length=100,blank=True,null=True)
 	favorites = models.ManyToManyField(Product,blank=True,null=True)
+	subscription = models.ForeignKey(Subscription,null=True,blank=True)
+	zip = models.CharField(max_length=40,blank=True,null=True)
+	def __unicode__(self):
+		return str(self.user)
+
+class Address(models.Model):
+	profile = models.ForeignKey(Profile,blank=True,null=True)
 	street = city = models.CharField(max_length=40,blank=True,null=True)
 	city = models.CharField(max_length=40,blank=True,null=True)
 	state = models.CharField(max_length=40,blank=True,null=True)
 	phone_numbrer = models.CharField(max_length=40,blank=True,null=True)
-	zip = models.CharField(max_length=40,blank=True,null=True)
+	primary_address = models.BooleanField(default=False)
+	shipping_address = models.BooleanField(default=False)
 	def __unicode__(self):
-		return str(self.user)
+		return self.state
 
 
 # -----------------------------------------------------------------------------------

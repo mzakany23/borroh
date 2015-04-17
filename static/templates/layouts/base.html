@@ -105,7 +105,7 @@
 <div>
 <!-- <div class="banner"> -->
   
-  <div class="full-container">
+  <div class="full-container" >
 
     {% block content %}{% endblock %}
     {% block account %}{% endblock %}
@@ -115,8 +115,10 @@
 </div>
 <!--/.banner style1-->
 
+</div>
+<!--main-container-->
 
-
+{% include 'layouts/partials/_pricing-table.html' %}
 <div class="container"> 
   
 <!-- <div class="container main-container">  -->
@@ -126,7 +128,7 @@
   {% block featured_products %}{% endblock %}
 
     <!--/.container--> 
-  </div>
+  
   <!--/.featuredPostContainer-->
   
   {% block collections %}{% endblock %}
@@ -134,8 +136,6 @@
   
   <!--/.section-block--> 
   
-</div>
-<!--main-container-->
 
 
 <div class="parallax-section parallax-image-2">
