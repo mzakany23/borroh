@@ -44,6 +44,13 @@ def get_home_variables(request):
 	except:
 		mobile = None
 
+	try:
+		list_borroh_count = list_set['borroh'].count()
+		list_buy_count = list_set['buy'].count()
+	except:
+		list_borroh_count = 0
+		list_buy_count = 0
+
 	return {
 			'login_form' : LoginForm, 
 			'register' : RegisterUserForm, 
@@ -52,7 +59,9 @@ def get_home_variables(request):
 			'list' : list_set, 
 			'mobile_items' : mobile,
 			'sorted_by_borroh' : borrohed,
-			'settings' : settings
+			'settings' : settings,
+			'list_borroh_count' : list_borroh_count,
+			'list_buy_count' : list_buy_count
 	}
 
 	
