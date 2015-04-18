@@ -188,7 +188,7 @@ def profile_info(request):
 
 
 	template = 'account/profile/user-information.html'
-	context = {'address_form' : address_form}
+	context = {}
 	return render(request,template,context)
 
 @login_required(login_url='/account/login')
@@ -203,6 +203,13 @@ def user_wishlist(request):
 
 	context = {'favorite_products' : favorite_products, 'settings' : settings}
 	template = 'account/wishlist/wishlist.html'
+	return render(request,template,context,context_instance=RequestContext(request, processors=[get_home_variables]))
+
+
+@login_required(login_url='/account/login')
+def show_borrohed(request):
+	template = "account/borroh/borroh-show.html"
+	context = {}
 	return render(request,template,context,context_instance=RequestContext(request, processors=[get_home_variables]))
 
 

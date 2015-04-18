@@ -16,7 +16,7 @@
       <h1 class="section-title-inner"><span><i class="glyphicon glyphicon-shopping-cart"></i> Shopping cart </span></h1>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar">
-      <h4 class="caps"><a href="category.html"><i class="fa fa-chevron-left"></i> Back to shopping </a></h4>
+      <h4 class="caps"><a href="{% url 'home' %}"><i class="fa fa-chevron-left"></i> Back to shopping </a></h4>
     </div>
   </div><!--/.row-->
   
@@ -86,7 +86,61 @@
       
     </div>
     
-    {% include 'cart/partials/_cart_totals.html' %}
+   <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar">
+      <div class="contentBox" >
+        <div class="w100 costDetails">
+          
+          <div class="table-block" id="order-detail-content">  
+          {% if list.buy %}  
+            <a class="btn btn-primary btn-lg btn-block " title="checkout" href="{% url 'start_order_process' %}" style="margin-bottom:20px"> Buy Items! &nbsp; <i class="fa fa-arrow-right"></i> 
+            </a>
+          {% endif %}
+          {% if list.borroh %}
+            <a class="btn btn-primary btn-lg btn-block " title="checkout" href="{% url 'start_order_process' %}" style="margin-bottom:20px"> Borroh Items! &nbsp; <i class="fa fa-arrow-right"></i> 
+            </a>
+          {% endif %}
+          
+
+            <div class="w100 cartMiniTable">
+              <table id="cart-summary" class="std table">
+                <tbody>
+                  
+                  <tr >
+                    <td><h4>Borroh products:</h4></td>
+                    <td class="price" >{{ list.borroh.count}} items</td>
+                  </tr>
+
+                   <tr >
+                    <td><h4>Borroh point total:</h4></td>
+                    <td class="price" >{{ cart.total_points }} points</td>
+                  </tr>
+                  
+                  <tr >
+                    <td><h4>Buy products:</h4></td>
+                    <td class="price" >${{ list.buy.count }}</td>
+                  </tr>
+
+                  <tr >
+                    <td><h4>Buy total:</h4></td>
+                    <td class="price" >${{ cart.total_price }}</td>
+                  </tr>
+                  
+
+                 
+                </tbody>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End popular --> 
+      
+    </div>
+    <!--/rightSidebar--> 
+    
+  </div><!--/row-->
     
   
   <div style="clear:both"></div>

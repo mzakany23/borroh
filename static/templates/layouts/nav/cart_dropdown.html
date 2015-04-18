@@ -4,7 +4,7 @@
               <table>
                 <tbody>
                   {% if list.buy.count >= 1 %}
-                  <h3 style='margin-left: 15px;'>Buy Items</h3>
+                  <a href="{% url 'cart_show_buy' %}"><h3 style='margin-left: 15px;'>Buy Items</h3></a>
                   {% for item in list.buy %}
                   <tr class="miniCartProduct">
                     <td style="width:20%" class="miniCartProductThumb"><div> <a href="{% url 'product_detail_non_json' item.product.id %}"> <img src="{% static 'images/product/3.jpg' %}" alt="img"> </a> </div></td>
@@ -23,7 +23,7 @@
               </table>
               <table>
                 {% if list.borroh.count >= 1 %}
-                <h3 style='margin-left: 15px;'>Borroh Items</h3>
+                <a href="{% url 'cart_show_borroh' %}"><h3 style='margin-left: 15px;'>Borroh Items</h3></a>
                 <tbody>
                 {% for item in list.borroh %}
                   <tr class="miniCartProduct">
