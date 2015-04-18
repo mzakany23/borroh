@@ -10,5 +10,7 @@ class AddressAdmin(admin.ModelAdmin):
 	class Meta:
 		model = Address
 
+
+
 admin.site.register(Profile,ProfileAdmin)
 admin.site.register(Address,AddressAdmin)

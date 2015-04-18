@@ -4,6 +4,7 @@ from product.models import Product
 from django.db.models.signals import post_save
 from django.utils.text import slugify
 from subscription.models import Subscription
+from order.models import Order
 
 class Profile(models.Model):
 	user = models.OneToOneField(User,blank=True,null=True,unique=True)
