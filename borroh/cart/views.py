@@ -11,6 +11,14 @@ def cart_show(request):
 	template = 'cart/show_cart.html'
 	return render(request,template,context_instance=RequestContext(request, processors=[get_home_variables]))
 
+def cart_show_buy(request):
+	template = 'cart/show_buy_cart.html'
+	return render(request,template,context_instance=RequestContext(request, processors=[get_home_variables]))
+
+def cart_show_borroh(request):
+	template = 'cart/show_borroh_cart.html'
+	return render(request,template,context_instance=RequestContext(request, processors=[get_home_variables]))
+
 def add_item(request,id):
 	try:
 		product = Product.objects.get(id=id)

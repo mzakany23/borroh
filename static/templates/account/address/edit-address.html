@@ -1,0 +1,52 @@
+{% extends 'layouts/base.html' %}
+{% load staticfiles %}
+{% block account %}
+<div class="container main-container headerOffset"> 
+  {% include 'account/address/nav.html' %}    
+      <div class="row">
+        <div class="col-lg-9 col-md-9 col-sm-7">
+        
+          <h1 class="section-title-inner"><span><i class="fa fa-map-marker"></i> Edit Address </span></h1>
+        
+          <div class="row userInfo">
+            
+      
+                
+                <div class="col-lg-12 col-xs-12">
+                    <h2 class="block-title-2"> To add a new address, please fill out the form below. </h2>
+                    <p class="required"><sup>*</sup> Required field</p>
+                </div>
+                
+                {% include 'account/address/partials/_address_form.html' %}
+
+                <div class="col-lg-12 col-xs-12  clearfix ">
+    
+                            <ul class="pager">
+                          <li class="previous pull-right"><a href="index.html"> <i class="fa fa-home"></i> Go to Shop </a></li>
+                          <li class="next pull-left"><a href="{% url 'show_address' %}">&larr; Back to My Address</a></li>
+                          </ul>
+               </div>
+            
+            
+            
+            </div><!--/row end-->
+          
+       
+        </div>
+         <div class="col-lg-3 col-md-3 col-sm-5">
+         </div>
+         
+         
+      </div><!--/row-->
+      
+      
+
+  <div style="clear:both"></div>
+</div>
+<!-- /wrapper --> 
+
+<div class="gap"> </div>
+
+
+</div>
+{% endblock %}

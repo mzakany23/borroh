@@ -9,10 +9,13 @@ from form import LoginForm,RegisterUserForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from product.models import Product
-from account.models import Profile
+from account.models import Profile,Address
 from home.views import get_home_variables
 from django.template import RequestContext
 from django.contrib.auth.models import AnonymousUser
+from account.form import AddressForm
+
+
 
 
 def auth_login(request):
@@ -107,20 +110,63 @@ def user_profile(request,id):
 	return render(request,template,context)
 
 @login_required(login_url='/account/login')
-def add_address(request,id):
+def add_address(request):
+	
 	try:
-		user = User.objects.get(id=id)
+		user = User.objects.get(id=request.user.id)
+		profile = Profile.objects.get(user=user)
+		form = AddressForm(request.POST or None)
+		address = Address()
 	except: 
-		user = None
+		pass
 
+	if form.is_valid():
+			address.profile = profile
+			address.name = form.cleaned_data['name']
+			address.first = form.cleaned_data['first']
+			address.last = form.cleaned_data['last']
+			address.street = form.cleaned_data['street']
+			address.secondary = form.cleaned_data['secondary']
+			address.city = form.cleaned_data['city']
+			address.state = form.cleaned_data['state']
+			address.zip_code = form.cleaned_data['zip_code']
+			address.phone_number = form.cleaned_data['phone_number']
+			address.primary_address = form.cleaned_data['primary_address']
+			address.shipping_address = form.cleaned_data['shipping_address']
+			address.save()
+			return HttpResponseRedirect(reverse('show_address'))
+	
 	template = 'account/address/add-address.html'
-	context = {}
+	context = {'address_add_form' : form, 'address_edit_form' : form}
 	return render(request,template,context)
 
 @login_required(login_url='/account/login')
 def show_address(request):
+	try:
+		user = User.objects.get(id=request.user.id)
+		profile = Profile.objects.get(user=user)
+		user_addresses = profile.address_set.all()
+	except:
+		user_addresses = None
+
 	template = 'account/address/my-address.html'
-	context = {}
+	context = {'user_addresses' : user_addresses}
+	return render(request,template,context)
+
+@login_required(login_url='/account/login')
+def edit_address(request,id):
+	try:
+		address = Address.objects.get(id=id)
+		form = AddressForm(request.POST or None,instance=address)
+	except:
+		form = None
+
+	if form.is_valid():
+		form.save()
+		return HttpResponseRedirect(reverse('show_address'))
+
+	template = 'account/address/edit-address.html'
+	context = {'address_edit_form' : form,'address' : address}
 	return render(request,template,context)
 
 @login_required(login_url='/account/login')
@@ -131,8 +177,18 @@ def edit_auth(request):
 
 @login_required(login_url='/account/login')
 def profile_info(request):
+	try:
+		user = User.objects.get(id=request.user.id)
+		profile = Profile.objects.get(user=user)
+		addresses = profile.address_set.all()
+	except:
+		profile = None
+		list_object = None
+
+
+
 	template = 'account/profile/user-information.html'
-	context = {}
+	context = {'address_form' : address_form}
 	return render(request,template,context)
 
 @login_required(login_url='/account/login')
@@ -174,6 +230,12 @@ def delete_from_wishlist(request,id):
 		pass
 	
 	return HttpResponseRedirect(reverse('user_wishlist'))
+
+@login_required(login_url='/account/login')
+def account_order_list(request):
+	template = 'account/orders/order-list.html'
+	context = {}
+	return render(request,template,context)
 
 
 

@@ -1,0 +1,96 @@
+{% extends 'layouts/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+
+<div class="container main-container headerOffset">
+  <div class="row">
+    <div class="breadcrumbDiv col-lg-12">
+      {% include 'cart/partials/_show_cart_sitemap.html' %}
+    </div>
+  </div><!--/.row-->
+  
+  <div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-7">
+      <h1 class="section-title-inner"><span><i class="glyphicon glyphicon-shopping-cart"></i> Shopping cart </span></h1>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar">
+      <h4 class="caps"><a href="category.html"><i class="fa fa-chevron-left"></i> Back to shopping </a></h4>
+    </div>
+  </div><!--/.row-->
+  
+  <div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-7">
+      <div class="row userInfo">
+        <div class="col-xs-12 col-sm-12">
+          <div class="cartContent w100">
+            <table class="cartTable table-responsive" style="width:100%">
+              <tbody>
+                {% if list.buy.count > 0 %}
+                <tr class="CartProduct cartTableHeader">
+                  <td style="width:15%"  > Product </td>
+                  <td style="width:40%"  >Details</td>
+                  <td style="width:10%"  class="delete">&nbsp;</td>
+                  <td style="width:10%" >$/borroh</td>
+                  <td style="width:10%" >Discount</td>
+                  <td style="width:15%" >Total</td>
+                </tr>
+                
+                {% for item in list.buy %}
+                <tr class="CartProduct">
+                  <td  class="CartProductThumb"><div> <a href="{% url 'product_detail_non_json' item.product.id %}"><img src="{{ settings.SERVER }}/media/{{ item.product.image_set.all.0 }}" alt="img"></a> </div></td>
+                  <td ><div class="CartDescription">
+                      <h4> <a href="{% url 'product_detail_non_json' item.product.id %}">{{ item.product.title }}</a> </h4>
+                      <!-- <span class="size">12 x 1.5 L</span> -->
+                      <div class="price"> <span>${{ item.product.price }}</span></div>
+                    </div></td>
+                  <td class=""><a href="{% url 'delete_item' item.id %}" title="Delete"> <i class="glyphicon glyphicon-trash fa-2x"></i></a></td>
+                  {% if item.borroh == True %}
+                  <td >borroh</td>
+                  {% else %}
+                  <td >buy</td>
+                  {% endif %}
+                  
+                  <td >0</td>
+                  {% if item.borroh == True %}
+                  <td class="price">{{ cart.total_points }} points</td>
+                  {% else %}
+                  <td class="price">${{ cart.total_price }}</td>
+                  {% endif %}
+                </tr>
+
+                {% endfor %}
+                {% else %}
+                <h1>There are no products in your cart.</h1>
+                {% endif %}
+                
+
+              </tbody>
+            </table>
+          </div>
+          <!--cartContent-->
+          
+          <div class="cartFooter w100">
+            <div class="box-footer">
+              <div class="pull-left"> <a href="{% url 'home' %}" class="btn btn-default"> <i class="fa fa-arrow-left"></i> &nbsp; Continue shopping </a> </div>
+              <div class="pull-right">
+                <!-- <button type="submit" class="btn btn-default"> <i class="fa fa-undo"></i> &nbsp; Update cart </button> -->
+              </div>
+            </div>
+          </div> <!--/ cartFooter --> 
+          
+        </div>
+      </div>
+      <!--/row end--> 
+      
+    </div>
+    
+    {% include 'cart/partials/_cart_totals.html' %}
+    
+  
+  <div style="clear:both"></div>
+</div><!-- /.main-container -->
+
+ 
+{% endblock %}

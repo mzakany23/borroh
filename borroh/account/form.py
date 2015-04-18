@@ -1,5 +1,8 @@
 from django import forms
+from django.forms import ModelForm
+from django.forms.models import modelformset_factory
 from django.contrib.auth.models import User
+from account.models import Profile,Address
 
 # -----------------------------------------------------------------------------------
 # login
@@ -25,7 +28,50 @@ class LoginForm(forms.Form):
 	}))
 
 	
+# -----------------------------------------------------------------------------------
+# updating user info
+# -----------------------------------------------------------------------------------
 
+class AddressForm(ModelForm):
+	class Meta:
+		model = Address
+		fields = ['name','first','last','street','secondary','city','state','zip_code' ,'phone_number','primary_address','shipping_address']
+		widgets = {
+            'name': forms.TextInput(attrs={
+            	'class': 'form-control', 
+            }),
+            'first': forms.TextInput(attrs={
+            	'class': 'form-control', 
+            }),
+            'last': forms.TextInput(attrs={
+            	'class': 'form-control', 
+            }),
+            'street': forms.TextInput(attrs={
+            	'class': 'form-control', 
+            }),
+            'secondary': forms.TextInput(attrs={
+            	'class': 'form-control', 
+            }),
+            'city': forms.TextInput(attrs={
+            	'class': 'form-control', 
+            }),
+            'state': forms.Select(attrs={
+            	'class': 'form-control', 
+            }),
+            'zip_code': forms.TextInput(attrs={
+            	'class': 'form-control', 
+            }),
+            'phone_number': forms.TextInput(attrs={
+            	'class': 'form-control', 
+            }),
+            'primary_address': forms.CheckboxInput(attrs={
+            	'class': 'form-control', 
+            }),
+            'shipping_address': forms.CheckboxInput(attrs={
+            	'class': 'form-control', 
+            }),
+
+        }
 
 
 # -----------------------------------------------------------------------------------

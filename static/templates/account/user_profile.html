@@ -13,13 +13,13 @@
           <h2 class="block-title-2"><span>Welcome to your account. Here you can manage all of your personal information and orders.</span></h2>
           <ul class="myAccountList row">
             <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
-              <div class="thumbnail equalheight"> <a title="Orders" href="order-list.html"><i class="fa fa-calendar"></i> Order history </a> </div>
+              <div class="thumbnail equalheight"> <a title="Orders" href="{% url 'account_order_list'%}"><i class="fa fa-calendar"></i> Order history </a> </div>
             </li>
             <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
               <div class="thumbnail equalheight"> <a title="My addresses" href="{% url 'show_address' %}"><i  class="fa fa-map-marker"></i> My addresses</a> </div>
             </li>
             <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
-              <div class="thumbnail equalheight"> <a title="Add  address" href="{% url 'add_address' user.id %} "> <i  class="fa fa-edit"> </i> Add  address</a> </div>
+              <div class="thumbnail equalheight"> <a title="Add  address" href="{% url 'add_address' %} "> <i  class="fa fa-thumbs-up"> </i> Borrowed </a> </div>
             </li>
             <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
               <div class="thumbnail equalheight"> <a title="Personal information" href="{% url 'profile_info' %}"><i class="fa fa-cog"></i> profile</a> </div>
