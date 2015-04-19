@@ -4,12 +4,32 @@ from django.contrib.auth.decorators import login_required
 from cart.models import Cart
 from home.views import get_home_variables
 from django.template import RequestContext
+from django.contrib.auth.models import User
+from account.models import Profile
+from django.conf import settings
 
 def start_order_process(request):
+	try:
+		process = request.POST['checkout_process']
+		user = User.objects.get(id=request.user.id)
+		profile = Profile.objects.get(user=user)
+	except:
+		process = None
+
+
 	if request.user.is_authenticated():
-		return HttpResponseRedirect(reverse('order_address'))
+		if process == 'borroh':
+			if profile.subscription is not None:
+				print 'has subscription'
+			else:
+				return HttpResponseRedirect(reverse('subscribe'))
+		elif process == 'buy':
+			print 'buy'
+			return HttpResponseRedirect(reverse('order_address'))
 	else:
 		return HttpResponseRedirect(reverse('order_auth'))
+
+
 
 # auth
 def order_auth(request):

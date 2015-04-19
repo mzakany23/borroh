@@ -63,7 +63,9 @@ urlpatterns += patterns('order.views',
 	url(r'^order/show/', 'order_show',name='order_show'),		
 )
 
-
+urlpatterns += patterns('subscription.views',
+	url(r'^subscription/subscribe/$','subscribe',name='subscribe'),
+)
 
 
 

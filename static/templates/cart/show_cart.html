@@ -92,12 +92,20 @@
           
           <div class="table-block" id="order-detail-content">  
           {% if list.buy %}  
-            <a class="btn btn-primary btn-lg btn-block " title="checkout" href="{% url 'start_order_process' %}" style="margin-bottom:20px"> Buy Items! &nbsp; <i class="fa fa-arrow-right"></i> 
-            </a>
+            <form method="POST" action="{% url 'start_order_process' %}">
+              {% csrf_token %}
+              <input type='hidden' name='checkout_process' value='buy'>
+              <button class="btn btn-primary btn-lg btn-block " type='submit' title="checkout" style="margin-bottom:20px"> Buy Items! &nbsp; <i class="fa fa-arrow-right"></i> 
+              </button>
+            </form>
           {% endif %}
-          {% if list.borroh %}
-            <a class="btn btn-primary btn-lg btn-block " title="checkout" href="{% url 'start_order_process' %}" style="margin-bottom:20px"> Borroh Items! &nbsp; <i class="fa fa-arrow-right"></i> 
-            </a>
+          {% if list.borroh %} 
+            <form method="POST" action="{% url 'start_order_process' %}">
+              {% csrf_token %}
+              <input type='hidden' name='checkout_process' value='borroh'>
+              <button class="btn btn-primary btn-lg btn-block " type='submit' title="checkout" style="margin-bottom:20px"> Borroh Items! &nbsp; <i class="fa fa-arrow-right"></i> 
+              </button>
+            </form>
           {% endif %}
           
 

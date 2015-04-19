@@ -1,0 +1,35 @@
+{% extends 'layouts/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container main-container headerOffset">
+  
+  <div class="row innerPage">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <div class="row userInfo">
+        <div class="col-md-10 col-md-offset-1">
+        	<div class="jumbotron">
+					  <h1>{{ user }},</h1>
+					  <br>
+					  <h2>You currently do not have a plan (0 points).</h2>
+					  <h2>Please select a plan to get points and start borrohing</h2>
+					  
+					  <!-- <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p> -->
+					</div>
+        </div>
+       </div>
+    		
+
+        {% include 'layouts/partials/_pricing-table.html' %}
+        
+        
+      </div>  <!--/row end-->
+    </div>
+  </div> <!--/.innerPage-->
+  <div style="clear:both">  </div>
+</div><!-- /.main-container -->
+
+
+<div class="gap"> </div>
+
+{% endblock %}

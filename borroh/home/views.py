@@ -4,8 +4,10 @@ from product.models import Product
 from django.template import *
 from cart.models import Cart
 from django.conf import settings
+import stripe
 
 def home(request):
+  
 	featured_products = Product.objects.filter(featured=True)
 	context = {
 			'featured_products' : featured_products

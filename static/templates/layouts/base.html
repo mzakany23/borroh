@@ -108,6 +108,7 @@
   <div class="full-container" >
 
     {% block content %}{% endblock %}
+    {% block pricing_table %}{% endblock %}
     {% block account %}{% endblock %}
     <!--/.slider-content--> 
   </div>
@@ -118,7 +119,7 @@
 </div>
 <!--main-container-->
 
-{% include 'layouts/pages/pricing_table.html' %}
+{% block pricing_tables %}{% endblock %}
 
 <div class="container"> 
   
