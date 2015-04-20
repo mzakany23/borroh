@@ -7,6 +7,7 @@ admin.autodiscover()
 # home
 urlpatterns = patterns('',
  		url(r'^$', 'home.views.home',name='home'),
+ 		url(r'^/error', 'home.views.error',name='error'),
     url(r'^admin/', include(admin.site.urls)),
 )
 
@@ -65,6 +66,7 @@ urlpatterns += patterns('order.views',
 
 urlpatterns += patterns('subscription.views',
 	url(r'^subscription/subscribe/$','subscribe',name='subscribe'),
+	url(r'^subscription/subscribe/thanks','subscription_thank_you',name='subscription_thank_you'),
 )
 
 

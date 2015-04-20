@@ -24,6 +24,7 @@
 
           <form method='POST' action="{% url 'subscribe' %}">
             {% csrf_token %}
+            <input type='hidden' name='planType' value='bronze'>
             <div style='text-align: center;'>
             <script
               src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -63,6 +64,7 @@
           
           <form method='POST' action="{% url 'subscribe' %}">
             {% csrf_token %}
+            <input type='hidden' name='planType' value='silver'>
             <div style='text-align: center;'>
             <script
               src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -100,6 +102,7 @@
           
           <form method='POST' action="{% url 'subscribe' %}">
             {% csrf_token %}
+            <input type='hidden' name='planType' value='bronze'>
             <div style='text-align: center;'>
             <script
               src="https://checkout.stripe.com/checkout.js" class="stripe-button"

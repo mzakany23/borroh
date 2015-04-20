@@ -67,7 +67,8 @@ def get_home_variables(request):
 	}
 
 	
-
-
-
+def error(request):
+	context = {}
+	template = 'home/404.html'
+	return render(request,template,context)
 

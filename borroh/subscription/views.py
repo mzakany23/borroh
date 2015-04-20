@@ -1,6 +1,7 @@
-from django.shortcuts import render
-from django.conf import settings
 import stripe
+from django.shortcuts import render,HttpResponseRedirect
+from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from account.models import Profile
 
@@ -14,12 +15,20 @@ def subscribe(request):
 		token = None
 		profile = None
 
-	print request.POST
-	# customer = stripe.Customer.create(
-	#   source=token,
-	#   plan="gold",
-	#   email="payinguser@example.com"
-	# )
+	try:
+		variables = request.POST
+	except:
+		return HttpResponseRedirect(reverse('error'))
+	
+	if variables:
+		print variables
+		return HttpResponseRedirect(reverse('subscription_thank_you'))
+
 	context = {'stripeKey' : settings.API_KEY2}
 	template = 'subscription/subscribe.html'
+	return render(request,template,context)
+
+def subscription_thank_you(request):
+	context = {}
+	template = 'subscription/subscription_confirmation.html'
 	return render(request,template,context)

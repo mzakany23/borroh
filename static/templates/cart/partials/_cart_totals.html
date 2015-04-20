@@ -4,11 +4,19 @@
           
           <div class="table-block" id="order-detail-content"> 
             {% if request.path == '/cart/show/borroh' %}
-            <a class="btn btn-primary btn-lg btn-block " title="checkout" href="{% url 'start_order_process' %}" style="margin-bottom:20px"> Borroh Items! &nbsp; <i class="fa fa-arrow-right"></i> 
-            </a>
+            <form method='POST' action="{% url 'start_order_process' %}">
+              {% csrf_token %}
+              <input type='hidden' name='checkout_process' value='borroh'>
+            <button class="btn btn-primary btn-lg btn-block " title="checkout" type='submit' style="margin-bottom:20px"> Borroh Items! &nbsp; <i class="fa fa-arrow-right"></i> 
+            </button>
+            </form>
             {% else %}
-            <a class="btn btn-primary btn-lg btn-block " title="checkout" href="{% url 'start_order_process' %}" style="margin-bottom:20px"> Buy Items! &nbsp; <i class="fa fa-arrow-right"></i> 
-            </a>
+            <form method='POST' action="{% url 'start_order_process' %}">
+              {% csrf_token %}
+              <input type='hidden' name='checkout_process' value='buy'>
+            <button class="btn btn-primary btn-lg btn-block " title="checkout" type='submit' style="margin-bottom:20px"> Buy Items! &nbsp; <i class="fa fa-arrow-right"></i> 
+            </button>
+            </form>
             {% endif %}
             <div class="w100 cartMiniTable">
               <table id="cart-summary" class="std table">

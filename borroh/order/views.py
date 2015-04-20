@@ -16,7 +16,6 @@ def start_order_process(request):
 	except:
 		process = None
 
-
 	if request.user.is_authenticated():
 		if process == 'borroh':
 			if profile.subscription is not None:
