@@ -7,38 +7,31 @@
   <div class="row innerPage">
     <div class="col-lg-12 col-md-12 col-sm-12">
       <div class="row userInfo">
-        <h1>Thanks for your order</h1>
+      	<h1>Subscription Confirmation</h1>
+        <h1>Thanks for your order!</h1>
         <table class="table table-bordered">
       <thead>
         <tr>
-          <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Username</th>
+          <th>Order Confirmation</th>
+          <th>User</th>
+          <th>Plan</th>
+          <th>Email</th>
+          <th>Price / Month</th>
+          <th>Points Awarded / Month</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
+          <td>{{ user_subscription_confirmation.user }}</td>
+          <td>{{ user_subscription_confirmation.plan }}</td>
+          <td>{{ user_subscription_confirmation.email }}</td>
+          <td>{{ user_subscription_confirmation.price }}</td>
+          <td>{{ user_subscription_confirmation.points }}</td>
         </tr>
       </tbody>
     </table>
-        
+    <button class="btn btn-success"><a href="{% url 'cart_show_borroh' %}">Go to Borroh Cart</a></button>
         
       </div>  <!--/row end-->
     </div>

@@ -61,7 +61,10 @@ urlpatterns += patterns('order.views',
 	url(r'^order/billing/', 'order_billing',name='order_billing'),	
 	url(r'^order/shipping/', 'order_shipping',name='order_shipping'),	
 	url(r'^order/payment/', 'order_payment',name='order_payment'),	
-	url(r'^order/show/', 'order_show',name='order_show'),		
+	url(r'^order/show/', 'order_show',name='order_show'),	
+	url(r'^order/too-many-items-in-cart/', 'too_many_items_in_borroh_cart',name='too_many_items_in_borroh_cart'),
+	url(r'^order/add-to-wishlist-and-remove/(?P<id>\d+)', 'add_to_wishlist_and_remove_from_cart',name='add_to_wishlist_and_remove_from_cart'),	
+	url(r'^order/remove-from-cart-and-redirect-back/(?P<id>\d+)', 'remove_from_cart_and_back_to_borroh',name='remove_from_cart_and_back_to_borroh'),	
 )
 
 urlpatterns += patterns('subscription.views',

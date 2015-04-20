@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from account.form import LoginForm,RegisterUserForm
 from product.models import Product
+from account.models import Profile
 from django.template import *
 from cart.models import Cart
 from django.conf import settings
@@ -53,7 +54,27 @@ def get_home_variables(request):
 		list_borroh_count = 0
 		list_buy_count = 0
 
+	try: 
+		profile = Profile.objects.get(user=request.user)
+		points_balance = profile.points
+		cart_points_balance = cart.borroh_items_total
+	except:
+		points_balance = 0
+
+	try:
+		points_over_balance = cart.total_points - points_balance
+		total_points_minus_individual_balance = 0
+	except:
+		points_over_balance = 0
+
+	if points_over_balance > 0:
+		total_points_minus_individual_balance = points_over_balance
+	else:
+		total_points_minus_individual_balance = 0
+
+
 	return {
+			'total_points_minus_individual_balance' : total_points_minus_individual_balance,
 			'login_form' : LoginForm, 
 			'register' : RegisterUserForm, 
 			'items' : cart_items,
@@ -62,8 +83,9 @@ def get_home_variables(request):
 			'mobile_items' : mobile,
 			'sorted_by_borroh' : borrohed,
 			'settings' : settings,
+			'points_balance' : points_balance,
 			'list_borroh_count' : list_borroh_count,
-			'list_buy_count' : list_buy_count
+			'list_buy_count' : list_buy_count,
 	}
 
 	

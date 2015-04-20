@@ -17,7 +17,12 @@
                     <!-- <div class="price"> <span> ${{ item.product.price }} </span> </div> -->
                   </div></td>
                 <!-- <td  style="10%" class="miniCartQuantity"><a > X 1 </a></td> -->
-                <td  style="15%" class="miniCartSubtotal"><span> ${{ cart.total_price }} </span></td>
+
+                {% if item.borroh == False %}
+                <td  style="15%" class="miniCartSubtotal"><span> ${{ item.product.price }} </span></td>
+                {% else %}
+                <td  style="15%" class="miniCartSubtotal"><span> {{ item.product.points_price }} points </span></td>
+                {% endif %}
                 <td  style="5%" class="delete"><a > x </a></td>
               </tr>
               {% endfor %}
@@ -28,8 +33,10 @@
         <!--/.miniCartTable-->
         
         <div class="miniCartFooter  miniCartFooterInMobile text-right">
-          <h3 class="text-right subtotal"> Subtotal: ${{ cart.total_price }} </h3>
-          <a href="{% url 'cart_show' %}" class="btn btn-sm btn-danger"> <i class="fa fa-shopping-cart"> </i> VIEW CART </a> <a href="{% url 'cart_show' %}" class="btn btn-sm btn-warning"> CHECKOUT </a> </div>
+          <h3 class="text-right subtotal"> Total Price: ${{ cart.total_price }} </h3>
+          <h3 class="text-right subtotal"> Total Points: {{ cart.total_points }} Points </h3>
+          <a href="{% url 'cart_show' %}" class="btn btn-sm btn-danger"> <i class="fa fa-shopping-cart"> </i> VIEW CART </a> 
+        </div>
         <!--/.miniCartFooter--> 
         
       </div>

@@ -18,7 +18,7 @@
             <ul class="userMenu">
               
               {% if user.is_authenticated %}
-            <li><a href="#">Borrowing <span class="badge">0</span></a>
+            <li><a href="#">Points Balance <span class="badge">{{ points_balance }}</span></a>
               </a> </li>
 
               <li><a href="{% url 'cart_show_borroh' %}">Basket <span class="badge">{{ list_borroh_count }}</span></a>
