@@ -86,6 +86,7 @@ def get_home_variables(request):
 			'points_balance' : points_balance,
 			'list_borroh_count' : list_borroh_count,
 			'list_buy_count' : list_buy_count,
+			'profile' : profile,
 	}
 
 	

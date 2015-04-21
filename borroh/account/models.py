@@ -18,6 +18,9 @@ class Profile(models.Model):
 	def __unicode__(self):
 		return str(self.user)
 
+	def wishlist_count(self):
+		return self.favorites.count()
+
 STATE_CHOICES = (
 	('OHIO','OHIO'),
 )

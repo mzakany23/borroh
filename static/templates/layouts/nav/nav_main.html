@@ -18,15 +18,34 @@
             <ul class="userMenu">
               
               {% if user.is_authenticated %}
-            <li><a href="#">Points Balance <span class="badge">{{ points_balance }}</span></a>
-              </a> </li>
+              <li>
+                <a href="{% url 'user_profile' user.id %}"> 
+                  <img src="{% static 'assets/menu-icons/icon_getpoints.png' %}"> 
+                  <span class="badge">{{ points_balance }}</span>
+                </a>
+              </li>
 
-              <li><a href="{% url 'cart_show_borroh' %}">Basket <span class="badge">{{ list_borroh_count }}</span></a>
-              </a> </li>
+               <li>
+                <a href="{% url 'cart_show_borroh' %}"> 
+                  <img src="{% static 'assets/menu-icons/icon_getclothes.png' %}"> 
+                  <span class="badge">{{ list_borroh_count }}</span>
+                </a>
+              </li>
 
-              <li><a href="{% url 'cart_show_buy' %}">Buy <span class="badge">{{ list_buy_count }}</span></a>
-              </a> </li>
-
+               <li>
+                <a href="{% url 'cart_show_buy' %}"> 
+                  <img src="{% static 'assets/menu-icons/cart.png' %}"> 
+                  <span class="badge">{{ list_buy_count }}</span>
+                </a>
+              </li>
+              
+              <li>
+                <a href="{% url 'user_wishlist' %}"> 
+                  <img src="{% static 'assets/menu-icons/icon_favorites.png' %}"> 
+                  <span class="badge">{{ profile.wishlist_count }}</span>
+                </a>
+              </li>
+              
               <li><a href="{% url 'user_profile' user.id %} "><span class="hidden-xs"> <i class="glyphicon glyphicon-user" style='margin-right: 5px;'></i>{{ user }}:profile</span> <i class="glyphicon glyphicon-user hide visible-xs "></i></a> </li>
 
               <li> <a href="{% url 'auth_logout' %}"><span class="hidden-xs"> Logout</span> <i class="glyphicon glyphicon-user hide visible-xs "></i></a> </li>
