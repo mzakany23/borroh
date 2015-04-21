@@ -36,7 +36,7 @@ def auth_login(request):
 			request.session['errors'] = 'Please try logging in again'
 			template = 'account/auth/authentication.html'
 			return HttpResponseRedirect('login')
-		return HttpResponseRedirect('/')
+		return HttpResponseRedirect(reverse('home'))
 
 	if form2.is_valid():
 		username = form.cleaned_data['username']
@@ -47,7 +47,7 @@ def auth_login(request):
 		authenticated_user = authenticate(username=username,password=password)
 		login(request,authenticated_user)
 		messages.success(request, str(user.username) + ', You have successfully signed up!')
-		return HttpResponseRedirect('/')
+		return HttpResponseRedirect(reverse('home'))
 
 	try: 
 		request.session['errors']

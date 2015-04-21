@@ -60,6 +60,7 @@ def get_home_variables(request):
 		cart_points_balance = cart.borroh_items_total
 	except:
 		points_balance = 0
+		profile = None
 
 	try:
 		points_over_balance = cart.total_points - points_balance
@@ -72,7 +73,11 @@ def get_home_variables(request):
 	else:
 		total_points_minus_individual_balance = 0
 
-
+	try:
+		wishlist_count = profile.wishlist_count
+	except:
+		wishlist_count = 0
+	
 	return {
 			'total_points_minus_individual_balance' : total_points_minus_individual_balance,
 			'login_form' : LoginForm, 
@@ -86,7 +91,7 @@ def get_home_variables(request):
 			'points_balance' : points_balance,
 			'list_borroh_count' : list_borroh_count,
 			'list_buy_count' : list_buy_count,
-			'profile' : profile,
+			'wishlist_count' : wishlist_count,
 	}
 
 	
