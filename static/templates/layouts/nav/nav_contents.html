@@ -1,6 +1,7 @@
  <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li class="active"> <a href="{% url 'home' %}"> Home </a> </li>
+
         <li class="dropdown megamenu-fullwidth"> <a data-toggle="dropdown" class="dropdown-toggle" href="#"> New Products <b class="caret"> </b> </a>
           {% include 'layouts/nav/new_products_dropdown.html' %}
         </li>
@@ -9,9 +10,16 @@
         <li class="dropdown megamenu-80width "> <a data-toggle="dropdown" class="dropdown-toggle" href="#"> SHOP <b class="caret"> </b> </a>
          {% include 'layouts/nav/shop_dropdown.html' %}
         </li>
+
         <li class="dropdown megamenu-fullwidth"> <a data-toggle="dropdown" class="dropdown-toggle" href="#"> PAGES <b class="caret"> </b> </a>
           {% include 'layouts/nav/pages_dropdown.html' %}
-      
+        </li>
+
+      </ul>
+
+     
+   
+
       <!--- this part will be hidden for mobile version -->
       {% if items.count > 0 %}
       {% include 'layouts/partials/cart/_buy_cart.html' %}

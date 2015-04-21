@@ -222,7 +222,6 @@ def add_to_wishlist(request,id):
 		profile.save()
 	except:
 		pass
-	
 	return HttpResponseRedirect(reverse('user_wishlist'))
 
 @login_required(login_url='/account/login')
