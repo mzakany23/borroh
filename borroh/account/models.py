@@ -19,7 +19,11 @@ class Profile(models.Model):
 		return str(self.user)
 
 	def wishlist_count(self):
-		return self.favorites.count()
+		count = self.favorites.count()
+		if count is None:
+			return 0
+		else:
+			return count
 
 STATE_CHOICES = (
 	('OHIO','OHIO'),
