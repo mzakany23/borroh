@@ -10,7 +10,6 @@ import stripe
 def home(request):
   
 	featured_products = Product.objects.filter(featured=True)
-	profile = Profile.objects.get(user=request.user)
 	context = {
 			'featured_products' : featured_products,
 	}
