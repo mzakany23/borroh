@@ -49,16 +49,16 @@
               </li>
               
               
-              <li><a href="{% url 'user_profile' user.id %} "><span class="hidden-xs"> <i class="glyphicon glyphicon-user" style='margin-right: 5px;'></i>{{ user }}:profile</span></a> </li>
+              <li><a href="{% url 'user_profile' user.id %} "><span style="color: black;" class="hidden-xs"> <i class="glyphicon glyphicon-user" style='margin-right: 5px;'></i>{{ user }}:profile</span></a> </li>
 
-              <li> <a href="{% url 'auth_logout' %}"><span class="hidden-xs"> Logout</span> </a> </li>
+              <li> <a href="{% url 'auth_logout' %}"><span style="color: black;" class="hidden-xs"> Logout</span> </a> </li>
               {% else %}
               <li> 
                 <a href="#"  data-toggle="modal" data-target="#ModalLogin"> 
-                  <span class="hidden-xs">Sign In</span> <div class="col-md-12"><i class="glyphicon glyphicon-log-in hide visible-xs "></i></div>
+                  <span style="color: black;" class="hidden-xs">Sign In</span> <div class="col-md-12"><i class="glyphicon glyphicon-log-in hide visible-xs "></i></div>
                 </a> 
               </li>
-              <li class="hidden-xs"> <a href="#"  data-toggle="modal" data-target="#ModalSignup"> Create Account </a>
+              <li class="hidden-xs"> <a style="color: black;" href="#"  data-toggle="modal" data-target="#ModalSignup"> Create Account </a>
               {% endif %}
                </li>
             </ul>

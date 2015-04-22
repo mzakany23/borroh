@@ -25,7 +25,8 @@ a:hover, a:focus {
 	color:#fff;
 }
 .navbar-tshop {
-	background:#4ec67f;
+	background: #00BBDE;
+	opacity: 0.97;
 }
 .btn-primary, .product:hover .add-fav:hover, .product:hover .add-fav.active {
 	background-color: #4ec67f;
@@ -40,13 +41,13 @@ a:hover, a:focus {
 	background:  #4ec67f;
 }
 .navbar-top {
-	background:#4bb777;
+	background:#FFFFFF;
 }
 .navbar-nav > li > a {
 	color:#fff;
 }
 .nav > li.active, .nav > li > a:hover, .nav > li > a:focus, .nav > li:hover > a {
-	background:#27AE60;
+	background:#03C6EA;
 }
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus, .cartMenu:hover > a.dropdown-toggle {
 	background:#27AE60;
