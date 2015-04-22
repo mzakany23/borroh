@@ -29,3 +29,7 @@
 	font-weight: 100;
 }
 
+.front-display-img{
+	height: 500px;
+	background: url(../photos/womanclosetbg.jpg);
+}

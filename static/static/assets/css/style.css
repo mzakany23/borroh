@@ -2585,7 +2585,7 @@ h1.bolder-style.dark, h1.bolder-style.dark a {
 	height: auto;
 }
 .parallax-image-1 {
-	background: url(../../images/parallax/parallax.jpg);
+	background: url(../../assets/photos/womensitting.jpg);
 	background-size: cover;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -2682,7 +2682,7 @@ h1.bolder-style.dark, h1.bolder-style.dark a {
 /***  -------  Parallax section 2  ------- ***/
 
 .parallax-image-2 {
-	background: url(../../images/parallax/people-collage.jpg) fixed;
+	background: url(../../assets/photos/womensitting.jpg) fixed;
 	background-attachment: fixed;/* IE FIX */
 }
 .parallax-section-overley {
