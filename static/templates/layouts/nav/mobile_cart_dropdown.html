@@ -6,7 +6,7 @@
               
               {% for item in mobile_items %}
               <tr class="miniCartProduct">
-                <td style="20%" class="miniCartProductThumb"><div> <a href="{% url 'product_detail_non_json' item.product.id %}"> <img src="{{ settings.SERVER }}/media/{{ item.product.image_set.all.0 }}" alt="img"> </a> </div></td>
+                <td style="20%" class="miniCartProductThumb"><div> <a href="{% url 'product_detail_non_json' item.product.id %}"> <img src="{{ server }}/media/{{ item.product.image_set.all.0 }}" alt="img"> </a> </div></td>
                 <td style="40%"><div class="miniCartDescription">
                     <h4> <a href="{% url 'product_detail_non_json' item.product.id %}"> TSHOP T shirt Black </a> </h4>
                     {% if item.borroh == True %}
@@ -23,7 +23,7 @@
                 {% else %}
                 <td  style="15%" class="miniCartSubtotal"><span> {{ item.product.points_price }} points </span></td>
                 {% endif %}
-                <td  style="5%" class="delete"><a > x </a></td>
+                <td  style="5%" class="delete"><a href="{% url 'delete_item' item.id %}">x</a></td>
               </tr>
               {% endfor %}
             </tbody>

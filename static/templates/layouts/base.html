@@ -19,7 +19,9 @@
 
 {% include 'account/auth/partials/_login.html' %}
 
-<!-- Modal Signup start -->
+  <!-- ############################ -->
+  <!-- login/register -->
+  <!-- ############################ -->
 
 <div class="modal signUpContent fade" id="ModalSignup" tabindex="-1" role="dialog" >
   <div class="modal-dialog">
@@ -46,8 +48,11 @@
   <!-- /.modal-dialog --> 
   
 </div>
-<!-- /.ModalSignup End --> 
+<!-- ############################ -->
+<!-- modal end -->
+<!-- ############################ -->
 
+  
   {% include 'layouts/nav/nav_main.html' %}
   
   <!-- success message login/register -->
@@ -93,7 +98,9 @@
         <img src="{% static 'images/logo.png' %}" alt="TSHOP"> 
       </a> 
       
-      <!-- this part for mobile -->
+  <!-- ############################ -->
+  <!-- mobile search -->
+  <!-- ############################ -->
       <div class="search-box pull-right hidden-lg hidden-md hidden-sm">
         <div class="input-group">
           <button class="btn btn-nobg getFullSearch" type="button"> <i class="fa fa-search"> </i> </button>
@@ -114,6 +121,9 @@
   </div>
   <!--/.container -->
   
+  <!-- ############################ -->
+  <!-- search bar -->
+  <!-- ############################ -->
   <div class="search-full text-right"> <a class="pull-right search-close"> <i class=" fa fa-times-circle"> </i> </a>
     <div class="searchInputBox pull-right">
       <input type="search"  data-searchurl="search?=" name="q" placeholder="start typing and hit enter to search" class="search-input">
