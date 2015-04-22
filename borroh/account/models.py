@@ -25,6 +25,14 @@ class Profile(models.Model):
 		else:
 			return count
 
+	def has_no_subscription(self):
+		if self.subscription is None:
+			return True
+
+	def has_subscription(self):
+		if self.subscription is not None:
+			return True
+
 STATE_CHOICES = (
 	('OHIO','OHIO'),
 )

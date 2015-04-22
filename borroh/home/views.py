@@ -93,7 +93,17 @@ def get_home_variables(request):
 		cart_has_contents = cart.cart_has_contents()
 	except:
 		cart_has_contents = None
-		
+
+	try:
+		user_does_not_have_a_subscription = profile.has_no_subscription()
+	except:
+		user_does_not_have_a_subscription = True
+	
+	try:
+		user_has_subscription = profile.has_subscription()
+	except:
+		user_has_subscription = False
+
 	return {
 			'total_points_minus_individual_balance' : total_points_minus_individual_balance,
 			'login_form' : LoginForm, 
@@ -109,7 +119,9 @@ def get_home_variables(request):
 			'list_buy_count' : list_buy_count,
 			'wishlist_count' : wishlist_count,
 			'cart_has_contents' : cart_has_contents,
-			'server' : settings.SERVER
+			'server' : settings.SERVER,
+			'user_does_not_have_a_subscription' : user_does_not_have_a_subscription,
+			'user_has_subscription' : user_has_subscription
 	}
 
 	

@@ -5,9 +5,14 @@
 	{% include 'layouts/pages/slider.html' %}
 {% endblock %}
 
+
+
 {% block pricing_tables %}
-	{% include 'layouts/pages/pricing_table.html' %}
+	{% if user_does_not_have_a_subscription %}
+		{% include 'layouts/pages/pricing_table.html' %}
+	{% endif %}
 {% endblock %}
+
 
 {% block icon_showings %}
 	{% include 'layouts/pages/icon_showings.html' %}
