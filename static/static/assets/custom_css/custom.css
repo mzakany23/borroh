@@ -1,4 +1,7 @@
-
+@font-face{
+	font-family: manifesto;
+	src: url(../fonts/manifesto.tff);
+}
 
 #custom-cart-add{
 	background-color: #39c381;
@@ -33,3 +36,4 @@
 	height: 500px;
 	background: url(../photos/womanclosetbg.jpg);
 }
+
