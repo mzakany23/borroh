@@ -10,8 +10,9 @@ import stripe
 def home(request):
   
 	featured_products = Product.objects.filter(featured=True)
+	profile = Profile.objects.get(user=request.user)
 	context = {
-			'featured_products' : featured_products
+			'featured_products' : featured_products,
 	}
 	template = 'home/index.html'
 	return render(request,template,context,context_instance=RequestContext(request, processors=[get_home_variables]))
@@ -54,13 +55,21 @@ def get_home_variables(request):
 		list_borroh_count = 0
 		list_buy_count = 0
 
-	try: 
+	try:
 		profile = Profile.objects.get(user=request.user)
+	except:
+		profile = None
+	
+	try:
 		points_balance = profile.points
-		cart_points_balance = cart.borroh_items_total
 	except:
 		points_balance = 0
-		profile = None
+
+	try: 
+		cart_points_balance = cart.borroh_items_total
+	except:
+		cart_points_balance = 0
+		
 
 	try:
 		points_over_balance = cart.total_points - points_balance

@@ -16,7 +16,6 @@
         <div class="col-lg-10 col-sm-10 col-xs-10 col-md-10 no-margin no-padding">
           <div class="pull-right">
             <ul class="userMenu">
-              
               {% if user.is_authenticated %}
               <li>
                 <a href="{% url 'user_profile' user.id %}"> 
