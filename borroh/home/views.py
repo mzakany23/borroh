@@ -20,9 +20,12 @@ def home(request):
 def get_home_variables(request):
 	try:
 		cart = Cart.objects.get(id=request.session['cart_id'])
-		cart_items = cart.lineitem_set.all()
 	except:
 		cart = None	
+		
+	try:
+		cart_items = cart.lineitem_set.all()
+	except:
 		cart_items = None
 
 	try:
@@ -86,6 +89,7 @@ def get_home_variables(request):
 	except:
 		wishlist_count = 0
 	
+	cart_contents = Cart()
 	return {
 			'total_points_minus_individual_balance' : total_points_minus_individual_balance,
 			'login_form' : LoginForm, 
@@ -100,6 +104,8 @@ def get_home_variables(request):
 			'list_borroh_count' : list_borroh_count,
 			'list_buy_count' : list_buy_count,
 			'wishlist_count' : wishlist_count,
+			'cart_has_contents' : cart_contents.cart_has_contents(),
+			'server' : settings.SERVER
 	}
 
 	

@@ -2,22 +2,18 @@
 
  <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+        {% include 'layouts/nav/login_logout_for_mobile.html' %}
         <li class="active"> <a href="{% url 'home' %}"> Home </a> </li>
 
-        <li class="dropdown megamenu-fullwidth"> <a data-toggle="dropdown" class="dropdown-toggle" href="#"> New Products <b class="caret"> </b> </a>
+        <li class="dropdown megamenu-fullwidth"> 
+          <a data-toggle="dropdown" class="dropdown-toggle" href="#"> New Products 
+            <b class="caret"> </b> 
+          </a>
           {% include 'layouts/nav/new_products_dropdown.html' %}
         </li>
       </ul>
 
-    <!--   <ul class="nav navbar-nav">
-       <li> <a href="{% url 'home' %}"> <img src="{% static 'assets/menu-icons/icon_favorites.png' %}"> </a> </li>
-       <li> <a href="{% url 'home' %}"> Home </a> </li>
-       <li> <a href="{% url 'home' %}"> Home </a> </li>
-      </ul> -->
-
-     
-   
-
+  
       <!--- this part will be hidden for mobile version -->
       {% if items.count > 0 %}
       {% include 'layouts/partials/cart/_buy_cart.html' %}

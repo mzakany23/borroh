@@ -66,9 +66,32 @@
   <div class="container">
     
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only"> Toggle navigation </span> <span class="icon-bar"> </span> <span class="icon-bar"> </span> <span class="icon-bar"> </span> </button>
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-cart"> <i class="fa fa-shopping-cart colorWhite"> </i> <span class="cartRespons colorWhite"> Cart (${{ cart.total_price }} / {{ cart.total_points }} Points) </span> </button>
-      <a class="navbar-brand " href="{% url 'home' %}"> <img src="{% static 'images/logo.png' %}" alt="TSHOP"> </a> 
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> 
+        <span class="sr-only"> Toggle navigation </span> 
+        <span class="icon-bar"> </span> 
+        <span class="icon-bar"> </span> 
+        <span class="icon-bar"> </span> 
+      </button>
+
+      {% if cart_has_contents %}
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-cart"> 
+        <i class="fa fa-shopping-cart colorWhite"> </i> 
+        <span class="cartRespons colorWhite"> 
+          (${{ cart.total_price }} / {{ cart.total_points }} Points) 
+        </span> 
+      </button>
+      {% else %}
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-cart"> 
+        <i class="fa fa-shopping-cart colorWhite"> </i> 
+        <span class="cartRespons colorWhite"> 
+          Cart Empty!
+        </span> 
+      </button>
+      {% endif %}
+
+      <a class="navbar-brand " href="{% url 'home' %}"> 
+        <img src="{% static 'images/logo.png' %}" alt="TSHOP"> 
+      </a> 
       
       <!-- this part for mobile -->
       <div class="search-box pull-right hidden-lg hidden-md hidden-sm">

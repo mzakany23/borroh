@@ -23,6 +23,13 @@ class Cart(models.Model):
 			if item.borroh == True:
 				total += int(item.product.points_price)
 		return total	
+
+	def cart_has_contents(self):
+		if self.total_points == 0 and self.total_price == 0:
+			return False
+		else:
+			return True
+
 	
 
 

@@ -63,7 +63,7 @@ $(window).load(function(){
 		var id = $(this).attr('id')
 		
     $.ajax({
-    	url: "http://localhost:8000/products/details/" + id,
+    	url: "{{ server }}/products/details/" + id,
     	type: 'GET',
     	success: function(data){
     		dynamicallyGenerateConent(data);
