@@ -1,10 +1,10 @@
 <ul class="nav navbar-nav visible-xs visible-sm">
 	<li style='margin-left: 5%;'>
 		{% if user.is_authenticated %}
-		<button style=' width: 68px;' class='btn btn-danger'>
+		<button style=' width: 68px;' class='btn btn-default'>
 			<a style="color: white;" href="{% url 'user_profile' user.id %}">Profile</a>
 		</button>
-		<button style='text-decoration: none; width: 68px; margin-left: 1%;' class='btn btn-danger'><a style="color: white;" href="{% url 'auth_logout' %}">Logout	</a></button>
+		<button style='text-decoration: none; width: 68px; margin-left: 1%;' class='btn btn-default'><a style="color: white;" href="{% url 'auth_logout' %}">Logout	</a></button>
 		{% endif %}
 		
 	</li>
