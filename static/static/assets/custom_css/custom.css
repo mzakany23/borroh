@@ -47,3 +47,39 @@
 	font-family: 'Amaranth', sans-serif;
 	font-size: 20px;	
 }
+
+/*********************************************************/
+/* account profile changes */
+/*********************************************************/
+.profile-heading-custom{
+	font-size: 50px;
+	font-weight: 200;
+	background-color: #BEBEBE;
+	border-radius: 2px;
+	padding: 25px;
+}
+
+.profile-body-custom{
+	background-color: #00BBDE;
+	height: 100px;
+	color: white;
+	padding-top: 30px;
+	font-weight: 400;
+	font-size: 50px;
+}
+
+.profile-body-footer{
+	font-weight: 100;
+	padding-top: 15px;
+	font-size: 20px !important;
+}
+
+.profile-heading-custom-mobile{
+	font-size: 20px;
+	font-weight: 400;
+	background-color: #BEBEBE;
+	border-radius: 1px;
+	padding: 5px;
+	
+}
+

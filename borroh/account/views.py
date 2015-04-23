@@ -121,24 +121,38 @@ def add_address(request):
 		pass
 
 	if form.is_valid():
-			address.profile = profile
-			address.name = form.cleaned_data['name']
-			address.first = form.cleaned_data['first']
-			address.last = form.cleaned_data['last']
-			address.street = form.cleaned_data['street']
-			address.secondary = form.cleaned_data['secondary']
-			address.city = form.cleaned_data['city']
-			address.state = form.cleaned_data['state']
-			address.zip_code = form.cleaned_data['zip_code']
-			address.phone_number = form.cleaned_data['phone_number']
-			address.primary_address = form.cleaned_data['primary_address']
-			address.shipping_address = form.cleaned_data['shipping_address']
-			address.save()
-			return HttpResponseRedirect(reverse('show_address'))
+		address.profile = profile
+		address.name = form.cleaned_data['name']
+		address.first = form.cleaned_data['first']
+		address.last = form.cleaned_data['last']
+		address.street = form.cleaned_data['street']
+		address.secondary = form.cleaned_data['secondary']
+		address.city = form.cleaned_data['city']
+		address.state = form.cleaned_data['state']
+		address.zip_code = form.cleaned_data['zip_code']
+		address.phone_number = form.cleaned_data['phone_number']
+		address.primary_address = form.cleaned_data['primary_address']
+		address.shipping_address = form.cleaned_data['shipping_address']
+		address.save()
+		return HttpResponseRedirect(reverse('show_address'))
+
+		
 	
 	template = 'account/address/add-address.html'
 	context = {'address_add_form' : form, 'address_edit_form' : form}
 	return render(request,template,context)
+
+@login_required(login_url='/account/login')
+def delete_address(request,id):
+	try:
+		address = Address.objects.get(id=id)
+	except:
+		address = None
+
+	if address:
+		address.delete()
+	
+	return HttpResponseRedirect(reverse('show_address'))
 
 @login_required(login_url='/account/login')
 def show_address(request):

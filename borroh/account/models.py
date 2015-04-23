@@ -34,7 +34,7 @@ class Profile(models.Model):
 			return True
 
 STATE_CHOICES = (
-	('OHIO','OHIO'),
+	('Ohio','Ohio'),
 )
 class Address(models.Model):
 	profile = models.ForeignKey(Profile,blank=True,null=True)

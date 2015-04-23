@@ -18,32 +18,77 @@
           <p> Be sure to update your personal information if it has changed.</p>
         </div>
         
+        {% if user_addresses.first == None %}
+        <div class="row">
+          <div style='font-weight: 400; font-size: 40px; margin-left: 33px; margin-bottom: 50px; padding-top: 50px;'>You don't have any addresses to ship to! Add one!</div>
+        </div>
+        {% else %}
         <div class="w100 clearfix">
           {% for address in user_addresses %}
+        
           <div class="col-xs-12 col-sm-6 col-md-4">
+            {% if address.shipping_address == True %}
+            <div style='border: dotted 2px;'>
+            <div style='padding-left: 5px; font-size: 20px; font-weight: 600; background-color: #BEBEBE ;'>Shipping Address:</div>
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h3 class="panel-title"><strong>{{ address.name }}</strong></h3>
               </div>
               <div class="panel-body">
                 <ul >
-                  <li> <span class="address-name"> <strong>{{ address.first }} {{ address.last }} </strong></span></li>
-                  <!-- <li> <span class="address-company"> TanimDesign & Development </span></li> -->
-                  <li> <span class="address-line1"> {{ address.street }} </span></li>
-                  <li> <span class="address-line2"> {{ address.secondary }} </span></li>
-                  <li> <span class="address-line2"> {{ address.state }} </span></li>
-                  <li> <span> <strong>Mobile</strong> : {{ address.phone_number }} </span></li>
+                  
+                    <li> <span class="address-name"> <strong>{{ address.first }} {{ address.last }} </strong></span></li>
+                    <!-- <li> <span class="address-company"> TanimDesign & Development </span></li> -->
+                    <li> <span class="address-line1"> {{ address.street }} </span></li>
+                    <li> <span class="address-line2"> {{ address.secondary }} </span></li>
+                    <li> <span class="address-line2"> {{ address.state }} </span></li>
+                    <li> <span> <strong>Mobile</strong> : {{ address.phone_number }} </span></li>
 
                   <!-- <li> <span> <strong>Phone</strong> : 020904 - 85882 </span></li> -->
                 </ul>
               </div>
-              <div class="panel-footer panel-footer-address"> <a href="{% url 'edit_address' address.id %}" class="btn btn-sm btn-success"> <i class="fa fa-edit"> </i> Edit </a> <a class="btn btn-sm btn-danger"> <i class="fa fa-minus-circle"></i> Delete </a> </div>
+              <div class="panel-footer panel-footer-address"> 
+                <a href="{% url 'edit_address' address.id %}" class="btn btn-sm btn-default"> 
+                  <i class="fa fa-edit"></i> 
+                  Edit 
+                </a> 
+                <a href="{% url 'delete_address' address.id %}" class="btn btn-sm btn-danger"> 
+                  <i class="fa fa-minus-circle"></i> 
+                  Delete 
+                </a> 
+              </div>
             </div>
-          </div>  
+          </div>
+          <div style='margin-top: 10px' class='visible-sm visible-xs'></div>
+          {% else %}
+
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title"><strong>{{ address.name }}</strong></h3>
+              </div>
+              <div class="panel-body">
+                <ul >
+                  
+                    <li> <span class="address-name"> <strong>{{ address.first }} {{ address.last }} </strong></span></li>
+                    <!-- <li> <span class="address-company"> TanimDesign & Development </span></li> -->
+                    <li> <span class="address-line1"> {{ address.street }} </span></li>
+                    <li> <span class="address-line2"> {{ address.secondary }} </span></li>
+                    <li> <span class="address-line2"> {{ address.state }} </span></li>
+                    <li> <span> <strong>Mobile</strong> : {{ address.phone_number }} </span></li>
+
+                  <!-- <li> <span> <strong>Phone</strong> : 020904 - 85882 </span></li> -->
+                </ul>
+              </div>
+              <div class="panel-footer panel-footer-address"> <a href="{% url 'edit_address' address.id %}" class="btn btn-sm btn-default"> <i class="fa fa-edit"> </i> Edit </a> <a href="{% url 'delete_address' address.id %}" class="btn btn-sm btn-danger"> <i class="fa fa-minus-circle"></i> Delete </a> </div>
+            </div>
+          
+          {% endif %}
+        </div>
+
           {% endfor %}
-          
-          
-        <div class="col-lg-12 clearfix">
+        
+        {% endif %}  
+        <div class="col-lg-12 clearfix" style='margin-top: 15px;'>
          <a class="btn   btn-primary" href="{% url 'add_address' %}"><i class="fa fa-plus-circle"></i> Add New Address </a>
          </div>
          

@@ -7,10 +7,59 @@
   <div class="row">
     <div class="col-lg-9 col-md-9 col-sm-7">
       <h1 class="section-title-inner"><span><i class="fa fa-unlock-alt"></i> My account </span></h1>
-      <div class="row userInfo">
+      <div class="row">
         <div class="col-xs-12 col-sm-12">
-          <p> Your account has been created. </p>
-          <h2 class="block-title-2"><span>Welcome to your account. Here you can manage all of your personal information and orders.</span></h2>
+          <h1 class='profile-heading-custom visible-md visible-lg'>Hello {{ user }}! you currently have:</h1>
+        </div>
+        <div class="col-xs-12 col-sm-12 visible-md visible-lg">
+          <div class="col-lg-3 text-center profile-body-custom">
+            <div>3</div>
+            <div class='profile-body-footer'>borrows</div>
+          </div>
+          <div class="col-lg-3 text-center profile-body-custom">
+            <div>{{ points_balance }}</div>
+            <div class="profile-body-footer">points</div>
+          </div>
+          <div class="col-lg-3 text-center profile-body-custom">
+            <div>2</div>
+            <div class="profile-body-footer">free shippings</div>
+          </div>
+          <div class="col-lg-3 text-center profile-body-custom">
+            <div>10%</div>
+            <div class="profile-body-footer">own it discount</div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 visible-sm visible-xs">
+          <h1 class='profile-heading-custom-mobile'>Hello {{ user }}, you currently have:</h1>
+        </div>
+        <div class="col-xs-12 col-sm-12 visible-sm visible-xs">
+          <div class="col-lg-3 text-center profile-body-custom">
+            <div>3</div>
+            <div class='profile-body-footer'>borrows</div>
+          </div>
+          <div class="col-lg-3 text-center profile-body-custom">
+            <div>{{ points_balance }}</div>
+            <div class="profile-body-footer">points</div>
+          </div>
+          <div class="col-lg-3 text-center profile-body-custom">
+            <div>2</div>
+            <div class="profile-body-footer">free shippings</div>
+          </div>
+          <div class="col-lg-3 text-center profile-body-custom">
+            <div>10%</div>
+            <div class="profile-body-footer">own it discount</div>
+          </div>
+        </div>
+        </div>
+      <div class="row userInfo">
+
+        <div class="col-xs-12 col-sm-12">
+          <div style='margin-top: 20px;' class='visible-xs visible-sm'>
+            <h1>Pages:</h1>
+          </div>
+
+          <h2 class="block-title-2 visible-lg visible-md"><em>Welcome to your account. Here you can manage all of your personal information and orders.</em></h2>
+          <div style='margin-top: 20px;' class="visible-lg visible-md"></div>
           <ul class="myAccountList row">
             <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
               <div class="thumbnail equalheight"> <a title="Orders" href="{% url 'account_order_list'%}"><i class="fa fa-calendar"></i> Order history </a> </div>
@@ -25,7 +74,7 @@
               <div class="thumbnail equalheight"> <a title="Personal information" href="{% url 'profile_info' %}"><i class="fa fa-cog"></i> profile</a> </div>
             </li>
             <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
-              <div class="thumbnail equalheight"> <a title="My wishlists" href="{% url 'user_wishlist' %}"><i class="fa fa-heart"></i> My wishlists </a> </div>
+              <div class="thumbnail equalheight"> <a title="My wishlists" href="{% url 'user_wishlist' %}"><i class="fa fa-heart"></i> Basket </a> </div>
             </li>
           </ul>
           <div class="clear clearfix"> </div>

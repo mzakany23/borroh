@@ -22,6 +22,7 @@ urlpatterns += patterns('account.views',
 	url(r'^account/profile/borroh/show/','show_borrohed',name='show_borrohed'),
 	url(r'^account/profile/address/show/$','show_address',name='show_address'),
 	url(r'^account/profile/address/edit/(?P<id>\d+)/$','edit_address',name='edit_address'),
+	url(r'^account/profile/address/delete/(?P<id>\d+)/$','delete_address',name='delete_address'),
 
 	url(r'^account/profile/auth/edit/$','edit_auth',name='edit_auth'),
 	url(r'^account/profile/info/$','profile_info',name='profile_info'),
