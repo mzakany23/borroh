@@ -11,7 +11,7 @@ body {
 	/* COMMON PRICING STYLES */
 		.panel.price,
 		.panel.price>.panel-heading{
-			border-radius:0px;
+			border-radius:10px;
 			 -moz-transition: all .3s ease;
 			-o-transition:  all .3s ease;
 			-webkit-transition:  all .3s ease;
@@ -60,15 +60,15 @@ body {
 		
 		.price.panel-green>.panel-heading {
 			color: #fff;
-			background-color: #57AC57;
-			border-color: #71DF71;
-			border-bottom: 1px solid #71DF71;
+			background-color: #0188A1;
+			border-color: #A9C2C6;
+			border-bottom: 1px solid #74E7FD;
 		}
 		
 			
 		.price.panel-green>.panel-body {
 			color: #fff;
-			background-color: #65C965;
+			background-color: #74E7FD;
 		}
 				
 		
@@ -79,7 +79,7 @@ body {
 		.price.panel-green .list-group-item {
 			color: #333;
 			background-color: rgba(50,50,50, .01);
-			font-weight:600;
+			font-weight:100;
 			text-shadow: 0px 1px 0px rgba(250,250,250, .75);
 		}
 		
@@ -88,15 +88,15 @@ body {
 		
 		.price.panel-blue>.panel-heading {
 			color: #fff;
-			background-color: #608BB4;
-			border-color: #78AEE1;
-			border-bottom: 1px solid #78AEE1;
+			background-color: #0188A1;
+			border-color: #A9C2C6;
+			border-bottom: 1px solid #74E7FD;
 		}
 		
 			
 		.price.panel-blue>.panel-body {
 			color: #fff;
-			background-color: #73A3D4;
+			background-color: #74E7FD;
 		}
 				
 		
@@ -107,7 +107,7 @@ body {
 		.price.panel-blue .list-group-item {
 			color: #333;
 			background-color: rgba(50,50,50, .01);
-			font-weight:600;
+			font-weight:100;
 			text-shadow: 0px 1px 0px rgba(250,250,250, .75);
 		}
 		
@@ -116,15 +116,15 @@ body {
 	
 		.price.panel-red>.panel-heading {
 			color: #fff;
-			background-color: #D04E50;
-			border-color: #FF6062;
-			border-bottom: 1px solid #FF6062;
+			background-color: #0188A1;
+			border-color: #A9C2C6;
+			border-bottom: 1px solid #74E7FD;
 		}
 		
 			
 		.price.panel-red>.panel-body {
 			color: #fff;
-			background-color: #EF5A5C;
+			background-color: #74E7FD;
 		}
 		
 		
@@ -137,7 +137,7 @@ body {
 		.price.panel-red .list-group-item {
 			color: #333;
 			background-color: rgba(50,50,50, .01);
-			font-weight:600;
+			font-weight:100;
 			text-shadow: 0px 1px 0px rgba(250,250,250, .75);
 		}
 		

@@ -4,7 +4,8 @@
 }
 
 #custom-cart-add{
-	background-color: #39c381;
+	background-color: #C6C7C7;
+	border-radius: 0 !important;
 	margin-bottom: 1%;
 	width: 95px;
 	max-height: 2000px !important; 
@@ -17,7 +18,7 @@
 
 
 #custom-cart-add:hover{
-	background-color: #39c350;
+	background-color: #8A8A8A;
 }
 
 #custom-featured{
@@ -37,3 +38,12 @@
 	background: url(../photos/womanclosetbg.jpg);
 }
 
+#pricing-bold{
+	font-family: 'Amaranth', sans-serif;
+	font-size: 45px;
+}
+
+#pricing-small{
+	font-family: 'Amaranth', sans-serif;
+	font-size: 20px;	
+}

@@ -3,7 +3,7 @@
 
 ::selection {
  color:#fff;
- background:#39c381;
+ background:#BEBEBE;
 }
 ::-moz-selection {
  color:#fff;
@@ -13,7 +13,7 @@
 	color:#4ec67f !important;
 }
 a:hover, a:focus {
-	color:#4ec67f;
+	color:#BEBEBE;
 }
 .search-full, .search-input {
 	background: #4bb777;
@@ -29,16 +29,16 @@ a:hover, a:focus {
 	opacity: 0.97;
 }
 .btn-primary, .product:hover .add-fav:hover, .product:hover .add-fav.active {
-	background-color: #4ec67f;
+	background-color: #BEBEBE;
 	color: #FFFFFF;
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary, .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
-	background-color: #48C9B0;
-	border-color: #48C9B0;
+	background-color: #BEBEBE;
+	border-color: #BEBEBE;
 	color: #FFFFFF;
 }
 .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
-	background:  #4ec67f;
+	background:  #BEBEBE;
 }
 .navbar-top {
 	background:#FFFFFF;
@@ -50,10 +50,10 @@ a:hover, a:focus {
 	background:#03C6EA;
 }
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus, .cartMenu:hover > a.dropdown-toggle {
-	background:#27AE60;
+	background:#BEBEBE;
 }
 .dropdown-menu {
-	border-top: solid #27AE60;
+	border-top: solid #BEBEBE;
 }
 .search-box:hover .form-control {
 	background:#4EC67F;
@@ -69,7 +69,7 @@ a:hover, a:focus {
 	background:#27AE60;
 }
 .product:hover, .featuredImgLook2 .inner:hover {
-	border: 1px solid #4EC67F;
+	border: 1px solid #BEBEBE;
 }
 .subCategoryList .thumbnail:hover {
 	border: 1px solid #4EC67F;
@@ -84,10 +84,10 @@ a:hover, a:focus {
 	background:#4EC67F;
 }
 .btn-site, .newsLatterBox .btn {
-	background: #4EC67F;
+	background: #BEBEBE;
 }
 .btn-discover:hover, .btn-site:hover, .newsLatterBox .btn:hover {
-	background: #27AE60;
+	background: #BEBEBE;
 }
 .full {
 	width:100%;

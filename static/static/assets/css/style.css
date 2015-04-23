@@ -2762,6 +2762,11 @@ h5.parallaxSubtitle {
 .footer a {
 	color: #78828D
 }
+
+.footer a:hover{
+	color: #BEBEBE !important; 	
+}
+
 .supportLi h4 {
 	font-size: 20px;
 	font-weight: lighter;
@@ -2818,6 +2823,8 @@ h5.parallaxSubtitle {
 	-ms-transition: all 0.5s ease 0s;
 	-o-transition: all 0.5s ease 0s;
 }
+
+
 .social li:hover {
 	transform: scale(1.15) rotate(360deg);
 	-webkit-transform: scale(1.1) rotate(360deg);
@@ -2830,7 +2837,7 @@ h5.parallaxSubtitle {
 }
 .social li:hover {
 	border: 2px solid #2c3e50;
-	background: #2c3e50;
+	background: #BEBEBE;
 }
 .social li a i {
 	font-size: 16px;
