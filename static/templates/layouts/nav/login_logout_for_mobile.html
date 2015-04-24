@@ -2,7 +2,7 @@
 	<li style='margin-left: 5%;'>
 		{% if user.is_authenticated %}
 		<button style=' width: 68px;' class='btn btn-default'>
-			<a style="color: white;" href="{% url 'user_profile' user.id %}">Profile</a>
+			<a style="color: white;" href="{% url 'user_profile' %}">Profile</a>
 		</button>
 		<button style='text-decoration: none; width: 68px; margin-left: 1%;' class='btn btn-default'><a style="color: white;" href="{% url 'auth_logout' %}">Logout	</a></button>
 		{% endif %}

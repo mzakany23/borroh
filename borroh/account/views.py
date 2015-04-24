@@ -13,7 +13,8 @@ from account.models import Profile,Address
 from home.views import get_home_variables
 from django.template import RequestContext
 from django.contrib.auth.models import AnonymousUser
-from account.form import AddressForm
+# forms
+from account.form import AddressForm, UserForm
 
 
 
@@ -99,9 +100,9 @@ def auth_create_account(request):
 	return render(request,template,context)
 
 @login_required(login_url='/account/login')
-def user_profile(request,id):
+def user_profile(request):
 	try:
-		user = User.objects.get(id=id)
+		user = User.objects.get(id=request.user.id)
 	except:
 		user = None
 
@@ -193,16 +194,18 @@ def edit_auth(request):
 def profile_info(request):
 	try:
 		user = User.objects.get(id=request.user.id)
-		profile = Profile.objects.get(user=user)
-		addresses = profile.address_set.all()
 	except:
-		profile = None
-		list_object = None
+		user = None
 
 
+	form = UserForm(request.POST or None,instance=user)
+
+	if form.is_valid():
+		form.save()
+		return HttpResponseRedirect(reverse('user_profile'))
 
 	template = 'account/profile/user-information.html'
-	context = {}
+	context = {'user_form' : form}
 	return render(request,template,context)
 
 @login_required(login_url='/account/login')
