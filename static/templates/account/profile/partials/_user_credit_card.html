@@ -8,19 +8,20 @@
                 {% if user_credit_card.0 == None %}
                 <h3 class="panel-title"><strong>Credit Card: None</strong></h3>
                 {% else %}
-                <h3 class="panel-title"><strong>{{ user_credit_card }}</strong></h3>
+                {{ hmm }}
+                <h3 class="panel-title"><strong>{{ user_credit_card.0 }}</strong></h3>
                 {% endif %}
               </div>
               <div>
                 {% if user_credit_card.0 != None %}
                 <ul class='profile-show-custom'>
-                  
-                    <li> Email: {{ user.email }}</li>
-                    <li> First: {{ user.first_name }}</li>
-                    <li> Last: {{ user.last_name }}</li>
+                    <li> Last 4 digits: {{ user_credit_card.0.credit_card_last_4 }}</li>
+                    <li> Type: {{ user_credit_card.0.type_of_credit_card }}</li>
+                    <li> Last: {{ user_info }}</li>
+                </ul>
                 {% endif %}
                   
-                </ul>
+                
               </div>
               <div class="panel-footer panel-footer-address"> 
                 {% if user_credit_card.0 == None %}
@@ -29,10 +30,30 @@
                   Add a Card to Stripe 
                 </a> 
                 {% else %}
-                <a href="{% url 'add_card_to_stripe' %}" class="btn btn-sm btn-default"> 
+                 <div class="row">
+                 
+                <div class="col-lg-6">
+
+                  <a style="width: 100px;" href="{% url 'add_card_to_stripe' %}" class="btn btn-sm btn-default"> 
                   <i class="fa fa-edit"></i> 
-                  Edit 
+                  Add Another
                 </a> 
+                </div>
+
+                <div class="col-lg-5">
+                  <form method='POST' action="{% url 'delete_stripe_card' %}">
+                    {% csrf_token %}
+                      <input type='hidden' name="last_4" value="{{ user_credit_card.0.credit_card_last_4 }}">
+                     <button type="submit" style="width: 100px;" class="btn btn-sm btn-danger"> 
+                      <i class="fa fa-edit"></i> 
+                      Delete Card
+                    </button> 
+                  </form>
+                </div>
+
+                </div>
+
+
                 {% endif %}
               </div>
             </div>

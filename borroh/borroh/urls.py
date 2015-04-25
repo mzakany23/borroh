@@ -19,7 +19,7 @@ urlpatterns += patterns('account.views',
 	url(r'^account/create$','auth_create_account',name='auth_create_account'),
 
 	# user_profile
-	url(r'^account/profile//$','user_profile',name='user_profile'),
+	url(r'^account/profile/$','user_profile',name='user_profile'),
 	url(r'^account/profile/address/add/','add_address',name='add_address'),
 	url(r'^account/profile/borroh/show/','show_borrohed',name='show_borrohed'),
 	url(r'^account/profile/address/show/$','show_address',name='show_address'),
@@ -27,7 +27,10 @@ urlpatterns += patterns('account.views',
 	url(r'^account/profile/address/delete/(?P<id>\d+)/$','delete_address',name='delete_address'),
 	url(r'^account/profile/password_reset/$','user_password_reset',name='user_password_reset'),
 	url(r'^account/profile/auth/edit/$','edit_auth',name='edit_auth'),
+
+	# credit cards
 	url(r'^account/profile/credit-card/add/','add_card_to_stripe',name='add_card_to_stripe'),
+	url(r'^account/profile/credit-card/delete/','delete_stripe_card',name='delete_stripe_card'),
 
 	# user_info
 	url(r'^account/profile/info/$','profile_info',name='profile_info'),

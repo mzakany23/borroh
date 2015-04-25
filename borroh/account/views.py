@@ -22,6 +22,8 @@ from account.form import AddressForm, UserForm
 
 from django.core.mail import send_mail,EmailMultiAlternatives
 import hashlib
+import stripe
+from django.conf import settings
 
 
 def auth_login(request):
@@ -233,11 +235,48 @@ def profile_info_edit(request):
 @login_required(login_url='/account/login')
 def add_card_to_stripe(request):
 	form = request.POST
-	print form
+	if form:
+		try:
+			profile = Profile.objects.get(user=request.user)
+			stripe.api_key = settings.API_KEY
+			customer = stripe.Customer.retrieve(str(profile.stripe_id))
+			card = customer.sources.create(source=str(form['stripeToken']))
+			credit_card = UserCreditCard()
+			credit_card.profile = profile
+			credit_card.credit_card_last_4 = card["last4"]
+			credit_card.credit_card_last_4
+			credit_card.type_of_credit_card = card["brand"]
+			credit_card.card_token = card["id"]
+			credit_card.save()
+			return HttpResponseRedirect(reverse('profile_info'))
+		except:
+			pass
+
+
 
 	template = 'account/profile/add_credit_card_form.html'
 	context = {}
 	return render(request,template,context)
+
+
+@login_required(login_url='/account/login')
+def delete_stripe_card(request):
+	try:
+		profile = Profile.objects.get(user=request.user)
+		digits = request.POST['last_4']
+	except:
+		digits = None
+		profile = None
+
+	if profile and digits:
+		card = UserCreditCard.objects.get(profile=profile,credit_card_last_4=digits)
+		stripe.api_key = settings.API_KEY
+		customer = stripe.Customer.retrieve(profile.stripe_id)
+		customer.sources.retrieve(str(card.card_token)).delete()
+		card.delete()
+	return HttpResponseRedirect(reverse('profile_info'))
+
+
 # -------------------------------------------------------------
 
 
