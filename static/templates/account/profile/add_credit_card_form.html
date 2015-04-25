@@ -62,7 +62,7 @@
 		          </div>
     			 <div class="row">
               <div class="col-md-12 pad-adjust">
-                 <input name='name' type="text" class="form-control" placeholder="Name On The Card" required>
+                 <input id="cc-name" name='name' type="text" class="form-control" placeholder="Name On The Card" required>
               </div>
           </div>
 				     <div class="row">
@@ -130,8 +130,11 @@
      	isValidated(validateCardNumber,'#cc-num')     	
      });
 
+     $('#cc-name').change(function(){
+     	$('#cc-name').css("background-color", "#BAEB92");
+     });
+
      $('#cc-exp').change(function(){
-     		
      		var str = String($('#cc-exp').val());
      		var date = str.split('/')
      		var validateCardExpiry = $.payment.validateCardExpiry(date[0],date[1]);

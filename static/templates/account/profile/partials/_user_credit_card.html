@@ -9,7 +9,7 @@
                 <h3 class="panel-title"><strong>Credit Card: None</strong></h3>
                 {% else %}
                 {{ hmm }}
-                <h3 class="panel-title"><strong>{{ user_credit_card.0 }}</strong></h3>
+                <h3 class="panel-title"><strong>{{ user_credit_card.0 }} <span class="badge">{{ user_credit_card.count }}</span></strong></h3>
                 {% endif %}
               </div>
               <div>
