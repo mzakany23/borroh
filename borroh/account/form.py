@@ -34,11 +34,8 @@ class LoginForm(forms.Form):
 class UserForm(ModelForm):
 	class Meta:
 		model = User
-		fields = ['username','email','first_name','last_name']
+		fields = ['email','first_name','last_name']
 		widgets = {
-            'username': forms.TextInput(attrs={
-            	'class': 'form-control', 
-            }),
             'email': forms.TextInput(attrs={
             	'class': 'form-control', 
             }),

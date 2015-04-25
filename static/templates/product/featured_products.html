@@ -8,7 +8,7 @@
        {% for product in featured_products %}
         <div id='product-id-custom' style='display: none'>{{ product.id }}</div>
 
-        <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6" id='custom-product-featured-show'>
+        <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6 " id='custom-product-featured-show'>
           <div class="product">
       
           <a href="{% url 'add_to_wishlist' product.id %}" class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"  data-placement="left">

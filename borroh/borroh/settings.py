@@ -18,6 +18,13 @@ AUTH_LOGIN = 'auth_login'
 
 SERVER = 'http://localhost:8000'
 
+DEFAULT_FROM_EMAIL = 'From Borroh Admin <mzakany@gmail.com>'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'mzakany@gmail.com'
+EMAIL_HOST_PASSWORD = 'PQowie32'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 SESSION_COOKIE_AGE = 14000
 
 TEMPLATE_CONTEXT_PROCESSORS = (

@@ -4,19 +4,24 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,HttpResponseRedirect
-from django.contrib.auth.models import User
+
 from form import LoginForm,RegisterUserForm
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
+
+# borroh models
+from django.contrib.auth.models import User
 from product.models import Product
-from account.models import Profile,Address
+from account.models import Profile,Address, EmailReset, UserCreditCard
+
+from django.contrib import messages
 from home.views import get_home_variables
 from django.template import RequestContext
 from django.contrib.auth.models import AnonymousUser
 # forms
 from account.form import AddressForm, UserForm
 
-
+from django.core.mail import send_mail,EmailMultiAlternatives
+import hashlib
 
 
 def auth_login(request):
@@ -190,8 +195,25 @@ def edit_auth(request):
 	context = {}
 	return render(request,template,context)
 
+# -------------------------------------------------------------
+# profile_info
+# -------------------------------------------------------------
 @login_required(login_url='/account/login')
 def profile_info(request):
+	try:
+		user = User.objects.get(id=request.user.id)
+		profile = Profile.objects.get(user=request.user)
+		credit_card = profile.usercreditcard_set.all()
+	except:
+		user = None
+		profile = None
+		credit_card = None
+		
+	template = 'account/profile/user-information.html'
+	context = {'user_info' : user, 'user_credit_card' : credit_card}
+	return render(request,template,context)
+
+def profile_info_edit(request):
 	try:
 		user = User.objects.get(id=request.user.id)
 	except:
@@ -204,9 +226,20 @@ def profile_info(request):
 		form.save()
 		return HttpResponseRedirect(reverse('user_profile'))
 
-	template = 'account/profile/user-information.html'
+	template = 'account/profile/edit_information.html'
 	context = {'user_form' : form}
 	return render(request,template,context)
+
+@login_required(login_url='/account/login')
+def add_card_to_stripe(request):
+	form = request.POST
+	print form
+
+	template = 'account/profile/add_credit_card_form.html'
+	context = {}
+	return render(request,template,context)
+# -------------------------------------------------------------
+
 
 @login_required(login_url='/account/login')
 def user_wishlist(request):
@@ -261,8 +294,36 @@ def account_order_list(request):
 	return render(request,template,context)
 
 
+@login_required(login_url='/account/login')
+def user_password_reset(request):
+	try:
+		email_address = request.user.email
+		user = request.user
+	except:
+		email_address = None
+		user = None
 
+	subject, from_email, to = 'hello', email_address, 'mzakany@gmail.com'
+	text_content = 'This is an important message.'
+	html_content = '<p>Hey does this work?This is an <strong>important</strong> message.</p><a href="www.google.com">Click to go to google'
 
+	send_confirmation_email(user,subject,text_content, from_email,to, html_content)
+	
+	messages.success(request, "Password Rest Sent to " + str(email_address) )
+
+	return HttpResponseRedirect(reverse('profile_info'))
+
+def send_confirmation_email(user, subject,text_content,from_email, to, html):
+		password_key = hashlib.sha224(str(user)).hexdigest()
+
+		new_confirmation = EmailReset()
+		new_confirmation.user = user
+		new_confirmation.hash_key = password_key
+		new_confirmation.save()
+
+		msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+		msg.attach_alternative(html, "text/html")
+		msg.send()
 
 
 

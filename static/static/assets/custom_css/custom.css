@@ -83,3 +83,14 @@
 	
 }
 
+.profile-show-custom{
+	list-style-type: none;
+}
+
+.profile-show-custom li{
+	font-size: 15px;
+	padding-left: 15px;
+	font-weight: 300;
+}
+
+

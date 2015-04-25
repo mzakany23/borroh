@@ -1,0 +1,35 @@
+{% load staticfiles %}
+
+        <div class="w100 clearfix">
+          
+          <div class="col-xs-12 col-sm-6 col-md-4">
+            <div style='padding-left: 5px; font-size: 20px; font-weight: 600; background-color: #BEBEBE ;'>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title"><strong>User: {{ user.username }}</strong></h3>
+              </div>
+              <div>
+                <ul class='profile-show-custom'>
+                  
+                    <li> Email: {{ user.email }}</li>
+                    <li> First: {{ user.first_name }}</li>
+                    <li> Last: {{ user.last_name }}</li>
+                  
+                  
+                </ul>
+              </div>
+              <div class="panel-footer panel-footer-address"> 
+                <a href="{% url 'profile_info_edit' %}" class="btn btn-sm btn-default"> 
+                  <i class="fa fa-edit"></i> 
+                  Edit 
+                </a> 
+                
+              </div>
+            </div>
+          </div>
+          <div style='margin-top: 10px' class='visible-sm visible-xs'></div>
+        
+      
+          
+         
+        </div>

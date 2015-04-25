@@ -1,0 +1,45 @@
+{% load staticfiles %}
+        <div class="w100 clearfix">
+          
+          <div class="col-xs-12 col-sm-6 col-md-4">
+            <div style='padding-left: 5px; font-size: 20px; font-weight: 600; background-color: #BEBEBE ;'>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                {% if user_credit_card.0 == None %}
+                <h3 class="panel-title"><strong>Credit Card: None</strong></h3>
+                {% else %}
+                <h3 class="panel-title"><strong>{{ user_credit_card }}</strong></h3>
+                {% endif %}
+              </div>
+              <div>
+                {% if user_credit_card.0 != None %}
+                <ul class='profile-show-custom'>
+                  
+                    <li> Email: {{ user.email }}</li>
+                    <li> First: {{ user.first_name }}</li>
+                    <li> Last: {{ user.last_name }}</li>
+                {% endif %}
+                  
+                </ul>
+              </div>
+              <div class="panel-footer panel-footer-address"> 
+                {% if user_credit_card.0 == None %}
+                <a href="{% url 'add_card_to_stripe' %}" class="btn btn-sm btn-default"> 
+                  <i class="fa fa-edit"></i> 
+                  Add a Card to Stripe 
+                </a> 
+                {% else %}
+                <a href="{% url 'add_card_to_stripe' %}" class="btn btn-sm btn-default"> 
+                  <i class="fa fa-edit"></i> 
+                  Edit 
+                </a> 
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div style='margin-top: 10px' class='visible-sm visible-xs'></div>
+        
+      
+          
+         
+        </div>

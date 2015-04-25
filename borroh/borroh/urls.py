@@ -13,19 +13,27 @@ urlpatterns = patterns('',
 
 # account
 urlpatterns += patterns('account.views',
+	# login/logout
 	url(r'^account/login$','auth_login',name='auth_login'),
 	url(r'^account/logout$','auth_logout',name='auth_logout'),
 	url(r'^account/create$','auth_create_account',name='auth_create_account'),
-	
+
+	# user_profile
 	url(r'^account/profile//$','user_profile',name='user_profile'),
 	url(r'^account/profile/address/add/','add_address',name='add_address'),
 	url(r'^account/profile/borroh/show/','show_borrohed',name='show_borrohed'),
 	url(r'^account/profile/address/show/$','show_address',name='show_address'),
 	url(r'^account/profile/address/edit/(?P<id>\d+)/$','edit_address',name='edit_address'),
 	url(r'^account/profile/address/delete/(?P<id>\d+)/$','delete_address',name='delete_address'),
-
+	url(r'^account/profile/password_reset/$','user_password_reset',name='user_password_reset'),
 	url(r'^account/profile/auth/edit/$','edit_auth',name='edit_auth'),
+	url(r'^account/profile/credit-card/add/','add_card_to_stripe',name='add_card_to_stripe'),
+
+	# user_info
 	url(r'^account/profile/info/$','profile_info',name='profile_info'),
+	url(r'^account/profile/info/edit$','profile_info_edit',name='profile_info_edit'),
+
+	# wishlist
 	url(r'^account/profile/wishlist/$','user_wishlist',name='user_wishlist'),
 	url(r'^account/profile/wishlist/add/(?P<id>\d+)$','add_to_wishlist',name='add_to_wishlist'),
 	url(r'^account/profile/wishlist/delete/(?P<id>\d+)$','delete_from_wishlist',name='delete_from_wishlist'),
