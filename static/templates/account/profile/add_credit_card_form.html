@@ -118,8 +118,35 @@
       $('#cc-num').payment('formatCardNumber');
       $('#cc-exp').payment('formatCardExpiry');
       $('#cc-cvc').payment('formatCardCVC');
+     	
+     $('#cc-num').change(function(){
+     	var validateCardNumber = $.payment.validateCardNumber($('#cc-num').val());
+     	isValidated(validateCardNumber,'#cc-num')     	
+     });
 
-    });
+     $('#cc-exp').change(function(){
+     		
+     		var str = String($('#cc-exp').val());
+     		var date = str.split('/')
+     		var validateCardExpiry = $.payment.validateCardExpiry(date[0],date[1]);
+     		
+     		isValidated(validateCardExpiry,'#cc-exp')
+     });
+
+     $('#cc-cvc').change(function(){
+     		var validateCardCVC = $.payment.validateCardCVC($('#cc-cvc').val());
+     		isValidated(validateCardCVC,'#cc-cvc')
+     });
+      
+     function isValidated(result,target){
+     		if(result == true){
+     			$(target).css("background-color","#BAEB92");
+     		}
+     		else{
+     			$(target).css("background-color","#FF6565");
+     		}
+     }
+    });	
 </script>
 
 
