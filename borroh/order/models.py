@@ -1,7 +1,9 @@
 from django.db import models
 from cart.models import Cart
+from account.models import Address
 
 class Order(models.Model):
+	address = models.ManyToManyField(Address,null=True,blank=True)
 	cart = models.ForeignKey(Cart,blank=True,null=True)
 	status = models.CharField(max_length=40,choices=(('pending','pending'),('shipped','shipped'),('done','done'),('cancel','cancel'),),blank=True,null=True)
 	type_of_cart = models.CharField(max_length=40,choices=(('Buy', 'Buy'),('Borroh','Borroh'),),blank=True,null=True)

@@ -10,7 +10,7 @@
  background:#39c381;
 }
 .site-color {
-	color:#4ec67f !important;
+	color:#494F50 !important;
 }
 a:hover, a:focus {
 	color:#BEBEBE;
@@ -102,7 +102,7 @@ a:hover, a:focus {
 	background: #8A8A8A;
 }
 .form-control:focus {
-	border-color: #4EC67F;
+	border-color: #092C40;
 }
 .new-product {
 	background:rgba(39, 174, 94, 0.95) !important;
@@ -160,10 +160,10 @@ a:hover, a:focus {
 	border: 2px solid #4EC67F
 }
 .orderStep li.active a {
-	background: none repeat scroll 0 0 #1ABC9C;
+	background: none repeat scroll 0 0 #50B2C4;
 }
 .orderStep li.active a:after {
-	border-top-color: #1ABC9C !important;
+	border-top-color: #BCC0C0 !important;
 }
 .orderStep li a {
 	background:  #EFF0F2;

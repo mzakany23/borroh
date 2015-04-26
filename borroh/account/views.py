@@ -1,29 +1,27 @@
 from django.conf import settings
-from django.shortcuts import render
+from django.shortcuts import render,HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate,login,logout
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render,HttpResponseRedirect
 
 from form import LoginForm,RegisterUserForm
 from django.contrib.auth.decorators import login_required
 
 # borroh models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,AnonymousUser
 from product.models import Product
 from account.models import Profile,Address, EmailReset, UserCreditCard
 
 from django.contrib import messages
 from home.views import get_home_variables
 from django.template import RequestContext
-from django.contrib.auth.models import AnonymousUser
+
 # forms
 from account.form import AddressForm, UserForm
 
 from django.core.mail import send_mail,EmailMultiAlternatives
 import hashlib
 import stripe
-from django.conf import settings
+
 
 
 def auth_login(request):

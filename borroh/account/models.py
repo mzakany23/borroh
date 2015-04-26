@@ -4,7 +4,6 @@ from product.models import Product
 from django.db.models.signals import post_save, post_delete
 from django.utils.text import slugify
 from subscription.models import Subscription
-from order.models import Order
 import stripe
 from django.conf import settings
 

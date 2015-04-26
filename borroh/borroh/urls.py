@@ -20,13 +20,18 @@ urlpatterns += patterns('account.views',
 
 	# user_profile
 	url(r'^account/profile/$','user_profile',name='user_profile'),
-	url(r'^account/profile/address/add/','add_address',name='add_address'),
 	url(r'^account/profile/borroh/show/','show_borrohed',name='show_borrohed'),
+	url(r'^account/profile/auth/edit/$','edit_auth',name='edit_auth'),
+	
+	# address
+	url(r'^account/profile/address/add/','add_address',name='add_address'),
 	url(r'^account/profile/address/show/$','show_address',name='show_address'),
 	url(r'^account/profile/address/edit/(?P<id>\d+)/$','edit_address',name='edit_address'),
 	url(r'^account/profile/address/delete/(?P<id>\d+)/$','delete_address',name='delete_address'),
+
+	# password reset
 	url(r'^account/profile/password_reset/$','user_password_reset',name='user_password_reset'),
-	url(r'^account/profile/auth/edit/$','edit_auth',name='edit_auth'),
+	
 
 	# credit cards
 	url(r'^account/profile/credit-card/add/','add_card_to_stripe',name='add_card_to_stripe'),
@@ -67,16 +72,20 @@ urlpatterns += patterns('cart.views',
 
 # order 
 urlpatterns += patterns('order.views',
+	# validation
 	url(r'^order/start_order/', 'start_order_process',name='start_order_process'),	
+	url(r'^order/too-many-items-in-cart/', 'too_many_items_in_borroh_cart',name='too_many_items_in_borroh_cart'),
+	url(r'^order/add-to-wishlist-and-remove/(?P<id>\d+)', 'add_to_wishlist_and_remove_from_cart',name='add_to_wishlist_and_remove_from_cart'),	
+	url(r'^order/remove-from-cart-and-redirect-back/(?P<id>\d+)', 'remove_from_cart_and_back_to_borroh',name='remove_from_cart_and_back_to_borroh'),	
+	
+	# order process
 	url(r'^order/auth/', 'order_auth',name='order_auth'),	
 	url(r'^order/address/', 'order_address',name='order_address'),	
 	url(r'^order/billing/', 'order_billing',name='order_billing'),	
 	url(r'^order/shipping/', 'order_shipping',name='order_shipping'),	
 	url(r'^order/payment/', 'order_payment',name='order_payment'),	
 	url(r'^order/show/', 'order_show',name='order_show'),	
-	url(r'^order/too-many-items-in-cart/', 'too_many_items_in_borroh_cart',name='too_many_items_in_borroh_cart'),
-	url(r'^order/add-to-wishlist-and-remove/(?P<id>\d+)', 'add_to_wishlist_and_remove_from_cart',name='add_to_wishlist_and_remove_from_cart'),	
-	url(r'^order/remove-from-cart-and-redirect-back/(?P<id>\d+)', 'remove_from_cart_and_back_to_borroh',name='remove_from_cart_and_back_to_borroh'),	
+	
 )
 
 urlpatterns += patterns('subscription.views',

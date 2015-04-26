@@ -9,6 +9,17 @@ from django.template import RequestContext
 from django.contrib.auth.models import User
 from account.models import Profile
 from django.conf import settings
+from account.form import AddressForm
+from account.models import Address
+# -------------------------------------------------------------------------------------------------
+# Start order process check
+# -------------------------------------------------------------------------------------------------
+
+'''
+	Try to start order process, validates that user has account and at least some points to 
+	get rolling. If not then will have to subscribe, and have an account (for now). If User
+	deosn't have enought ponits then will have to put some stuff back, or add to basket for later.
+'''
 
 def start_order_process(request):
 	try:
@@ -38,6 +49,7 @@ def too_many_items_in_borroh_cart(request):
 	context = {}
 	template = 'order/too_many_items_in_cart.html'
 	return render(request,template,context_instance=RequestContext(request, processors=[get_home_variables]))
+
 
 def add_to_wishlist_and_remove_from_cart(request,id):
 	try:
@@ -85,7 +97,14 @@ def remove_from_cart_and_back_to_borroh(request,id):
 		return HttpResponseRedirect(reverse('order_address'))
 	else:
 		return HttpResponseRedirect(reverse('too_many_items_in_borroh_cart'))
+# -------------------------------------------------------------------------------------------------
+# end order start validation
+# -------------------------------------------------------------------------------------------------
 
+
+# -------------------------------------------------------------------------------------------------
+# Order steps and actions
+# -------------------------------------------------------------------------------------------------
 
 # auth
 def order_auth(request):
@@ -93,20 +112,66 @@ def order_auth(request):
 	return render(request,template,context_instance=RequestContext(request, processors=[get_home_variables]))
 
 # address
+''' 
+	Order address will look for any primary addresses in the profile. If not, then can manually enter address,
+	which will save for later use in user's profile. 
+'''
+@login_required(login_url='/account/login')
 def order_address(request):
-	context = {}
+
+	try:
+		profile = Profile.objects.get(user=request.user)
+		user_addresses = profile.address_set.all()
+	except:
+		profile = None
+		user_addresses = None
+
+	if user_addresses:
+		is_addresses_to_show = True
+	else:
+		is_addresses_to_show = False
+
+	form = AddressForm(request.POST or None)
+
+	if form.is_valid():
+		new_address = form.save(commit=False)
+		new_address.profile = profile
+		new_address.save()
+		return HttpResponseRedirect(reverse('order_address'))
+
+	context = {'user_addresses' : user_addresses, 'is_addresses_to_show': is_addresses_to_show, 'new_address_form' : form}
 	template = 'order/checkout-address.html'
 	return render(request,template,context)
 
 # billing
 def order_billing(request):
-	context = {}
+	try:
+		address_id = request.POST['address_id']
+	except: 
+		address_id = None
+
+	try:
+		address =	Address.objects.get(id=address_id)
+	except:
+		address = None
+
+	context = {'address_to_use' : address}
 	template = 'order/checkout-billing.html'
 	return render(request,template,context)
 
 # shipping
 def order_shipping(request):
-	context = {}
+	try:
+		address_id = request.POST['address_id']
+	except: 
+		address_id = None
+		
+	try:
+		address =	Address.objects.get(id=address_id)
+	except:
+		address = None
+
+	context = {'address_to_use' : address}
 	template = 'order/checkout-shipping.html'
 	return render(request,template,context)
 
