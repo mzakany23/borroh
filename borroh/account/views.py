@@ -111,6 +111,12 @@ def user_profile(request):
 	except:
 		user = None
 
+	try:
+		profile = Profile.objects.get(user=request.user)
+	except:
+		profile = None
+
+	
 	template = 'account/user_profile.html'
 	context = {}
 	return render(request,template,context)
@@ -179,11 +185,13 @@ def edit_address(request,id):
 		address = Address.objects.get(id=id)
 		form = AddressForm(request.POST or None,instance=address)
 	except:
+		address = None
 		form = None
 
-	if form.is_valid():
-		form.save()
-		return HttpResponseRedirect(reverse('show_address'))
+	if form is not None:
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect(reverse('show_address'))
 
 	template = 'account/address/edit-address.html'
 	context = {'address_edit_form' : form,'address' : address}
@@ -218,7 +226,6 @@ def profile_info_edit(request):
 		user = User.objects.get(id=request.user.id)
 	except:
 		user = None
-
 
 	form = UserForm(request.POST or None,instance=user)
 
