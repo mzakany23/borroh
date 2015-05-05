@@ -18,7 +18,7 @@
 
               {% if favorite_products.all.count > 0 %}
               {% for product in favorite_products.all %}  
-              
+              {% if product.borrohed != True %}
               <tr class="CartProduct">
                 <td style="width:10%" class="CartProductThumb"><div> <a href="{% url 'product_detail_non_json' product.id %}">
                 <img src="{{ settings.server }}/media/{{ product.image_set.all.0 }}" alt="img"></a> </div></td>
@@ -54,6 +54,10 @@
 
 
               </tr>
+              {% else %}
+              <h1>Looks like one or more of the items on your wishlist have been borrohed.</h1>
+
+              {% endif %}
               {% endfor %}
               {% else %}
               <h1>There are no products in your favorites. <a href="{% url 'home' %}">Add some!</a></h1>

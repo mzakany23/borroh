@@ -238,6 +238,16 @@ def order_submit(request):
 	if order:
 		order.status = 'pending'
 		order.save()
+		request.session['order_id'] = None
+		profile = Profile.objects.get(user=request.user)
+		profile.points -= order.cart.total_points
+		profile.save()
+
+		for item in order.cart.lineitem_set.all():
+			product = item.product
+			product.borrohed = True
+			product.save()
+			item.delete()
 
 	return HttpResponseRedirect(reverse('account_order_list'))
 

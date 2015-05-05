@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User,AnonymousUser
 from product.models import Product
 from account.models import Profile,Address, EmailReset, UserCreditCard
+from order.models import Order
 
 from django.contrib import messages
 from home.views import get_home_variables
@@ -333,8 +334,13 @@ def delete_from_wishlist(request,id):
 
 @login_required(login_url='/account/login')
 def account_order_list(request):
+	try:
+		orders = Order.objects.all()
+	except:
+		orders = None
+
 	template = 'account/orders/order-list.html'
-	context = {}
+	context = {'orders' : orders}
 	return render(request,template,context)
 
 

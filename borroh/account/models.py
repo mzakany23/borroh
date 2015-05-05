@@ -38,7 +38,9 @@ class Profile(models.Model):
 		return str(self.user)
 
 	def wishlist_count(self):
-		count = self.favorites.count()
+
+		count = self.favorites.exclude(borrohed=True).count()
+
 		if count is None:
 			return 0
 		else:

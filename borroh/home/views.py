@@ -2,6 +2,7 @@ from django.shortcuts import render
 from account.form import LoginForm,RegisterUserForm
 from product.models import Product
 from account.models import Profile
+from order.models import Order
 from django.template import *
 from cart.models import Cart
 from django.conf import settings
@@ -9,7 +10,7 @@ import stripe
 
 def home(request):
   
-	featured_products = Product.objects.filter(featured=True)
+	featured_products = Product.objects.filter(featured=True).exclude(borrohed=True)
 	context = {
 			'featured_products' : featured_products,
 	}
@@ -104,6 +105,11 @@ def get_home_variables(request):
 	except:
 		user_has_subscription = False
 
+	try:
+		borroh_orders = Order.objects.filter(type_of_cart='Borroh').filter(status='pending')
+	except:
+		borroh_orders = None
+
 	return {
 			'total_points_minus_individual_balance' : total_points_minus_individual_balance,
 			'login_form' : LoginForm, 
@@ -122,7 +128,8 @@ def get_home_variables(request):
 			'server' : settings.SERVER,
 			'user_does_not_have_a_subscription' : user_does_not_have_a_subscription,
 			'user_has_subscription' : user_has_subscription,
-			'stripeKey' : settings.API_KEY2
+			'stripeKey' : settings.API_KEY2,
+			'borroh_orders' : borroh_orders
 	}
 
 	
