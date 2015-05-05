@@ -1,0 +1,31 @@
+
+
+<ul class="orderStep orderStepLook2">
+  <li id='address'> <a href="{% url 'order_address' %}"><i class="fa fa-map-marker "></i><span>address</span></a> 
+  </li>
+  <!-- <li id='billing'> 
+  	<a href="{% url 'order_billing' %}"> <i class="fa fa fa-envelope  "></i> <span> Billing </span></a>
+  </li> -->
+  <li id='shipping'> <a href="{% url 'order_shipping' %}"><i class="fa fa-truck "> </i><span>Shipping</span> </a> </li>
+  <!-- <li id='payment'> <a href="{% url 'order_payment' %}"><i class="fa fa-money  "> </i><span>Payment</span> </a> </li> -->
+  <li id='show'> <a href="{% url 'order_show' %}"><i class="fa fa-check-square "> </i><span>Order</span></a> </li>
+</ul>
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		var urlName = location.pathname.split("/")[2]
+		if(urlName == 'address'){
+			$('#address').addClass('active')
+		}else if(urlName == 'billing'){
+			$('#billing').addClass('active')
+		}else if(urlName == 'shipping'){
+			$('#shipping').addClass('active')
+		}else if(urlName == 'payment'){
+			$('#payment').addClass('active')
+		}else if(urlName == 'show'){
+			$('#show').addClass('active')
+		}
+	});
+</script>

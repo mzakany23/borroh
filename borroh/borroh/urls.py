@@ -29,6 +29,9 @@ urlpatterns += patterns('account.views',
 	url(r'^account/profile/address/edit/(?P<id>\d+)/$','edit_address',name='edit_address'),
 	url(r'^account/profile/address/delete/(?P<id>\d+)/$','delete_address',name='delete_address'),
 
+	# orders
+	url(r'^account/order/list/','account_order_list',name='account_order_list'),
+	
 	# password reset
 	url(r'^account/profile/password_reset/$','user_password_reset',name='user_password_reset'),
 	
@@ -47,7 +50,7 @@ urlpatterns += patterns('account.views',
 	url(r'^account/profile/wishlist/delete/(?P<id>\d+)$','delete_from_wishlist',name='delete_from_wishlist'),
 	
 	url(r'^account/login_as_guest/', 'login_as_guest',name='login_as_guest'),
-	url(r'^account/order/list/','account_order_list',name='account_order_list'),
+	
 
 )
 
@@ -85,6 +88,7 @@ urlpatterns += patterns('order.views',
 	url(r'^order/shipping/', 'order_shipping',name='order_shipping'),	
 	url(r'^order/payment/', 'order_payment',name='order_payment'),	
 	url(r'^order/show/', 'order_show',name='order_show'),	
+	url(r'^order/submit/', 'order_submit',name='order_submit'),	
 	
 )
 

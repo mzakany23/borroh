@@ -7,7 +7,7 @@ from account.models import Profile
 from subscription.models import Subscription
 
 def subscribe(request):
-	stripe.api_key = settings.API_KEY
+	stripe.api_key = settings.API_KEY2
 	try:
 		token = request.POST['stripeToken']
 		user = User.objects.get(id=request.user.id)

@@ -5,7 +5,7 @@ SECRET_KEY = 'q)gfe86m1s&dy0z$^uh2w$ph$-q9o8v=1*y6*zs-sqgs39@n5z'
 # stripe
 API_KEY = 'sk_test_u9E91FD8uffgpOGXHNdfU5LO'
 API_KEY2 = 'pk_test_G0K67FwSKkcdKKLDcwTjrXzy'
-
+# pk_test_G0K67FwSKkcdKKLDcwTjrXzy
 
 DEBUG = True
 

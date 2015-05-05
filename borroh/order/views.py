@@ -2,6 +2,7 @@ from django.shortcuts import render,HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from cart.models import Cart,LineItem
+from order.models import Order
 from product.models import Product
 from subscription.models import Subscription
 from home.views import get_home_variables
@@ -30,10 +31,22 @@ def start_order_process(request):
 	except:
 		process = None
 
+
 	if request.user.is_authenticated():
 		if process == 'borroh':
 			if profile.subscription is not None:
 				if profile.points >= cart.borroh_items_total():
+					order,created = Order.objects.get_or_create(
+						user=request.user,
+						cart=cart,
+						status='started',
+						type_of_cart=str(process).capitalize()
+					)
+					
+					if created:
+			 			request.session['order_id'] = order.id
+			 			
+
 					return HttpResponseRedirect(reverse('order_address'))
 				else:
 					return HttpResponseRedirect(reverse('too_many_items_in_borroh_cart'))
@@ -139,11 +152,15 @@ def order_address(request):
 		new_address.save()
 		return HttpResponseRedirect(reverse('order_address'))
 
+
 	context = {'user_addresses' : user_addresses, 'is_addresses_to_show': is_addresses_to_show, 'new_address_form' : form}
 	template = 'order/checkout-address.html'
 	return render(request,template,context)
 
 # billing
+'''
+	not using billing right now. 
+'''
 def order_billing(request):
 	try:
 		address_id = request.POST['address_id']
@@ -155,39 +172,74 @@ def order_billing(request):
 	except:
 		address = None
 
-	context = {'address_to_use' : address}
+	try:
+		order = Order.objects.get(id=request.session['order_id'])
+		order.address = address
+		order.save()
+	except:
+		order = None
+
+	context = {'address_to_use' : address, 'order' : order}
 	template = 'order/checkout-billing.html'
 	return render(request,template,context)
 
 # shipping
+
+@login_required(login_url='/account/login')
 def order_shipping(request):
 	try:
 		address_id = request.POST['address_id']
-	except: 
-		address_id = None
-		
-	try:
 		address =	Address.objects.get(id=address_id)
-	except:
+	except: 
 		address = None
 
-	context = {'address_to_use' : address}
+	try:
+		order = Order.objects.get(id=request.session['order_id'])
+	except:
+		order = None
+
+	if order.address is None:
+		order.address = address
+		order.save()
+
+	context = {'address' : address, 'order' : order}
 	template = 'order/checkout-shipping.html'
 	return render(request,template,context)
 
 # payment
+@login_required(login_url='/account/login')
 def order_payment(request):
 	context = {}
 	template = 'order/checkout-payment.html'
 	return render(request,template,context)
 
 # order
+@login_required(login_url='/account/login')
 def order_show(request):
-	context = {}
+
+	try:
+		order = Order.objects.get(id=request.session['order_id'])
+	except:
+		order = None
+
+
+	borroh_order = order.type_of_cart == 'Borroh'
+	context = {'order' : order, 'borroh_order' : borroh_order}
 	template = 'order/checkout-order.html'
 	return render(request,template,context,context_instance=RequestContext(request, processors=[get_home_variables]))
 
+@login_required(login_url='/account/login')
+def order_submit(request):
+	try:
+		order = Order.objects.get(id=request.session['order_id'])
+	except:
+		order = None
 
+	if order:
+		order.status = 'pending'
+		order.save()
+
+	return HttpResponseRedirect(reverse('account_order_list'))
 
 
 

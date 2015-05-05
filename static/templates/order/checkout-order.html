@@ -29,15 +29,8 @@
         
        <div class="w100 clearfix"> 
        
-       <ul class="orderStep orderStepLook2">
-              <li > <a href="{% url 'order_address' %}"><i class="fa fa-map-marker "></i><span>address</span></a> 
-              </li>
-              <!-- <li> <a href="{% url 'order_billing' %}"> <i class="fa fa fa-envelope  "></i> <span> Billing </span></a></li> -->
-              <li> <a href="{% url 'order_shipping' %}"><i class="fa fa-truck "> </i><span>Shipping</span> </a> </li>
-              <li> <a href="{% url 'order_payment' %}"><i class="fa fa-money  "> </i><span>Payment</span> </a> </li>
-              <li class='active'> <a href="{% url 'order_show' %}"><i class="fa fa-check-square "> </i><span>Order</span></a> </li>
-            </ul>
-        </div>
+      {% include 'order/partials/_checkout_nav_borroh.html' %} 
+      </div>
         
         
         <div class="w100 clearfix">
@@ -57,9 +50,9 @@
                           <tbody>
                             <tr class="CartProduct cartTableHeader">
                               <th style="width:15%"> Product </th>
-                              <th class="checkoutReviewTdDetails"  >Details</th>
+                              <th class="checkoutReviewTdDetails"  ></th>
                               <th style="width:10%" >Unit Price</th>
-                              <th class="hidden-xs" style="width:5%">QNT</th>
+                              <th class="hidden-xs" style="width:5%"></th>
                               <th class="hidden-xs" style="width:10%" >Discount</th>
                               <th style="width:15%">Total</th>
                             </tr>
@@ -72,10 +65,22 @@
                                   <!-- <span class="size">12 x 1.5 L</span> -->
                                  
                                 </div></td>
-                              <td class="delete"><div class="price ">${{ item.product.price }}</div></td>
-                              <td class="hidden-xs">1</td>
-                              <td class="hidden-xs">0</td>
-                              <td class="price">${{ item.product.price }}</td>
+                              {% if borroh_order %}
+                              <td class="delete"><div class="price ">{{ item.product.price }} points</div></td>
+                              {% else %}
+                              <td class="delete"><div class="price ">${{ item.product.price }} points</div></td>
+                              {% endif %}
+                              <td class="hidden-xs"></td>
+                              {% if item.product.discount == None %}
+                              <td class="hidden-xs">None</td>
+                              {% else %}
+                              <td class="hidden-xs">{{ item.product.discount }}%</td>
+                              {% endif %}
+                              {% if borroh_order %}
+                              <td class="price">{{ item.cart.total_points }} points</td>
+                              {% else %}
+                              <td class="price">${{ item.cart.total_points }}</td>
+                              {% endif %}
                             </tr>          
                             {% endfor %}
                           </tbody>
@@ -83,6 +88,7 @@
                       </div>
                       <!--cartContent-->
                       
+                      {% if borroh_order == False %}
                       <div class="w100 costDetails">
                         <div class="table-block" id="order-detail-content">
                           <table class="std table" id="cart-summary">
@@ -111,6 +117,7 @@
                           </table>
                         </div>
                       </div>
+                      {% endif %}
                       <!--/costDetails-->
                       
 
@@ -133,13 +140,13 @@
             
             <div class="cartFooter w100">
             <div class="box-footer">
-              <div class="pull-left"> <a class="btn btn-default" href="checkout-4.html">
-          <i class="fa fa-arrow-left"></i> &nbsp; Payment method </a> 
+              <div class="pull-left"> <a class="btn btn-default" href="{% url 'order_shipping' %}">
+          <i class="fa fa-arrow-left"></i> &nbsp; Shipping </a> 
                </div>
                
                
                <div class="pull-right">
-                <a href="#" class="btn btn-primary btn-small " > 
+                <a href="{% url 'order_submit' %}" class="btn btn-danger btn-small " > 
           Confirm Order &nbsp; <i class="fa fa-check"></i>
                  </a>
               </div>
@@ -157,7 +164,7 @@
       </div>
       <!--/row end--> 
       
-      {% include 'order/partials/_right_column_total.html' %}  
+      <!-- {% include 'order/partials/_right_column_total.html' %}   -->
 
     <!--/rightSidebar--> 
     

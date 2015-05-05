@@ -121,7 +121,8 @@ def get_home_variables(request):
 			'cart_has_contents' : cart_has_contents,
 			'server' : settings.SERVER,
 			'user_does_not_have_a_subscription' : user_does_not_have_a_subscription,
-			'user_has_subscription' : user_has_subscription
+			'user_has_subscription' : user_has_subscription,
+			'stripeKey' : settings.API_KEY2
 	}
 
 	
