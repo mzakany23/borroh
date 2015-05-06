@@ -33,46 +33,61 @@
               </div>
               <div class="col-xs-12 col-sm-12">
                 <div class="w100 row">
-                  <div id='shipping-address'>
-
-                    <p><i>Name: </i> <strong>{{ order.address.first }} {{ order.address.last }}</strong></p>
-                    <p><i>Address: </i> <strong>{{ order.address.street }}</strong></p>
-                    <p><i>State: </i> <strong>{{ order.address.state }}</strong> </p>
-                    <p><i>Country: </i><strong> US</strong></p>
-                    <p><i>Zip Code: </i><strong>{{ order.address.zip_code }}</strong></p>
-                    
-                  </div>
-
                   
-                  <div class="form-group col-lg-12 col-sm-12 col-md-12 -col-xs-12">
+                  <div class="row">
+
+                    <div class="col-lg-3">
+                      <div id='shipping-address'>
+                        <p><i>Name: </i> <strong>{{ order.address.first }} {{ order.address.last }}</strong></p>
+                        <p><i>Address: </i> <strong>{{ order.address.street }}</strong></p>
+                        <p><i>State: </i> <strong>{{ order.address.state }}</strong> </p>
+                        <p><i>Country: </i><strong> US</strong></p>
+                        <p><i>Zip Code: </i><strong>{{ order.address.zip_code }}</strong></p>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-9  ">
+                      <div class="form-group col-lg-12 col-sm-12 col-md-12 -col-xs-12">
                     <table style="width:100%"  class="table-bordered table tablelook2">
                       <tbody>
                         <tr >
-                          <td > Carrier</td>
-                          <td >Method</td>
+                          <td >Carrier</td>
+                          <td >Service</td>
                           <td >Information</td>
                           <td >Price!</td>
                         </tr>
                         <tr >
                           <td><label class="radio">
-                              <input style='margin-left: 35px;' type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                              <i class="fa  fa-plane fa-2x"></i> </label>
+                              <input style='margin-left: 40px;' type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                              {{ shipping.carrier }}</label>
                           </td>
-                          <td > By Road </td>
+                          <td > {{ shipping.service }}</td>
                           <td >Pick up in-store</td>
-                          <td >Free!</td>
+                          <td >${{ shipping.rate }}</td>
                         </tr>
+                        
+                        <!-- free shipment -->
                         <tr >
-                          <td ><label class="radio">
+                          <td >
+                            <label class="radio">
                               <input style='margin-left: 35px;' type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                              <i class="fa fa-truck fa-2x"></i> </label></td>
+                              Free 
+                            </label>
+                          </td>
+
                           <td >By Air </td>
                           <td >Delivery next day!</td>
                           <td >Free!</td>
                         </tr>
+
+
                       </tbody>
                     </table>
                   </div>
+                      
+                    </div>
+                  </div>
+
                 </div>
                 
                 <!--/row-->

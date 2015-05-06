@@ -55,12 +55,12 @@
   
   {% include 'layouts/nav/nav_main.html' %}
   
-  <!-- success message login/register -->
   {% if messages %}
+
     {% for message in messages %}
       <div class="alert alert-warning alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <strong>Success!</strong> {{ message }}
+        {{ message }}
       </div>
     {% endfor %}
   {% endif %}

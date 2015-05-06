@@ -22,6 +22,8 @@ from account.form import AddressForm, UserForm
 from django.core.mail import send_mail,EmailMultiAlternatives
 import hashlib
 import stripe
+import easypost
+
 
 
 
@@ -95,7 +97,7 @@ def auth_create_account(request):
 		user = authenticate(username=username,password=password)
 		
 		if user:
-			messages.success(request, 'You have successfully logged in!')
+			messages.success(request, "<strong>Success!</strong> "+ 'You have successfully logged in!')
 			login(request,user)
 		else:
 			print 'does not exist try again'
@@ -124,7 +126,7 @@ def user_profile(request):
 
 @login_required(login_url='/account/login')
 def add_address(request):
-	
+
 	try:
 		user = User.objects.get(id=request.user.id)
 		profile = Profile.objects.get(user=user)
@@ -146,11 +148,32 @@ def add_address(request):
 		address.phone_number = form.cleaned_data['phone_number']
 		address.primary_address = form.cleaned_data['primary_address']
 		address.shipping_address = form.cleaned_data['shipping_address']
-		address.save()
+
+		easypost.api_key = settings.EASY_POST
+		to_address = easypost.Address.create(
+		  name = address.name,
+		  street1 = str(address.street),
+		  street2 = "",
+		  city = str(address.city),
+		  state = str(address.state),
+		  zip = address.zip_code,
+		  country = "USA"
+		)
+
+		try:
+			address_validated = to_address.verify()
+		except easypost.Error as e:
+			address_validated = None
+			messages.error(request, "Failure!" + str(e))
+			
+		if address_validated:
+			messages.success(request, "You successfully added an address!")
+			address.save()
+	
+			
 		return HttpResponseRedirect(reverse('show_address'))
 
 		
-	
 	template = 'account/address/add-address.html'
 	context = {'address_add_form' : form, 'address_edit_form' : form}
 	return render(request,template,context)

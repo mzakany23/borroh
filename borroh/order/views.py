@@ -12,6 +12,9 @@ from account.models import Profile
 from django.conf import settings
 from account.form import AddressForm
 from account.models import Address
+from shipping.models import Shipping
+import easypost
+
 # -------------------------------------------------------------------------------------------------
 # Start order process check
 # -------------------------------------------------------------------------------------------------
@@ -202,7 +205,34 @@ def order_shipping(request):
 		order.address = address
 		order.save()
 
-	context = {'address' : address, 'order' : order}
+	try:
+		shipping_cost = address.shipping_cost()
+		new_shipping, created = Shipping.objects.get_or_create(order=order)
+		
+		if created:
+			new_shipping.carrier = shipping_cost['rates'][0]['carrier']
+			new_shipping.carrier_account_id = shipping_cost['rates'][0]['id']
+			new_shipping.rate = shipping_cost['rates'][0]['rate']
+			new_shipping.service = shipping_cost['rates'][0]['service']
+			new_shipping.buyer_address_id = shipping_cost['buyer_address']['id']
+			new_shipping.seller_address_id = shipping_cost['from_address']['id']
+			new_shipping.save()
+	except: 
+		shipping = None
+
+	try:
+		current_orders_shipping_info = Shipping.objects.get(order=order)
+	except:
+		current_orders_shipping_info = None
+
+	print current_orders_shipping_info
+
+	context = {
+			'address' : address, 
+			'order' : order, 
+			'shipping' : current_orders_shipping_info
+	}
+
 	template = 'order/checkout-shipping.html'
 	return render(request,template,context)
 

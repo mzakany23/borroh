@@ -10,8 +10,7 @@ def subscribe(request):
 	stripe.api_key = settings.API_KEY2
 	try:
 		token = request.POST['stripeToken']
-		user = User.objects.get(id=request.user.id)
-		profile = Profile.objects.get(user=user)
+		profile = Profile.objects.get(user=request.user)
 	except:
 		token = None
 		profile = None

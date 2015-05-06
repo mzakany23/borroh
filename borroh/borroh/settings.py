@@ -27,6 +27,9 @@ EMAIL_USE_TLS = True
 
 SESSION_COOKIE_AGE = 14000
 
+# test key shipping for ups ect
+EASY_POST = "gwoySI2L62BXhftVW0Ol3Q"
+
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.contrib.auth.context_processors.auth',
@@ -47,6 +50,7 @@ INSTALLED_APPS = (
     'subscription',
     'cart',
     'order',
+    'shipping'
 
 )
 

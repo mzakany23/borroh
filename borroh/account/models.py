@@ -5,6 +5,8 @@ from django.db.models.signals import post_save, post_delete
 from django.utils.text import slugify
 from subscription.models import Subscription
 import stripe
+import easypost
+import json
 from django.conf import settings
 
 
@@ -29,6 +31,7 @@ class Profile(models.Model):
 	user = models.OneToOneField(User,blank=True,null=True,unique=True)
 	slug = models.SlugField(blank=True,null=True)
 	points = models.IntegerField(default=0)
+	free_shipping_count = models.IntegerField(default=0)
 	profile_pic = models.ImageField(upload_to='profile_pics',blank=True,null=True)
 	stripe_id = models.CharField(max_length=100,blank=True,null=True)
 	favorites = models.ManyToManyField(Product,blank=True,null=True)
@@ -38,7 +41,7 @@ class Profile(models.Model):
 		return str(self.user)
 
 	def wishlist_count(self):
-
+		
 		count = self.favorites.exclude(borrohed=True).count()
 
 		if count is None:
@@ -73,13 +76,42 @@ class Address(models.Model):
 	def __unicode__(self):
 		return self.street
 
+	def shipping_cost(self):
+		easypost.api_key = settings.EASY_POST
+		name = str(self.first) + ' ' + str(self.last)
+		shipment = easypost.Shipment.create(
+		  to_address={
+		    'name': name,
+		    'company': '',
+		    'street1': self.street,
+		    'city': self.city,
+		    'state': self.state,
+		    'zip': self.zip_code
+		  },
+		  from_address={
+		    'company': 'Borroh',
+		    'street1': '164 Townsend Street',
+		    'city': 'San Francisco',
+		    'state': 'CA',
+		    'zip': '94107',
+		    'phone': '415-528-7555'
+		  },
+		  parcel={
+		    'length': 9,
+		    'width': 6,
+		    'height': 2,
+		    'weight': 10
+		  }
+		)
+		
+		return json.loads(str(shipment))
+		
+
+
 
 # -----------------------------------------------------------------------------------
 # signals
 # -----------------------------------------------------------------------------------
-
-def create_or_add_credit_card_at_stripe(sender,instance,created,*args,**kwargs):
-	pass
 
 def create_profile_receiver(sender,instance,created,*args,**kwargs):
 	if created:
