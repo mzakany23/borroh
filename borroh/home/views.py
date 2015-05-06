@@ -110,6 +110,7 @@ def get_home_variables(request):
 	except:
 		borroh_orders = None
 
+	
 	return {
 			'total_points_minus_individual_balance' : total_points_minus_individual_balance,
 			'login_form' : LoginForm, 
@@ -129,7 +130,8 @@ def get_home_variables(request):
 			'user_does_not_have_a_subscription' : user_does_not_have_a_subscription,
 			'user_has_subscription' : user_has_subscription,
 			'stripeKey' : settings.API_KEY2,
-			'borroh_orders' : borroh_orders
+			'borroh_orders' : borroh_orders,
+			'profile' : profile
 	}
 
 	

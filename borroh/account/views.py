@@ -358,7 +358,7 @@ def delete_from_wishlist(request,id):
 @login_required(login_url='/account/login')
 def account_order_list(request):
 	try:
-		orders = Order.objects.all()
+		orders = Order.objects.filter(user=request.user)
 	except:
 		orders = None
 

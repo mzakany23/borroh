@@ -57,6 +57,12 @@ class Profile(models.Model):
 		if self.subscription is not None:
 			return True
 
+	def own_it_discount(self):
+		if self.subscription:
+			return 100*self.subscription.own_it_discount
+		else:
+			return 0
+
 STATE_CHOICES = (
 	('Ohio','Ohio'),
 )
@@ -112,6 +118,9 @@ class Address(models.Model):
 # -----------------------------------------------------------------------------------
 # signals
 # -----------------------------------------------------------------------------------
+
+def create_or_add_credit_card_at_stripe(sender,instance,created,*args,**kwargs):
+	pass
 
 def create_profile_receiver(sender,instance,created,*args,**kwargs):
 	if created:

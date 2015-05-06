@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from account.models import Profile
 from subscription.models import Subscription
 
+
 def subscribe(request):
 	stripe.api_key = settings.API_KEY2
 	try:
@@ -28,6 +29,7 @@ def subscribe(request):
 			user_to_subscribe.subscription = subscription
 			user_to_subscribe.subscription
 			user_to_subscribe.points += subscription.points_per_month
+			user_to_subscribe.free_shipping_count += subscription.free_shipments
 			user_to_subscribe.save()
 		except:
 			subscription = None
@@ -40,6 +42,7 @@ def subscribe(request):
 				'price' : subscription.price_per_month,
 				'points' : subscription.points_per_month
 			}
+
 
 			context = {'user_subscription_confirmation' : user_subscription_confirmation}
 			template = 'subscription/subscription_confirmation.html'
