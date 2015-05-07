@@ -296,7 +296,7 @@ def order_show(request):
 			order.free_shipping = True
 			order.save()
 			
-		
+	
 	borroh_order = order.type_of_cart == 'Borroh'
 	context = {'order' : order, 'borroh_order' : borroh_order, 'shipping_cost' : shipping_cost}
 	template = 'order/checkout-order.html'
@@ -320,11 +320,11 @@ def order_submit(request):
 		profile.save()
 		del request.session['cart_id']
 
-		# for item in order.cart.lineitem_set.all():
-		# 	product = item.product
-		# 	product.borrohed = True
-		# 	product.save()
-		# 	item.delete()
+		for item in order.cart.lineitem_set.all():
+			product = item.product
+			product.borrohed = True
+			product.save()
+			
 
 	return HttpResponseRedirect(reverse('account_order_list'))
 

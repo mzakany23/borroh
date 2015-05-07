@@ -98,10 +98,12 @@
                       <div class="w100 costDetails">
                         <div class="table-block" id="order-detail-content">
                           <table class="std table" id="cart-summary">
+                            {% if order.does_not_have_free_shipping %}
                             <tr >
                               <td>Your Credit Card On File</td>
                               <td  class="price">{{ profile.usercreditcard_set.first }}</td>
                             </tr>
+                            {% endif %}
                             <tr >
                               <td>Total Points</td>
                               <td  class="price">{{ cart.total_points }} points</td>

@@ -21,5 +21,8 @@ class Order(models.Model):
 	def has_free_shipping(self):
 		return self.free_shipping == True
 
+	def does_not_have_free_shipping(self):
+		return self.free_shipping == False
+
 	def __unicode__(self):
 		return "Cart: " +  str(self.cart.id) + " "+ str(self.cart.user)
