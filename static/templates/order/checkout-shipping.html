@@ -35,7 +35,8 @@
                 <div class="w100 row">
                   
                   <div class="row">
-
+                    <form method="POST" action="{% url 'order_show' %}">
+                      {% csrf_token %}
                     <div class="col-lg-3">
                       <div id='shipping-address'>
                         <p><i>Name: </i> <strong>{{ order.address.first }} {{ order.address.last }}</strong></p>
@@ -51,6 +52,7 @@
                     <table style="width:100%"  class="table-bordered table tablelook2">
                       <tbody>
                         <tr >
+                          <td>Option</td>
                           <td >Carrier</td>
                           <td >Service</td>
                           <td >Information</td>
@@ -58,29 +60,34 @@
                         </tr>
                         <tr >
                           <td><label class="radio">
-                              <input style='margin-left: 40px;' type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                              {{ shipping.carrier }}</label>
+                              <input style='margin-left: 20px;' type="radio" name="optionsRadios" id="optionsRadios1" value="usps" checked>
+                              </label></td>
+                          <td>
+                              {{ shipping.carrier }}
                           </td>
                           <td > {{ shipping.service }}</td>
-                          <td >Pick up in-store</td>
+                          <td >Ground Shipping</td>
                           <td >${{ shipping.rate }}</td>
                         </tr>
 
 
                         <!-- free shipment -->
-                        
+
+                        {% if profile.has_free_shippings_left %}
                         <tr >
-                          <td >
-                            <label class="radio">
-                              <input style='margin-left: 35px;' type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                              Free 
-                            </label>
+                          <td><label class="radio">
+                              <input style='margin-left: 20px;' type="radio" name="optionsRadios" id="optionsRadios2" value="free">
+                            </label></td>
+                          <td>
+                            
+                            Free 
                           </td>
 
-                          <td >By Air </td>
-                          <td >Delivery next day!</td>
+                          <td >{{ shipping.service }}</td>
+                          <td >Use one of you free shippings!</td>
                           <td >Free!</td>
                         </tr>
+                        {% endif %}
 
 
                       </tbody>
@@ -96,7 +103,7 @@
                 
                 {% include 'order/partials/_checkout_footer.html' %}
                 <!--/ cartFooter --> 
-                
+                </form>
               </div>
             </div>
           </div>
@@ -115,6 +122,9 @@
   <div style="clear:both"></div>
   
 </div>
+
 <!-- /main-container -->
 
+
 {% endblock %}
+

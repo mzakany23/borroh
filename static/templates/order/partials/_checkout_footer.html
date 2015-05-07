@@ -2,14 +2,14 @@
 <div class="cartFooter w100">
   <div class="box-footer">
     <div class="pull-left"> <a class="btn btn-default" href="{% url 'order_address' %}"> <i class="fa fa-arrow-left"></i> Address </a> </div>
-    <div class="pull-right"> <a href="{% url 'order_show' %}" class="btn btn-danger btn-small " > Proceed to Order! <i class="fa fa-arrow-circle-right"></i> </a> </div>
+    <div id='proceed-to-order' class="pull-right"> <button type='submit' class="btn btn-danger btn-small " > Proceed to Order! <i class="fa fa-arrow-circle-right"></i> </button> </div>
   </div>
 </div>
 {% else %}
 <div class="cartFooter w100">
   <div class="box-footer">
     <div class="pull-left"> <a class="btn btn-default" href="{% url 'order_address' %}"> <i class="fa fa-arrow-left"></i> &nbsp; Shipping address </a> </div>
-    <div class="pull-right"> <a href="checkout-4.html" class="btn btn-primary btn-small " > Payment Method &nbsp; <i class="fa fa-arrow-circle-right"></i> </a> </div>
+    <div class="pull-right"> <a id='proceed-to-order' href="checkout-4.html" class="btn btn-primary btn-small " > Payment Method &nbsp; <i class="fa fa-arrow-circle-right"></i> </a> </div>
   </div>
 </div>
 {% endif %}

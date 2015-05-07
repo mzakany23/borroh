@@ -66,13 +66,13 @@
                                  
                                 </div></td>
                               {% if borroh_order %}
-                              <td class="delete"><div class="price ">{{ item.product.price }} points</div></td>
+                              <td class="delete"><div class="price ">{{ item.product.points_price }} points</div></td>
                               {% else %}
                               <td class="delete"><div class="price ">${{ item.product.price }} points</div></td>
                               {% endif %}
                               <td class="hidden-xs"></td>
                               {% if item.product.discount == None %}
-                              <td class="hidden-xs">None</td>
+                              <td class="hidden-xs">n/a</td>
                               {% else %}
                               <td class="hidden-xs">{{ item.product.discount }}%</td>
                               {% endif %}
@@ -80,12 +80,46 @@
                               <td class="price">{{ item.cart.total_points }} points</td>
                               {% else %}
                               <td class="price">${{ item.cart.total_points }}</td>
+
                               {% endif %}
                             </tr>          
                             {% endfor %}
                           </tbody>
                         </table>
                       </div>
+
+                      <!--/costDetails-->
+
+                      {% if borroh_order %}
+                      <div class="w100 costDetails">
+                        <div class="table-block" id="order-detail-content">
+                          <table class="std table" id="cart-summary">
+                            <tr >
+                              <td>Total Points</td>
+                              <td  class="price">{{ cart.total_points }}</td>
+                            </tr>
+                            <tr style="" >
+                              <td>Shipping</td>
+                              {% if shipping_cost == 0 %}
+                              <td  class="price"><span class="success">Free shipping!</span></td>
+                              {% else %}
+                              <td  class="price"><span class="success">{{ shipping_cost }}: ${{ shipping_cost.rate }}</span></td>
+                              {% endif %}
+                            </tr>
+                           
+                       
+                            <tr >
+                              <td > Total cost w/ shipping </td>
+
+                              <td id="total-price" class="price">{{ cart.total_points }} points / ${{ shipping_cost.rate }} shipping</td>
+                            </tr>
+                            <tbody>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      {% endif %}
+
                       <!--cartContent-->
                       
                       {% if borroh_order == False %}
@@ -98,7 +132,11 @@
                             </tr>
                             <tr style="" >
                               <td>Shipping</td>
+                              {% if shipping_cost == 0 %}
                               <td  class="price"><span class="success">Free shipping!</span></td>
+                              {% else %}
+                              <td  class="price"><span class="success">{{ shipping_cost }}</span></td>
+                              {% endif %}
                             </tr>
                             <tr class="cart-total-price ">
                               <td>Total (tax excl.)</td>
@@ -118,9 +156,8 @@
                         </div>
                       </div>
                       {% endif %}
-                      <!--/costDetails-->
-                      
 
+                      
           
           <!--/row-->
   

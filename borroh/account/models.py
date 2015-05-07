@@ -63,6 +63,9 @@ class Profile(models.Model):
 		else:
 			return 0
 
+	def has_free_shippings_left(self):
+		return self.free_shipping_count > 0
+
 STATE_CHOICES = (
 	('Ohio','Ohio'),
 )

@@ -225,8 +225,7 @@ def order_shipping(request):
 	except:
 		current_orders_shipping_info = None
 
-	print current_orders_shipping_info
-
+	
 	context = {
 			'address' : address, 
 			'order' : order, 
@@ -246,15 +245,32 @@ def order_payment(request):
 # order
 @login_required(login_url='/account/login')
 def order_show(request):
+	
 
 	try:
 		order = Order.objects.get(id=request.session['order_id'])
 	except:
 		order = None
 
+	shipping_cost_form = request.POST
+
+	try:
+		shipping_cost = Shipping.objects.get(order=order)
+	except:
+		shipping_cost = None
+
+	if shipping_cost_form:
+		if shipping_cost_form['optionsRadios'] == 'free':
+			shipping_cost = 0.00
+		
+		
+				
+	
+
+
 
 	borroh_order = order.type_of_cart == 'Borroh'
-	context = {'order' : order, 'borroh_order' : borroh_order}
+	context = {'order' : order, 'borroh_order' : borroh_order, 'shipping_cost' : shipping_cost}
 	template = 'order/checkout-order.html'
 	return render(request,template,context,context_instance=RequestContext(request, processors=[get_home_variables]))
 
