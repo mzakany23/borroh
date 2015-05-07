@@ -74,7 +74,11 @@
                               {% if item.product.discount == None %}
                               <td class="hidden-xs">n/a</td>
                               {% else %}
-                              <td class="hidden-xs">{{ item.product.discount }}%</td>
+                              {% if item.borroh == True %}
+                              <td class="hidden-xs">n/a</td>
+                              {% else %}
+                              <td class="hidden-xs">{{ item.product.discount }}</td>
+                              {% endif %}
                               {% endif %}
                               {% if borroh_order %}
                               <td class="price">{{ item.cart.total_points }} points</td>
@@ -95,23 +99,31 @@
                         <div class="table-block" id="order-detail-content">
                           <table class="std table" id="cart-summary">
                             <tr >
+                              <td>Your Credit Card On File</td>
+                              <td  class="price">{{ profile.usercreditcard_set.first }}</td>
+                            </tr>
+                            <tr >
                               <td>Total Points</td>
-                              <td  class="price">{{ cart.total_points }}</td>
+                              <td  class="price">{{ cart.total_points }} points</td>
                             </tr>
                             <tr style="" >
                               <td>Shipping</td>
-                              {% if shipping_cost == 0 %}
+                              {% if order.has_free_shipping %}
                               <td  class="price"><span class="success">Free shipping!</span></td>
                               {% else %}
-                              <td  class="price"><span class="success">{{ shipping_cost }}: ${{ shipping_cost.rate }}</span></td>
+                              <td  class="price"><span class="success">{{ shipping_cost.carrier }}: ${{ shipping_cost.rate }}</span></td>
                               {% endif %}
                             </tr>
                            
                        
                             <tr >
+                              
                               <td > Total cost w/ shipping </td>
-
-                              <td id="total-price" class="price">{{ cart.total_points }} points / ${{ shipping_cost.rate }} shipping</td>
+                              {% if order.has_free_shipping %}
+                              <td id="total-price" class="price">{{ cart.total_points }} points </td>
+                              {% else %}
+                              <td id="total-price" class="price">${{ shipping_cost.rate }} shipping</td>
+                              {% endif %}
                             </tr>
                             <tbody>
                             </tbody>
@@ -183,9 +195,17 @@
                
                
                <div class="pull-right">
+                {% if order.has_free_shipping %}
                 <a href="{% url 'order_submit' %}" class="btn btn-danger btn-small " > 
-          Confirm Order &nbsp; <i class="fa fa-check"></i>
+                  Confirm Order &nbsp; 
+                  <i class="fa fa-check"></i>
                  </a>
+                 {% else %}
+                 <a href="{% url 'order_submit' %}" class="btn btn-danger btn-small " > 
+                  Pay for Shipping & Confirm Order&nbsp; 
+                  <i class="fa fa-check"></i>
+                 </a>
+                 {% endif %}
               </div>
                
                

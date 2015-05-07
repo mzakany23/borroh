@@ -25,7 +25,7 @@ class UserCreditCard(models.Model):
 	card_token = models.CharField(max_length=20,blank=True,null=True)
 
 	def __unicode__(self):
-		return str(self.profile.user) + ":" + str(self.type_of_credit_card) + " ending in " + str(self.credit_card_last_4)
+		return str(self.type_of_credit_card) + " ending in " + str(self.credit_card_last_4)
 
 class Profile(models.Model):
 	user = models.OneToOneField(User,blank=True,null=True,unique=True)

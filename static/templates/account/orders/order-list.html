@@ -28,10 +28,10 @@
               <tr style='margin-bottom: 2%;'>
                 <th data-class="expand" data-sort-initial="true"> <span title="table sorted by this column on load">Order ID</span> </th>
                 <!-- <th data-hide="phone,tablet" data-sort-ignore="true">No. of items</th> -->
-                <th data-hide="phone,tablet" data-sort-ignore="true">Invoice</th>
+                <th data-hide="phone,tablet" data-sort-ignore="true">Order Details</th>
                 <th data-hide="phone,tablet"><strong>Payment Method</strong></th>
-                <th data-hide="default"> Price </th>
-                <th data-hide="default" data-type="numeric"> Date </th>
+                <th data-hide="default"> Total Price </th>
+                <th data-hide="default" data-type="numeric"> Date Order Placed </th>
                 <th data-hide="phone" data-type="numeric"> Status </th>
               </tr>
             </thead>
@@ -40,9 +40,13 @@
               <tr>
                 <td>{{ order.id }}</td>
                 <!-- <td>5 <small>item(s)</small></td> -->
-                <td><a target="_blank" >-</a></td>
+                <td><a target="_blank" ><a style='font-weight: bold;' href="{% url 'profile_order_show' order.id %}">{{ order.type_of_cart }} Order</a></a></td>
                 <td>None</td>
-                <td>{{ order.cart.total_points }}</td>
+                {% if order.is_borroh %}
+                <td>{{ order.cart.total_points }} points</td>
+                {% else %}
+                <td>${{ order.cart.total_price }}</td>
+                {% endif %}
                 <td data-value="78025368997">{{ order.date_order_started }}</td>
                 <td data-value="3"><span class="label label-success">{{ order.status }}</span></td>
               </tr>

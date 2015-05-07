@@ -178,6 +178,21 @@ def add_address(request):
 	context = {'address_add_form' : form, 'address_edit_form' : form}
 	return render(request,template,context)
 
+
+@login_required(login_url='/account/login')
+def profile_order_show(request,id):
+	try:
+		order = Order.objects.get(id=id)
+	except:
+		order = None
+
+	if order:
+		order_contents = order.cart.lineitem_set.all()
+
+	template = 'account/orders/order-details.html'
+	context = {'order_contents' : order_contents}
+	return render(request,template,context)	
+
 @login_required(login_url='/account/login')
 def delete_address(request,id):
 	try:

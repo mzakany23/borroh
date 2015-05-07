@@ -13,4 +13,4 @@ class Shipping(models.Model):
 	estimated_delivery_days = models.CharField(max_length=40,blank=True,null=True)
 
 	def __unicode__(self):
-		return self.carrier
+		return str(self.carrier) + '/' + str(self.order.date_order_started) + "/" + "cart:" + str(self.order.cart.id)

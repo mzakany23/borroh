@@ -18,69 +18,8 @@
             </button>
             </form>
             {% endif %}
-            <div class="w100 cartMiniTable">
-              <table id="cart-summary" class="std table">
-                <tbody>
-                  {% if request.path == '/cart/show/borroh' %}
-                  <tr >
-                    <td>Total borroh</td>
-                    <td class="price" >{{ cart.total_points }} points</td>
-                  </tr>
-                  {% else %}
-                  <tr >
-                    <td>Total products</td>
-                    <td class="price" >${{ cart.total_price }}</td>
-                  </tr>
-                  {% endif %}
-
-                  <tr  style="">
-                    <td>Shipping</td>
-                    <td class="price" ><span class="success">Free shipping!</span></td>
-                  </tr>
-                  {% if request.path == '/cart/show/borroh' %}
-                  <tr class="cart-total-price ">
-                    <td>Total (tax excl.)</td>
-                    <td class="price" >{{ cart.total_points }}</td>
-                  </tr>
-                  
-                  <tr >
-                    <td > Total </td>
-                    <td class=" site-color" id="total-price">{{ cart.total_points }}</td>
-                  </tr>
-                  <!-- <tr >
-                    <td colspan="2"  ><div class="input-append couponForm">
-                        <input class="col-lg-8" id="appendedInputButton" type="text"  placeholder="Coupon code" >
-                        <button class="col-lg-4 btn btn-success" type="button">Apply!</button>
-                      </div></td>
-                  </tr> -->
-                  {% else %}
-                  <tr class="cart-total-price ">
-                    <td>Total (tax excl.)</td>
-                    <td class="price" >${{ cart.total_price }}</td>
-                  </tr>
-                  <tr >
-                    <td>Total tax</td>
-                    <td class="price" id="total-tax">$0.00</td>
-                  </tr>
-                  <tr >
-                    <td > Total </td>
-                    <td class=" site-color" id="total-price">${{ cart.total_price }}</td>
-                  </tr>
-                 <!--  <tr >
-                    <td colspan="2"  ><div class="input-append couponForm">
-                        <input class="col-lg-8" id="appendedInputButton" type="text"  placeholder="Coupon code" >
-                        <button class="col-lg-4 btn btn-success" type="button">Apply!</button>
-                      </div>
-                    </td>
-                  </tr> -->
-
-                  {% endif %}
-                </tbody>
-                <tbody>
-                </tbody>
-              </table>
-            </div>
-          </div>
+            
+          
         </div>
       </div>
       <!-- End popular --> 

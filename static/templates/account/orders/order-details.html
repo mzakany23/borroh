@@ -1,0 +1,96 @@
+{% extends 'layouts/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+
+<div class="container main-container headerOffset">
+  <div class="row">
+    <div class="breadcrumbDiv col-lg-12">
+      <ul class="breadcrumb">
+        <li> <a href="index.html">Home</a> </li>
+        <li> <a href="category.html">Category</a> </li>
+        <li class="active">Cart </li>
+      </ul>
+    </div>
+  </div><!--/.row-->
+  
+  <div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-7">
+      <h1 class="section-title-inner"><span><i class="glyphicon glyphicon-shopping-cart"></i> Order Details </span></h1>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar">
+      <h4 class="caps"><a href="category.html"><i class="fa fa-chevron-left"></i> Back to shopping </a></h4>
+    </div>
+  </div><!--/.row-->
+  
+  <div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-7">
+      <div class="row userInfo">
+        <div class="col-xs-12 col-sm-12">
+          <div class="cartContent w100">
+            <table class="cartTable table-responsive" style="width:100%">
+              <tbody>
+              
+                <tr class="CartProduct cartTableHeader">
+                  <td style="width:15%"  > Product </td>
+                  <td style="width:40%"  >Details</td>
+                  <td style="width:10%"  class="delete">&nbsp;</td>
+                  <td style="width:10%" ></td>
+                  <td style="width:10%" >Discount</td>
+                  <td style="width:15%" >Total</td>
+                </tr>
+                
+                {% for item in order_contents %}
+                <tr class="CartProduct">
+                  <td  class="CartProductThumb"><div> <a href="product-details.html"><img src="{{ settings.SERVER }}/media/{{ item.product.image_set.all.0 }}" alt="img"></a> </div></td>
+                  <td ><div class="CartDescription">
+                      <h4> <a href="product-details.html">{{ item.product.title }}</a> </h4>
+                      <span class="size"></span>
+                      {% if item.borroh == True %}
+                      <div class="price"> <span>{{ item.product.points_price }} points</span></div>
+                      {% else %}
+                      <div class="price"> <span>${{ item.product.price }}</span></div>
+                      {% endif %}
+                    </div></td>
+                  <td class="delete"></td>
+                  <td ></td>
+                  <td >{{ item.product.discount }}</td>
+                  {% if item.borroh == True %}
+                  <td class="price">{{ item.product.points_price }} points</td>
+                  {% else %}
+                  <td class="price">${{ item.product.price }}</td>
+                  {% endif %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <!--cartContent-->
+          
+          <div class="cartFooter w100">
+            <div class="box-footer">
+              <div class="pull-left"> <a href="{% url 'account_order_list' %}" class="btn btn-default"> 
+                <i class="fa fa-arrow-left"></i> &nbsp; Order List </a> </div>
+              <div class="pull-right">
+               
+              </div>
+            </div>
+          </div> <!--/ cartFooter --> 
+          
+        </div>
+      </div>
+      <!--/row end--> 
+      
+    </div>
+    
+    <!--/rightSidebar--> 
+    
+  </div><!--/row-->
+  
+  <div style="clear:both"></div>
+</div><!-- /.main-container -->
+
+<div class="gap"> </div>
+
+{% endblock %}

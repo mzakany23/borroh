@@ -118,8 +118,34 @@ def remove_from_cart_and_back_to_borroh(request,id):
 # -------------------------------------------------------------------------------------------------
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# -------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------
 # Order steps and actions
+# -------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------
 
 # auth
@@ -156,7 +182,11 @@ def order_address(request):
 		return HttpResponseRedirect(reverse('order_address'))
 
 
-	context = {'user_addresses' : user_addresses, 'is_addresses_to_show': is_addresses_to_show, 'new_address_form' : form}
+	context = {
+		'user_addresses' : user_addresses, 
+		'is_addresses_to_show': is_addresses_to_show, 
+		'new_address_form' : form
+	}
 	template = 'order/checkout-address.html'
 	return render(request,template,context)
 
@@ -185,6 +215,9 @@ def order_billing(request):
 	context = {'address_to_use' : address, 'order' : order}
 	template = 'order/checkout-billing.html'
 	return render(request,template,context)
+
+
+
 
 # shipping
 
@@ -245,7 +278,6 @@ def order_payment(request):
 # order
 @login_required(login_url='/account/login')
 def order_show(request):
-	
 
 	try:
 		order = Order.objects.get(id=request.session['order_id'])
@@ -261,14 +293,10 @@ def order_show(request):
 
 	if shipping_cost_form:
 		if shipping_cost_form['optionsRadios'] == 'free':
-			shipping_cost = 0.00
+			order.free_shipping = True
+			order.save()
+			
 		
-		
-				
-	
-
-
-
 	borroh_order = order.type_of_cart == 'Borroh'
 	context = {'order' : order, 'borroh_order' : borroh_order, 'shipping_cost' : shipping_cost}
 	template = 'order/checkout-order.html'
@@ -287,13 +315,16 @@ def order_submit(request):
 		request.session['order_id'] = None
 		profile = Profile.objects.get(user=request.user)
 		profile.points -= order.cart.total_points
+		if order.free_shipping:
+			profile.free_shipping_count -= 1
 		profile.save()
+		del request.session['cart_id']
 
-		for item in order.cart.lineitem_set.all():
-			product = item.product
-			product.borrohed = True
-			product.save()
-			item.delete()
+		# for item in order.cart.lineitem_set.all():
+		# 	product = item.product
+		# 	product.borrohed = True
+		# 	product.save()
+		# 	item.delete()
 
 	return HttpResponseRedirect(reverse('account_order_list'))
 
