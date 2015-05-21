@@ -13,7 +13,7 @@ class Order(models.Model):
 	free_shipping = models.BooleanField(default=False)
 	
 	def total(self):	
-		return self.cart.total_price()
+		return self.cart.total_price
 
 	def is_borroh(self):
 		return self.type_of_cart == 'Borroh'
@@ -23,6 +23,18 @@ class Order(models.Model):
 
 	def does_not_have_free_shipping(self):
 		return self.free_shipping == False
+
+	def shipping_cost(self):
+		if self.free_shipping == False:
+			return str(self.shipping_set.all()[0].rate)
+		else:
+			return 0
+
+	def total_tax(self):
+		return float(float(self.cart.total_price) * 0.0575)
+
+	def total_with_tax_and_shipping(self):
+		return self.total_tax() + float(self.total()) + float(self.shipping_cost())
 
 	def __unicode__(self):
 		return "Cart: " +  str(self.cart.id) + " "+ str(self.cart.user)

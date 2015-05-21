@@ -1,5 +1,4 @@
 
-
 <ul class="orderStep orderStepLook2">
   <li id='address'> <a href="{% url 'order_address' %}"><i class="fa fa-map-marker "></i><span>address</span></a> 
   </li>
@@ -7,7 +6,9 @@
   	<a href="{% url 'order_billing' %}"> <i class="fa fa fa-envelope  "></i> <span> Billing </span></a>
   </li> -->
   <li id='shipping'> <a href="{% url 'order_shipping' %}"><i class="fa fa-truck "> </i><span>Shipping</span> </a> </li>
-  <!-- <li id='payment'> <a href="{% url 'order_payment' %}"><i class="fa fa-money  "> </i><span>Payment</span> </a> </li> -->
+  {% if session_order.type_of_cart  == 'Buy' %}
+  <li id='payment'> <a href="{% url 'order_payment' %}"><i class="fa fa-money  "> </i><span>Payment</span> </a> </li>
+  {% endif %}
   <li id='show'> <a href="{% url 'order_show' %}"><i class="fa fa-check-square "> </i><span>Order</span></a> </li>
 </ul>
 

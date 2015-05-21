@@ -56,7 +56,16 @@ def start_order_process(request):
 			else:
 				return HttpResponseRedirect(reverse('subscribe'))
 		elif process == 'buy':
-			print 'buy'
+			order,created = Order.objects.get_or_create(
+				user=request.user,
+				cart=cart,
+				status='started',
+				type_of_cart=str(process).capitalize()
+			)
+
+			if created:
+				request.session['order_id'] = order.id
+
 			return HttpResponseRedirect(reverse('order_address'))
 	else:
 		return HttpResponseRedirect(reverse('order_auth'))
@@ -271,20 +280,37 @@ def order_shipping(request):
 # payment
 @login_required(login_url='/account/login')
 def order_payment(request):
-	context = {}
+	try:
+		user = User.objects.get(id=request.user.id)
+		profile = Profile.objects.get(user=user)
+		user_credit_cards = profile.all_credit_cards_on_file()
+	except:
+		user_credit_cards = None
+
+	context = {'user_credit_cards' : user_credit_cards}
+
 	template = 'order/checkout-payment.html'
 	return render(request,template,context)
 
 # order
 @login_required(login_url='/account/login')
 def order_show(request):
+	try:
+		card = request.POST['creditCardToken']
+	except:
+		card = None
+
+	print card
 
 	try:
 		order = Order.objects.get(id=request.session['order_id'])
 	except:
 		order = None
 
-	shipping_cost_form = request.POST
+	try:
+		shipping_cost_form = request.POST['optionsRadios']
+	except:
+		shipping_cost_form = None
 
 	try:
 		shipping_cost = Shipping.objects.get(order=order)
@@ -321,9 +347,14 @@ def order_submit(request):
 		del request.session['cart_id']
 
 		for item in order.cart.lineitem_set.all():
-			product = item.product
-			product.borrohed = True
-			product.save()
+			if order.type_of_cart == 'Borroh':
+				product = item.product
+				product.borrohed = True
+				product.save()
+			elif order.type_of_cart == 'Buy':
+				product = item.product
+				product.sold = True
+				product.save()
 			
 
 	return HttpResponseRedirect(reverse('account_order_list'))

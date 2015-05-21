@@ -68,7 +68,7 @@
                               {% if borroh_order %}
                               <td class="delete"><div class="price ">{{ item.product.points_price }} points</div></td>
                               {% else %}
-                              <td class="delete"><div class="price ">${{ item.product.price }} points</div></td>
+                              <td class="delete"><div class="price ">${{ item.product.price }}</div></td>
                               {% endif %}
                               <td class="hidden-xs"></td>
                               {% if item.product.discount == None %}
@@ -83,7 +83,7 @@
                               {% if borroh_order %}
                               <td class="price">{{ item.cart.total_points }} points</td>
                               {% else %}
-                              <td class="price">${{ item.cart.total_points }}</td>
+                              <td class="price">${{ item.cart.total_price }}</td>
 
                               {% endif %}
                             </tr>          
@@ -142,14 +142,14 @@
                           <table class="std table" id="cart-summary">
                             <tr >
                               <td>Total products</td>
-                              <td  class="price">$216.51 </td>
+                              <td  class="price">${{ session_order.cart.total_price }} </td>
                             </tr>
                             <tr style="" >
                               <td>Shipping</td>
                               {% if shipping_cost == 0 %}
                               <td  class="price"><span class="success">Free shipping!</span></td>
                               {% else %}
-                              <td  class="price"><span class="success">{{ shipping_cost }}</span></td>
+                              <td  class="price"><span class="success">${{ shipping_cost.rate }}</span></td>
                               {% endif %}
                             </tr>
                             <tr class="cart-total-price ">
@@ -158,11 +158,11 @@
                             </tr>
                             <tr >
                               <td>Total tax</td>
-                              <td id="total-tax" class="price">0.00</td>
+                              <td id="total-tax" class="price">{{ session_order.total_tax }}</td>
                             </tr>
                             <tr >
-                              <td > Total </td>
-                              <td id="total-price" class="price">${{ cart.total_price }} </td>
+                              <td > Total w/tax & Shipping </td>
+                              <td id="total-price" class="price">${{ session_order.total_with_tax_and_shipping }} </td>
                             </tr>
                             <tbody>
                             </tbody>
@@ -197,17 +197,12 @@
                
                
                <div class="pull-right">
-                {% if order.has_free_shipping %}
+                
                 <a href="{% url 'order_submit' %}" class="btn btn-danger btn-small " > 
                   Confirm Order &nbsp; 
                   <i class="fa fa-check"></i>
                  </a>
-                 {% else %}
-                 <a href="{% url 'order_submit' %}" class="btn btn-danger btn-small " > 
-                  Pay for Shipping & Confirm Order&nbsp; 
-                  <i class="fa fa-check"></i>
-                 </a>
-                 {% endif %}
+                 
               </div>
                
                

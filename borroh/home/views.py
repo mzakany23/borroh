@@ -10,7 +10,7 @@ import stripe
 
 def home(request):
   
-	featured_products = Product.objects.filter(featured=True).exclude(borrohed=True)
+	featured_products = Product.objects.filter(featured=True).exclude(borrohed=True).exclude(sold=True)
 	context = {
 			'featured_products' : featured_products,
 	}
@@ -110,6 +110,11 @@ def get_home_variables(request):
 	except:
 		borroh_orders = None
 
+	try:
+		session_order = Order.objects.get(id=request.session['order_id'])
+	except:
+		session_order = None
+	
 	
 	return {
 			'total_points_minus_individual_balance' : total_points_minus_individual_balance,
@@ -131,7 +136,8 @@ def get_home_variables(request):
 			'user_has_subscription' : user_has_subscription,
 			'stripeKey' : settings.API_KEY2,
 			'borroh_orders' : borroh_orders,
-			'profile' : profile
+			'profile' : profile,
+			'session_order' : session_order,
 	}
 
 	

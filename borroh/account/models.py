@@ -40,6 +40,15 @@ class Profile(models.Model):
 	def __unicode__(self):
 		return str(self.user)
 
+	def has_credit_card_on_file(self):
+		if self.usercreditcard_set.all()[0]:
+			return True
+		else:
+			return False
+
+	def all_credit_cards_on_file(self):
+		return self.usercreditcard_set.all()
+
 	def wishlist_count(self):
 		
 		count = self.favorites.exclude(borrohed=True).count()
