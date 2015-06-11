@@ -169,7 +169,6 @@ def order_auth(request):
 '''
 @login_required(login_url='/account/login')
 def order_address(request):
-
 	try:
 		profile = Profile.objects.get(user=request.user)
 		user_addresses = profile.address_set.all()
@@ -289,7 +288,7 @@ def order_payment(request):
 		order = Order.objects.get(id=request.session['order_id'])
 	except:
 		order = None
-		
+
 	try:
 		user = User.objects.get(id=request.user.id)
 		profile = Profile.objects.get(user=user)
@@ -357,8 +356,7 @@ def order_submit(request):
 		if order.free_shipping:
 			profile.free_shipping_count -= 1
 		profile.save()
-		del request.session['cart_id']
-
+		
 		for item in order.cart.lineitem_set.all():
 			if order.type_of_cart == 'Borroh':
 				product = item.product
@@ -368,7 +366,12 @@ def order_submit(request):
 				product = item.product
 				product.sold = True
 				product.save()
-			
+		
+
+		if order.cart.has_both_buy_and_borroh_items():
+			order.rid_of_current_orders_line_items()
+		else:
+			del request.session['cart_id']
 
 	return HttpResponseRedirect(reverse('account_order_list'))
 

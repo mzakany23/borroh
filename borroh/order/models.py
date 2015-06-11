@@ -12,6 +12,16 @@ class Order(models.Model):
 	date_order_started = models.DateField(auto_now_add=True,blank=True,null=True)
 	free_shipping = models.BooleanField(default=False)
 	
+	def rid_of_current_orders_line_items(self):
+		if self.cart.has_both_buy_and_borroh_items():
+			for item in self.cart.lineitem_set.all():
+				if item.borroh == True and self.type_of_cart == 'Borroh':
+					item.delete()
+				elif item.borroh == False and self.type_of_cart == 'Buy':
+					item.delete()
+		else:
+			return False
+
 	def total(self):	
 		return self.cart.total_price
 
