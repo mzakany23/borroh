@@ -9,6 +9,7 @@ class ProductAdmin(admin.ModelAdmin):
 	list_display = ['title','description','brand_relation','featured','size','price','points_price','borrohed','sold','discount','status']
 	readonly_fields = ('product_code','slug','created','updated')
 	ordering = ['-price']
+	list_editable = ['borrohed','sold','price','points_price']
 	inlines = [ProductImageInline]
 	class Meta:
 		model = Product
