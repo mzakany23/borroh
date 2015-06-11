@@ -300,8 +300,6 @@ def order_show(request):
 	except:
 		card = None
 
-	print card
-
 	try:
 		order = Order.objects.get(id=request.session['order_id'])
 	except:
@@ -318,7 +316,7 @@ def order_show(request):
 		shipping_cost = None
 
 	if shipping_cost_form:
-		if shipping_cost_form['optionsRadios'] == 'free':
+		if shipping_cost_form == 'free':
 			order.free_shipping = True
 			order.save()
 			
