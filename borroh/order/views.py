@@ -281,12 +281,27 @@ def order_shipping(request):
 @login_required(login_url='/account/login')
 def order_payment(request):
 	try:
+		shipping_cost_form = request.POST['optionsRadios']
+	except:
+		shipping_cost_form = None
+
+	try:
+		order = Order.objects.get(id=request.session['order_id'])
+	except:
+		order = None
+		
+	try:
 		user = User.objects.get(id=request.user.id)
 		profile = Profile.objects.get(user=user)
 		user_credit_cards = profile.all_credit_cards_on_file()
 	except:
 		user_credit_cards = None
 
+	if shipping_cost_form:
+		if shipping_cost_form == 'free':
+			order.free_shipping = True
+			order.save()
+	
 	context = {'user_credit_cards' : user_credit_cards}
 
 	template = 'order/checkout-payment.html'
