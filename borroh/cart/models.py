@@ -10,7 +10,11 @@ class Cart(models.Model):
 	
 	def __unicode__(self):
 		return "Cart: " + str(self.id)
-		
+	
+	def already_contains(self,line_item):
+		products = [item.product for item in self.lineitem_set.all()]
+		return line_item.product in products
+	
 	def has_both_buy_and_borroh_items(self):
 		borroh = self.lineitem_set.all().filter(borroh=True)
 		buy = self.lineitem_set.all().filter(borroh=False)

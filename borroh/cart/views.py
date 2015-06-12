@@ -6,6 +6,7 @@ from product.models import Product
 from django.contrib.auth.models import User,AnonymousUser
 from home.views import get_home_variables
 from django.template import RequestContext
+from django.contrib import messages
 
 def cart_show(request):
 	template = 'cart/show_cart.html'
@@ -46,10 +47,26 @@ def add_item(request,id):
 
 	if request.POST['cart_to_add'] == 'buy':
 		line_item = LineItem(cart=cart,product=product)
+		
+		print cart.already_contains(line_item)
+
+		if cart.already_contains(line_item):
+			messages.error(request, str(product) + " already is in your cart." )
+			return HttpResponseRedirect(reverse('home'))
+		else:
+			line_item.save()
+			
 	elif request.POST['cart_to_add'] == 'borroh':
 		line_item = LineItem(cart=cart,product=product,borroh=True)
 
-	line_item.save()
+		if cart.already_contains(line_item):
+			messages.error(request, str(product) + " already is in your cart." )
+			return HttpResponseRedirect(reverse('home'))
+		else:
+			line_item.save()
+	
+			
+
 
 	# set the session buy item total
 	try: 
