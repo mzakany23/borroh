@@ -3,7 +3,7 @@
       {% if items.count == 0 %}
       <span class="cartRespons"> Cart (Empty!)</span>  </a>
       {% elif cart.active %}
-      <span class="cartRespons"> Cart (${{ cart.total_price }} / {{ cart.total_points }} points)</span> 
+      <span class="cartRespons"> Cart (${{ cart.active_buy_total }} / {{ cart.active_borroh_total }} points)</span> 
       
       <b class="caret"> </b> </a>
       {% include 'layouts/nav/cart_dropdown.html' %}

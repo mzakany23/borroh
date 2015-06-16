@@ -57,7 +57,8 @@
                               <th style="width:15%">Total</th>
                             </tr>
 
-                            {% for item in items %}
+                            {% for item in current_cart_items %}
+
                             <tr class="CartProduct">
                               <td  class="CartProductThumb"><div> <a href="{% url 'product_detail_non_json' item.product.id%}"><img src="{{ settings.SERVER }}/media/{{ item.product.image_set.all.0 }}"></a> </div></td>
                               <td ><div class="CartDescription">
@@ -65,12 +66,15 @@
                                   <!-- <span class="size">12 x 1.5 L</span> -->
                                  
                                 </div></td>
-                              {% if borroh_order %}
+                              {% if order.type_of_cart == 'Borroh' %}
+
                               <td class="delete"><div class="price ">{{ item.product.points_price }} points</div></td>
-                              {% else %}
+                              {% elif order.type_of_cart == 'Buy' %}
                               <td class="delete"><div class="price ">${{ item.product.price }}</div></td>
                               {% endif %}
                               <td class="hidden-xs"></td>
+
+
                               {% if item.product.discount == None %}
                               <td class="hidden-xs">n/a</td>
                               {% else %}
@@ -82,7 +86,7 @@
                               {% endif %}
                               {% if borroh_order %}
                               <td class="price">{{ item.cart.total_points }} points</td>
-                              {% else %}
+                              {% elif session_order.type_of_cart == 'Buy' %}
                               <td class="price">${{ item.cart.total_price }}</td>
 
                               {% endif %}

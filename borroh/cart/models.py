@@ -22,6 +22,13 @@ class Cart(models.Model):
 	def borroh_count(self):
 		return self.lineitem_set.all().filter(borroh=True)
 
+	def active_buy_total(self):
+		return self.total_price if self.contains_buy_order == True else 0
+
+	def active_borroh_total(self):
+		return self.total_points if self.contains_borroh_order == True else 0
+
+
 	def buy_count(self):
 		return self.lineitem_set.all().filter(borroh=False)
 

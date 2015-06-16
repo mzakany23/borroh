@@ -389,7 +389,7 @@ def order_submit(request):
 				cart.save()
 		else:
 			cart.borrohcount = 0
-			cart.buycount = 0
+			cart.buycount = 0	
 			cart.contains_borroh_order = False
 			cart.contains_buy_order = False
 			cart.active = False

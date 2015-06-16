@@ -187,7 +187,10 @@ def profile_order_show(request,id):
 		order = None
 
 	if order:
-		order_contents = order.cart.lineitem_set.all()
+		if order.type_of_cart == 'Borroh':
+			order_contents = order.cart.lineitem_set.all().filter(borroh=True)
+		else:
+			order_contents = order.cart.lineitem_set.all().filter(borroh=False)
 
 	template = 'account/orders/order-details.html'
 	context = {'order_contents' : order_contents}

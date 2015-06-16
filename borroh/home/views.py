@@ -116,16 +116,31 @@ def get_home_variables(request):
 		session_order = None
 	
 	try:
-		cart_buy_count = cart.buycount
+		if cart.contains_borroh_order == True:
+			cart_borroh_count = cart.borrohcount
+		else:
+			cart_borroh_count = 0
+	except:
+		cart_borroh_count = 0
+
+	try:
+		if cart.contains_buy_order == True:
+			cart_buy_count = cart.buycount
+		else:
+			cart_buy_count = 0
 	except:
 		cart_buy_count = 0
 
 	try:
-		cart_borroh_count = cart.borrohcount
+		if session_order.type_of_cart == 'Borroh':
+			current_cart_items = cart.lineitem_set.all().filter(borroh=True)
+		elif session_order.type_of_cart == 'Buy':
+			current_cart_items = cart.lineitem_set.all().filter(borroh=False)
 	except:
-		cart_borroh_count = 0
+		current_cart_items = None
 
 	return {
+			'current_cart_items' : current_cart_items,
 			'cart_borroh_count' : cart_borroh_count,
 			'cart_buy_count' : cart_buy_count,
 			'total_points_minus_individual_balance' : total_points_minus_individual_balance,
