@@ -1,0 +1,4 @@
+*.pyc
+borroh/borroh/env_var.py
+notes.txt
+db/borroh

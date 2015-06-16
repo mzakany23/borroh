@@ -368,10 +368,11 @@ def order_submit(request):
 				product.save()
 		
 
-		if order.cart.has_both_buy_and_borroh_items():
-			order.rid_of_current_orders_line_items()
-		else:
-			del request.session['cart_id']
+		# if order.cart.has_both_buy_and_borroh_items():
+		# 	order.rid_of_current_orders_line_items()
+		# else:
+		
+		# del request.session['cart_id']
 
 	return HttpResponseRedirect(reverse('account_order_list'))
 

@@ -1,11 +1,16 @@
 import os
+import sys
+
+from env_var import STRIPE_API, SECRET_KEY_VAR, EMAIL, EASY_POST_KEY, DATABASE
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-SECRET_KEY = 'q)gfe86m1s&dy0z$^uh2w$ph$-q9o8v=1*y6*zs-sqgs39@n5z'
+SECRET_KEY = SECRET_KEY_VAR
+
 
 # stripe
-API_KEY = 'sk_test_u9E91FD8uffgpOGXHNdfU5LO'
-API_KEY2 = 'pk_test_G0K67FwSKkcdKKLDcwTjrXzy'
-# pk_test_G0K67FwSKkcdKKLDcwTjrXzy
+API_KEY = STRIPE_API['key']
+API_KEY2 = STRIPE_API['pwd']
+
 
 DEBUG = True
 
@@ -18,17 +23,17 @@ AUTH_LOGIN = 'auth_login'
 
 SERVER = 'http://localhost:8000'
 
-DEFAULT_FROM_EMAIL = 'From Borroh Admin <mzakany@gmail.com>'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'mzakany@gmail.com'
-EMAIL_HOST_PASSWORD = 'PQowie32'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = EMAIL['default_message']
+EMAIL_HOST = EMAIL['host']
+EMAIL_HOST_USER = EMAIL['host_user']
+EMAIL_HOST_PASSWORD = EMAIL['password']
+EMAIL_PORT = EMAIL['port']
+EMAIL_USE_TLS = EMAIL['tls']
 
 SESSION_COOKIE_AGE = 14000
 
 # test key shipping for ups ect
-EASY_POST = "gwoySI2L62BXhftVW0Ol3Q"
+EASY_POST = EASY_POST_KEY
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
@@ -73,8 +78,12 @@ WSGI_APPLICATION = 'borroh.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': DATABASE['name'],
+        'HOST': DATABASE['host'],
+        'PORT': DATABASE['port'],
+        'USER': DATABASE['user'],
+        'PASSWORD': DATABASE['password']
     }
 }
 

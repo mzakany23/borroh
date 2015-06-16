@@ -7,10 +7,18 @@ class Cart(models.Model):
 	user = models.ForeignKey(User,blank=True,null=True)
 	total_price = models.DecimalField(max_digits=10,decimal_places=2,default=0.0)
 	total_points = models.IntegerField(default=0)
+	buy_count = models.IntegerField(default=0)
+	borroh_count = models.IntegerField(default=0)
 	
 	def __unicode__(self):
 		return "Cart: " + str(self.id)
 	
+	def borroh_count(self):
+		return self.lineitem_set.all().filter(borroh=True)
+
+	def buy_count(self):
+		return self.lineitem_set.all().filter(borroh=False)
+
 	def already_contains(self,line_item):
 		products = [item.product for item in self.lineitem_set.all()]
 		return line_item.product in products
