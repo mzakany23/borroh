@@ -48,6 +48,7 @@ def add_item(request,id):
 	if request.POST['cart_to_add'] == 'buy':
 		line_item = LineItem(cart=cart,product=product)
 		cart.buycount += 1
+		cart.contains_buy_order = True
 		cart.save()
 
 		if cart.already_contains(line_item):
@@ -58,6 +59,7 @@ def add_item(request,id):
 			
 	elif request.POST['cart_to_add'] == 'borroh':
 		line_item = LineItem(cart=cart,product=product,borroh=True)
+		cart.contains_borroh_order = True
 		cart.borrohcount += 1
 		cart.save()
 
@@ -95,10 +97,19 @@ def delete_item(request,id):
 		price = line_item.product.price
 		cart.total_price -= price
 		cart.buycount -= 1
+		if cart.buycount > 0:
+			cart.contains_buy_order = True
+		else:
+			cart.contains_buy_order = False
+
 	elif line_item.borroh == True:
 		points = line_item.product.points_price
 		cart.total_points -= points
 		cart.borrohcount -= 1
+		if cart.borrohcount > 0:
+			cart.contains_borroh_order = True
+		else:
+			cart.contains_borroh_order = False
 
 	cart.save()
 	line_item.delete()

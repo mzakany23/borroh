@@ -12,6 +12,9 @@ class Cart(models.Model):
 	total_points = models.IntegerField(default=0)
 	buycount = models.IntegerField(default=0)
 	borrohcount = models.IntegerField(default=0)
+	contains_borroh_order = models.BooleanField(default=False)
+	contains_buy_order = models.BooleanField(default=False)
+	active = models.BooleanField(default=True)
 	
 	def __unicode__(self):
 		return "Cart: " + str(self.id)
@@ -27,9 +30,7 @@ class Cart(models.Model):
 		return line_item.product in products
 	
 	def has_both_buy_and_borroh_items(self):
-		borroh = self.lineitem_set.all().filter(borroh=True)
-		buy = self.lineitem_set.all().filter(borroh=False)
-		return buy.count > 0 and borroh.count > 0
+		return self.contains_borroh_order == True and self.contains_buy_order == True
 
 	def buy_items_total(self):
 		total = 0

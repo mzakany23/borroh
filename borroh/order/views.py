@@ -366,24 +366,34 @@ def order_submit(request):
 		# mark items sold or borrohed
 		for item in order.cart.lineitem_set.all():
 			if order.type_of_cart == 'Borroh':
-				product = item.product
-				product.borrohed = True
-				product.save()
+				if item.borroh == True:
+					product = item.product
+					product.borrohed = True
+					product.save()
 			elif order.type_of_cart == 'Buy':
-				product = item.product
-				product.sold = True
-				product.save()
+				if item.borroh == False:
+					product = item.product
+					product.sold = True
+					product.save()
 		
 
 		# reset cart count
 		if order.cart.has_both_buy_and_borroh_items():
 			if order.type_of_cart == 'Buy':
 				cart.buycount = 0
+				cart.contains_buy_order = False
 				cart.save()
 			elif order.type_of_cart == 'Borroh':
 				cart.borrohcount = 0
+				cart.contains_borroh_order = False
 				cart.save()
 		else:
+			cart.borrohcount = 0
+			cart.buycount = 0
+			cart.contains_borroh_order = False
+			cart.contains_buy_order = False
+			cart.active = False
+			cart.save()
 			del request.session['cart_id']
 
 	return HttpResponseRedirect(reverse('account_order_list'))

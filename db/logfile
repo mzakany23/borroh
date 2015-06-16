@@ -91,3 +91,15 @@ ERROR:  column cart_cart.buy does not exist at character 104
 STATEMENT:  SELECT "cart_cart"."id", "cart_cart"."user_id", "cart_cart"."total_price", "cart_cart"."total_points", "cart_cart"."buy", "cart_cart"."borroh" FROM "cart_cart" ORDER BY "cart_cart"."id" DESC LIMIT 21
 ERROR:  column cart_cart.buy does not exist at character 104
 STATEMENT:  SELECT "cart_cart"."id", "cart_cart"."user_id", "cart_cart"."total_price", "cart_cart"."total_points", "cart_cart"."buy", "cart_cart"."borroh" FROM "cart_cart" ORDER BY "cart_cart"."id" DESC LIMIT 21
+ERROR:  column cart_cart.has_borroh_order does not exist at character 155
+STATEMENT:  SELECT "cart_cart"."id", "cart_cart"."user_id", "cart_cart"."total_price", "cart_cart"."total_points", "cart_cart"."buycount", "cart_cart"."borrohcount", "cart_cart"."has_borroh_order", "cart_cart"."has_buy_order" FROM "cart_cart" WHERE "cart_cart"."id" = 11 LIMIT 21
+ERROR:  column cart_cart.has_borroh_order does not exist at character 155
+STATEMENT:  SELECT "cart_cart"."id", "cart_cart"."user_id", "cart_cart"."total_price", "cart_cart"."total_points", "cart_cart"."buycount", "cart_cart"."borrohcount", "cart_cart"."has_borroh_order", "cart_cart"."has_buy_order" FROM "cart_cart" ORDER BY "cart_cart"."id" DESC
+ERROR:  column cart_cart.has_borroh_order does not exist at character 155
+STATEMENT:  SELECT "cart_cart"."id", "cart_cart"."user_id", "cart_cart"."total_price", "cart_cart"."total_points", "cart_cart"."buycount", "cart_cart"."borrohcount", "cart_cart"."has_borroh_order", "cart_cart"."has_buy_order" FROM "cart_cart" ORDER BY "cart_cart"."id" DESC LIMIT 21
+ERROR:  column cart_cart.has_borroh_order does not exist at character 155
+STATEMENT:  SELECT "cart_cart"."id", "cart_cart"."user_id", "cart_cart"."total_price", "cart_cart"."total_points", "cart_cart"."buycount", "cart_cart"."borrohcount", "cart_cart"."has_borroh_order", "cart_cart"."has_buy_order" FROM "cart_cart" ORDER BY "cart_cart"."id" DESC LIMIT 21
+ERROR:  column cart_cart.has_borroh_order does not exist at character 155
+STATEMENT:  SELECT "cart_cart"."id", "cart_cart"."user_id", "cart_cart"."total_price", "cart_cart"."total_points", "cart_cart"."buycount", "cart_cart"."borrohcount", "cart_cart"."has_borroh_order", "cart_cart"."has_buy_order" FROM "cart_cart" ORDER BY "cart_cart"."id" DESC LIMIT 21
+ERROR:  column cart_cart.has_borroh_order does not exist at character 155
+STATEMENT:  SELECT "cart_cart"."id", "cart_cart"."user_id", "cart_cart"."total_price", "cart_cart"."total_points", "cart_cart"."buycount", "cart_cart"."borrohcount", "cart_cart"."has_borroh_order", "cart_cart"."has_buy_order" FROM "cart_cart" WHERE "cart_cart"."id" = 11 LIMIT 21

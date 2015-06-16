@@ -3,7 +3,7 @@
             <div class="w100 miniCartTable scroll-pane" style='overflow: scroll;'>
               <table>
                 <tbody>
-                  {% if list.buy.count >= 1 %}
+                  {% if list.buy.count >= 1 and cart.contains_buy_order == True  %}
                   <a href="{% url 'cart_show_buy' %}"><h3 style='margin-left: 15px;'>Buy Items</h3></a>
                   {% for item in list.buy %}
                   <tr class="miniCartProduct">
@@ -22,7 +22,7 @@
                 </tbody>
               </table>
               <table>
-                {% if list.borroh.count >= 1 %}
+                {% if list.borroh.count >= 1 and cart.contains_borroh_order == True %}
                 <a href="{% url 'cart_show_borroh' %}"><h3 style='margin-left: 15px;'>Borroh Items</h3></a>
                 <tbody>
                 {% for item in list.borroh %}
@@ -44,12 +44,14 @@
             </div>
             <!--/.miniCartTable-->
             
+            {% if cart.active %}
             <div class="miniCartFooter text-right">
               <h3 class="text-right subtotal"> Buy Subtotal: ${{ cart.total_price }} </h3>
                 <h3 class="text-right subtotal"> Borroh Subtotal: {{ cart.total_points }} </h3>
                 <a href="{% url 'cart_show' %}" class="btn btn-sm btn-default"> <i class="fa fa-shopping-cart"> </i> VIEW CART </a> 
                 <!-- <a href="{% url 'start_order_process' %}" class="btn btn-sm btn-primary"> CHECKOUT </a>  -->
             </div>
+            {% endif %}
             <!--/.miniCartFooter--> 
             
             
