@@ -3,6 +3,7 @@ from django.contrib import admin
 from models import Cart,LineItem
 
 class CartAdmin(admin.ModelAdmin):
+	list_display = ['__unicode__','total_price','total_points']
 	class Meta:
 		model = Cart
 

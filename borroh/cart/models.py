@@ -4,11 +4,14 @@ from django.contrib.auth.models import User
 
 
 class Cart(models.Model):
+	class Meta:
+		managed = True
+
 	user = models.ForeignKey(User,blank=True,null=True)
 	total_price = models.DecimalField(max_digits=10,decimal_places=2,default=0.0)
 	total_points = models.IntegerField(default=0)
-	buy_count = models.IntegerField(default=0)
-	borroh_count = models.IntegerField(default=0)
+	buycount = models.IntegerField(default=0)
+	borrohcount = models.IntegerField(default=0)
 	
 	def __unicode__(self):
 		return "Cart: " + str(self.id)

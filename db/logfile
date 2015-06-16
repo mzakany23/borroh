@@ -67,3 +67,27 @@ ERROR:  database "borroh" already exists
 STATEMENT:  CREATE DATABASE borroh;
 	
 FATAL:  database "borroh_dev" does not exist
+ERROR:  column "spclocation" does not exist at character 32
+STATEMENT:  SELECT oid, spcname, spcowner, spclocation, spcacl, shobj_description(oid, 'pg_tablespace') AS comment FROM pg_tablespace
+ERROR:  update or delete on table "product_product" violates foreign key constraint "product_image_product_id_44fb57f90c5c9296_fk_product_product_id" on table "product_image"
+DETAIL:  Key (id)=(2) is still referenced from table "product_image".
+STATEMENT:  delete from "public"."product_product" where "id"='2' 
+ERROR:  update or delete on table "product_product" violates foreign key constraint "product_image_product_id_44fb57f90c5c9296_fk_product_product_id" on table "product_image"
+DETAIL:  Key (id)=(4) is still referenced from table "product_image".
+STATEMENT:  delete from "public"."product_product" where "id"='4' 
+ERROR:  column cart_cart.buy does not exist at character 104
+STATEMENT:  SELECT "cart_cart"."id", "cart_cart"."user_id", "cart_cart"."total_price", "cart_cart"."total_points", "cart_cart"."buy", "cart_cart"."borroh" FROM "cart_cart" ORDER BY "cart_cart"."id" DESC
+ERROR:  column cart_cart.buy does not exist at character 104
+STATEMENT:  SELECT "cart_cart"."id", "cart_cart"."user_id", "cart_cart"."total_price", "cart_cart"."total_points", "cart_cart"."buy", "cart_cart"."borroh" FROM "cart_cart" ORDER BY "cart_cart"."id" DESC LIMIT 21
+ERROR:  column cart_cart.buy does not exist at character 104
+STATEMENT:  SELECT "cart_cart"."id", "cart_cart"."user_id", "cart_cart"."total_price", "cart_cart"."total_points", "cart_cart"."buy", "cart_cart"."borroh" FROM "cart_cart" ORDER BY "cart_cart"."id" DESC LIMIT 21
+ERROR:  column cart_cart.buy does not exist at character 104
+STATEMENT:  SELECT "cart_cart"."id", "cart_cart"."user_id", "cart_cart"."total_price", "cart_cart"."total_points", "cart_cart"."buy", "cart_cart"."borroh" FROM "cart_cart" ORDER BY "cart_cart"."id" DESC LIMIT 21
+ERROR:  column cart_cart.buy does not exist at character 104
+STATEMENT:  SELECT "cart_cart"."id", "cart_cart"."user_id", "cart_cart"."total_price", "cart_cart"."total_points", "cart_cart"."buy", "cart_cart"."borroh" FROM "cart_cart" ORDER BY "cart_cart"."id" DESC
+ERROR:  column cart_cart.buy does not exist at character 104
+STATEMENT:  SELECT "cart_cart"."id", "cart_cart"."user_id", "cart_cart"."total_price", "cart_cart"."total_points", "cart_cart"."buy", "cart_cart"."borroh" FROM "cart_cart" ORDER BY "cart_cart"."id" DESC LIMIT 21
+ERROR:  column cart_cart.buy does not exist at character 104
+STATEMENT:  SELECT "cart_cart"."id", "cart_cart"."user_id", "cart_cart"."total_price", "cart_cart"."total_points", "cart_cart"."buy", "cart_cart"."borroh" FROM "cart_cart" ORDER BY "cart_cart"."id" DESC LIMIT 21
+ERROR:  column cart_cart.buy does not exist at character 104
+STATEMENT:  SELECT "cart_cart"."id", "cart_cart"."user_id", "cart_cart"."total_price", "cart_cart"."total_points", "cart_cart"."buy", "cart_cart"."borroh" FROM "cart_cart" ORDER BY "cart_cart"."id" DESC LIMIT 21

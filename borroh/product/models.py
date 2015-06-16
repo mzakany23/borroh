@@ -26,9 +26,12 @@ class Product(models.Model):
 		return "%s %s %s" %(self.title,':',str(self.id))
 	def brand_relation(self):
 		brands = []
-		for brand in self.brand.values():
-			brands.append(str(brand['name']))
-		return brands[0]
+		try:
+			for brand in self.brand.values():
+				brands.append(str(brand['name']))
+			return brands[0]
+		except:
+			return "No Brand"
 	
 
 # -----------------------------------------------------------------------------------
