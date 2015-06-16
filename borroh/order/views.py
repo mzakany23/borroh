@@ -347,6 +347,12 @@ def order_submit(request):
 	except:
 		order = None
 
+	try:
+		cart = Cart.objects.get(id=request.session['cart_id'])
+	except:
+		cart = None
+
+	# reset session variables and states
 	if order:
 		order.status = 'pending'
 		order.save()
@@ -357,6 +363,7 @@ def order_submit(request):
 			profile.free_shipping_count -= 1
 		profile.save()
 		
+		# mark items sold or borrohed
 		for item in order.cart.lineitem_set.all():
 			if order.type_of_cart == 'Borroh':
 				product = item.product
@@ -368,11 +375,16 @@ def order_submit(request):
 				product.save()
 		
 
-		# if order.cart.has_both_buy_and_borroh_items():
-		# 	order.rid_of_current_orders_line_items()
-		# else:
-		
-		# del request.session['cart_id']
+		# reset cart count
+		if order.cart.has_both_buy_and_borroh_items():
+			if order.type_of_cart == 'Buy':
+				cart.buycount = 0
+				cart.save()
+			elif order.type_of_cart == 'Borroh':
+				cart.borrohcount = 0
+				cart.save()
+		else:
+			del request.session['cart_id']
 
 	return HttpResponseRedirect(reverse('account_order_list'))
 

@@ -115,8 +115,19 @@ def get_home_variables(request):
 	except:
 		session_order = None
 	
-	
+	try:
+		cart_buy_count = cart.buycount
+	except:
+		cart_buy_count = 0
+
+	try:
+		cart_borroh_count = cart.borrohcount
+	except:
+		cart_borroh_count = 0
+
 	return {
+			'cart_borroh_count' : cart_borroh_count,
+			'cart_buy_count' : cart_buy_count,
 			'total_points_minus_individual_balance' : total_points_minus_individual_balance,
 			'login_form' : LoginForm, 
 			'register' : RegisterUserForm, 
