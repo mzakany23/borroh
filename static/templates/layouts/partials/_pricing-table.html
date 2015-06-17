@@ -1,24 +1,27 @@
 {% load staticfiles %}
 
 <h3 class="section-title style2 text-center"><span>Subscriptions</span></h3>
+
 <div class="row">
 
 
   <div class="col-md-10 col-md-offset-1">
+
+    {% for plan in subscriptions %}
+
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-    
       <!-- PRICE ITEM -->
       <div class="panel price panel-red">
         <div class="panel-heading  text-center">
-        <h1 id='pricing-bold'>30 Points</h3>
+        <h1 id='pricing-bold'>{{ plan.points_per_month }} Points</h3>
         <h4 id='pricing-small'>Per month</h4>
         </div>
         <div class="panel-body text-center">
-          <p class="lead" style="font-size:40px" ><strong>$25 / month</strong></p>
+          <p class="lead" style="font-size:40px" ><strong>${{ plan.price_per_month }} / month</strong></p>
         </div>
         <ul class="list-group list-group-flush text-center">
-          <li class="list-group-item"><i class="icon-ok text-danger"></i> 1 Free shipment per month</li>
-          <li class="list-group-item"><i class="icon-ok text-danger"></i> 10% 'own it' discount</li>
+          <li class="list-group-item"><i class="icon-ok text-danger"></i> {{ plan.free_shipments }} Free shipment per month</li>
+          <li class="list-group-item"><i class="icon-ok text-danger"></i> {{ plan.whole_own_it_discount }}% 'own it' discount</li>
         </ul>
         <div class="panel-footer">
 
@@ -31,7 +34,7 @@
               data-key="{{ stripeKey }}"
               data-image="{% static '/static/assets/img/borroh-stripe.png' %}"
               data-name="Borroh Subscription"
-              data-amount="2500"
+              data-amount='{{ plan.stripe_price_per_month }}'
               data-label="Subscribe">
             </script>
             </div>
@@ -44,82 +47,10 @@
       
       
     </div>
+
+    {% endfor %}
     
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
     
-      <!-- PRICE ITEM -->
-      <div class="panel price panel-blue">
-        <div class="panel-heading  text-center">
-        <h1 id='pricing-bold'>60 Points</h3>
-        <h4 id='pricing-small'>Per month</h4>
-        </div>
-        <div class="panel-body text-center">
-          <p class="lead" style="font-size:40px"><strong>$45 / month</strong></p>
-        </div>
-        <ul class="list-group list-group-flush text-center">
-          <li class="list-group-item"><i class="icon-ok text-danger"></i> 2 Free shipment per month</li>
-          <li class="list-group-item"><i class="icon-ok text-danger"></i> 15% 'own it' discount</li>
-        </ul>
-        <div class="panel-footer">
-          
-          <form method='POST' action="{% url 'subscribe' %}">
-            {% csrf_token %}
-            <input type='hidden' name='planType' value='silver'>
-            <div style='text-align: center;'>
-            <script
-              src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-              data-key="{{ stripeKey }}"
-              data-image="{% static '/static/assets/img/signup.png' %}"
-              data-name="Borroh"
-              data-amount="4500"
-              data-label="Subscribe">
-            </script>
-            </div>
-          </form>
-        </div>
-      </div>
-      <!-- /PRICE ITEM -->
-      
-      
-    </div>
-    
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-    
-      <!-- PRICE ITEM -->
-      <div class="panel price panel-green">
-        <div class="panel-heading  text-center">
-        <h1 id='pricing-bold'>90 Points</h3>
-        <h4 id='pricing-small'>Per month</h4>
-        </div>
-        <div class="panel-body text-center">
-          <p class="lead" style="font-size:40px"><strong>$65 / month</strong></p>
-        </div>
-        <ul class="list-group list-group-flush text-center">
-          <li class="list-group-item"><i class="icon-ok text-danger"></i> 3 Free shipment per month</li>
-          <li class="list-group-item"><i class="icon-ok text-danger"></i> 20% 'own it' discount</li>
-        </ul>
-        <div class="panel-footer">
-          
-          <form method='POST' action="{% url 'subscribe' %}">
-            {% csrf_token %}
-            <input type='hidden' name='planType' value='bronze'>
-            <div style='text-align: center;'>
-            <script
-              src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-              data-key="{{ stripeKey }}"
-              data-image="{% static '/static/assets/img/signup.png' %}"
-              data-name="Borroh"
-              data-amount="6500"
-              data-label="Subscribe">
-            </script>
-            </div>
-          </form>
-        </div>
-      </div>
-      <!-- /PRICE ITEM -->
-      
-      
-    </div>
 
   </div>          
 </div>

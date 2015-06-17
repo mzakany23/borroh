@@ -3,6 +3,7 @@ from account.form import LoginForm,RegisterUserForm
 from product.models import Product
 from account.models import Profile
 from order.models import Order
+from subscription.models import Subscription
 from django.template import *
 from cart.models import Cart
 from django.conf import settings
@@ -19,6 +20,11 @@ def home(request):
 
 
 def get_home_variables(request):
+	try:
+		subscriptions = Subscription.objects.all().order_by('price_per_month')
+	except:
+		subscriptions = None
+
 	try:
 		cart = Cart.objects.get(id=request.session['cart_id'])
 	except:
@@ -140,6 +146,7 @@ def get_home_variables(request):
 		current_cart_items = None
 
 	return {
+			'subscriptions' : subscriptions,
 			'current_cart_items' : current_cart_items,
 			'cart_borroh_count' : cart_borroh_count,
 			'cart_buy_count' : cart_buy_count,
